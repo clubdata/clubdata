@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find . \( -wholename '*/Old/*' -o -wholename '*Tools'* -o -wholename '*CVS*' -o -wholename '*templates_c*' \) -prune -o \( -type f ! -name '*~' -print0 \) | xargs -0 grep -i "$1"
+

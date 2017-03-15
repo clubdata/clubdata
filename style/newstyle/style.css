@@ -1,0 +1,670 @@
+
+
+/* newstyle */
+body {
+        margin: 0px;
+        padding: 0px;
+	background-repeat: no-repeat;
+	background-color : #FFFFFF;
+	background-attachment : fixed;
+	background-position: center center;
+}
+
+.vMain{
+    background-color: #a5cbf7;
+    vertical-align: top;
+  }
+
+.head1, .head2, .head3, .navigator, .navigator_active, .companyname, .headline {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	color: #73A2D0;
+	text-decoration: none;
+}
+
+
+h5 {
+    font-size: 14px;
+    margin: 0px 0px 5px 0px;
+    padding: 0px;
+    }
+
+.navigator {
+    line-height: normal;
+    font-style: normal;
+    font-weight: normal;
+    color: #FFFFFF;
+    background: #08245b;
+    text-align: left;
+}
+
+.navigator img {
+	vertical-align: middle;
+	margin-bottom: 0px;
+}
+
+.navigator ul {
+	list-style-image:url(images/flash_small.png);
+	}
+	
+.navigator a:link, .navigator a:active, .navigator a:visited {
+	font-size: 14px;
+    color: #FFFFFF;
+	text-decoration: none;
+}
+
+.navigator_active {
+	font-size: 14px;
+	line-height: normal;
+        font-style: normal;
+        font-weight: normal;
+    color: #FFFFFF;
+}
+
+.navigator_label {
+	font-size: 14px;
+	line-height: normal;
+        font-style: normal;
+        font-weight: normal;
+    color: #FFFFFF;
+}
+
+.navigator_sub {
+    font-size: 12px;
+    padding-left: 40px;
+    padding-bottom: 5px;
+}
+
+.navigator_sub a:link, .navigator_sub a:active, .navigator_sub a:visited {
+	font-size: 12px;
+    color: #FFFFFF;
+}
+
+/* Box definition */
+.box {
+    background-color: #08245b;
+}
+
+.boxhead {
+/*        background-image: url("box_topmiddle.gif");
+        background-repeat: repeat-x;*/
+    background-color: #08245b;
+    font-size: 16px;
+    color: #ffffff;
+	padding-left:	10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.boxmiddle {
+    vertical-align: top;
+    padding: 5px 10px 5px 10px;
+    background-color: #ffffff;
+}
+.boxbottom {
+/*        background-image: url("box_bottommiddle.gif");
+        background-repeat: repeat-x;*/
+    background-color: #ffffff;
+
+}
+.boxhead a:link, .boxhead a:active, .boxhead a:visited {
+	font-size: 16px;
+    color: #FFFFFF;
+	text-decoration: none;
+}
+
+/* End Box definition */
+TABLE.head {
+    height: 25px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+
+TABLE.head TD.multi {
+    font-weight: bold;
+    font-size: 9pt;
+    padding-left: 0.2cm;
+    padding-right: 0.2cm;
+    background-color: #a5cbf7;
+  }
+
+TABLE.head TD.single {
+    font-weight: bold;
+    font-size: 14pt;
+    padding-left: 0.2cm;
+    padding-right: 0.2cm;
+    border: none 0px;
+    background-color: #a5cbf7;
+ }
+.light_border_upper {
+    border: none 0px;
+    margin: 0px;
+    padding: 0px;
+    height: 10px;
+    vertical-align: bottom;
+    background-image: url("images/light_border_u.png");
+}
+.light_border_lower {
+    height: 13px;
+    background-image: url("images/light_border_lower.png");
+}
+.light_border_right {
+    width: 13px;
+    background-image: url("images/light_border_r.png");
+}
+.light_border_left {
+    border: none 0px;
+    margin: 0px;
+    padding: 0px;
+    width:10px;
+    background-image: url("images/light_border_left.png");
+}
+
+/* Tabulator Anfang */
+.tabulator{
+    margin-top: 0.0cm;
+    background-color: #FFFFFF;
+  }
+
+TABLE.tabulator TD {
+    background-color: #FFFFFF;
+    margin: 0.0cm;
+    padding: 0.0cm;
+  }
+
+td.tabar {
+    background-color: #a5cbf7;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    border-left: solid #cccccc 2px;
+    border-right: solid #cccccc 2px;
+    border-bottom: solid #cccccc 2px;
+  }
+
+td.taboff {
+/*     background: #d6ebff; */
+    background-color: #FFFFFF;
+    border: none 0px;
+    margin: 0px;
+    background-image: url('images/tabBg.png');
+  }
+
+.tabon {
+/*     background: #a5cbf7; */
+    border: none 0px;
+    margin: 0px;
+    background-image: url('images/tabSelectedBg.png');
+  }
+
+/*td.tabox {
+    background-color: #a5cbf7;
+    border-left: solid #cccccc 2px;
+    border-right: solid #cccccc 2px;
+    border-bottom: solid #cccccc 2px;
+  }*/
+
+td.tabsp {
+    border-bottom: solid #cccccc 2px;
+  }
+/* Tabulator Ende */
+
+/* Datapager Anfang */
+TABLE.datapager {
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+}
+/* Datapager Ende */
+/* Buttonbar Anfang */
+.Buttonbar {
+    width: 97%;
+    border: none 0.0cm;
+    background-color: #a5cbf7;
+  }
+
+TABLE.Buttonbar {
+    padding : 0px;
+    margin : 0px;
+    border: none 0px;
+    width : 100%;
+  }
+
+/*TABLE.Buttonbar INPUT.BUTTON {
+    width: auto;
+    height: 2em;
+    border: outset 2px;
+    font-size:8pt;
+  }
+
+*/
+/* TABLE.Buttonbar */ INPUT.text {
+    background-color: #FFFFFF;
+    margin : 0px;
+    width: auto;
+    border: inset 2px;
+    vertical-align: middle;
+  }
+
+TABLE.Buttonbar TD {
+    width: auto;
+    margin : 0px;
+    border: solid 0px;
+    padding: 0.0cm 0px 0cm 0.0cm;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+TABLE.Buttonbar TD.IMAGE {
+    width: 32px;
+    margin : 0px;
+    border: solid 0px;
+    padding: 0.0cm 5px 0cm 0.0cm;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+TABLE.Buttonbar TD.FILL {
+    width: 100%;
+    margin : 0px;
+    border: solid 0px;
+    padding: 0.0cm 5px 0cm 0.0cm;
+    white-space: nowrap;
+  }
+
+/* Buttonbar Ende */
+
+/* General link style */
+A:visited {
+    color: #08245b;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+A:active {
+    color: red;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+A:hover {
+    color: #666666;
+    text-decoration: underline;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+A:link {
+    color: #08245b;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+/* End General link style */
+
+
+/* Start Listtable */
+TABLE.listTable {
+    width: 100%;
+/*     background-color: #dae0f1; */
+    font: 9pt Osaka,verdana,Sans-Serif;
+    margin: 0px;
+    padding: 0px;
+  }
+
+TABLE.listTable TR  {
+    margin: 0px;
+}
+
+TABLE.listTable TD.even {
+    margin: 0px;
+    background-color: #d6ebff;
+  }
+
+TABLE.listTable TD.odd {
+    margin: 0px;
+  }
+
+TABLE.listTable TD.Data, TABLE.listTable TD.DataSearch {
+    font : bold 9pt/130% Osaka,verdana,Sans-Serif;
+    margin: 0px;
+    padding: 0px;
+    white-space: nowrap;
+  }
+
+TABLE.listTable TD {
+    font : 9pt/130% Osaka,verdana,Sans-Serif;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 1px;
+    white-space: nowrap;
+  }
+
+TABLE.listTable INPUT {
+    width: 99.5%;
+    padding-left: 0.1cm;
+    margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.listTable TD.DataSearch INPUT {
+    width: 200pt;
+    padding-left: 0.1cm;
+    margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.listTable SELECT {
+    margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.listTable SELECT.MULTIPLE {
+    height: 6em;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+
+TABLE.listTable TEXTAREA {
+    width: 100%;
+    height: 10ex;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+    font-family: "helvetica", "arial", "geneva", sans-serif;
+    font-size: x-small;
+    text-align: left;
+    font-weight: bold;
+  }
+
+TABLE.listTable TD.Description {
+    font : 9pt/130% Osaka,verdana,Sans-Serif;
+    margin: 0px;
+    padding: 0px 5px 0px 0px;
+    width: 1%;
+    white-space: nowrap;
+    height: 30px;
+  }
+
+TABLE.listTable TD.SectionTitle {
+    font : 9pt/130% Osaka,verdana,Sans-Serif;
+    margin: 0px;
+    padding: 5px 0px 2px 0px;
+    width: 100%;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+TABLE.listTable INPUT.CHECKBOX {
+    width: 1em;
+    padding-left: 0.1cm;
+    margin: 0.05cm 0.1cm 0.05cm 0.0cm;
+  }
+
+TABLE.listTable TD.Data INPUT.DATUM  {
+    width: 4em;
+  }
+
+TABLE.listTable TD.DataSearch INPUT.DATUM {
+    width: 4em;
+  }
+
+TABLE.listTable TH {
+    font-size: 9pt;
+    background-color: #08245b;
+    color: white;
+    list-style-type: disc;
+    list-style-position: inside;
+/*     border: outset #D1D1CD 1px; */
+    height: 4ex;
+}
+
+TH.listTable A:link, TH.listTable A:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+#listTableSortCol {
+/*      background-color: #9bc5db; */
+	font-style: italic; 	
+	}
+	
+TABLE.listTable BUTTON.DATEBUTTON {
+    width: 3em;
+    margin: 0.0cm 0.0cm 0cm 0.25cm;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+
+
+TABLE.listTable TD.Header {
+    font : 9pt Osaka,verdana,Sans-Serif;
+    background-color: #a5cbf7;
+/* 	color: white; */
+    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+    list-style-type: disc;
+    list-style-position: inside;
+/*     border: outset #D1D1CD 1px; */
+    height: 4ex;
+  }
+
+TABLE.listTable TD.Value {
+    margin: 0px;
+    width: 80%;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.listTable TD.Footer {
+    font : 9pt Osaka,verdana,Sans-Serif;
+    background-color: #a5cbf7;
+/* 	color: white; */
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+	font-style: italic; 	
+/*     border: outset #D1D1CD 1px; */
+    height: 4ex;
+  }
+
+/**/
+
+/* End ListTable */
+
+/* message/error tables */
+TABLE.Warning {
+    width: 100%;
+    text-align: left;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    border: solid 0px;
+  }
+
+TABLE.Warning TD {
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 200, 0);
+  }
+
+TABLE.Warning TH {
+    font-weight: bold;
+    font-size: 14pt;
+    white-space: nowrap;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 200, 0);
+  }
+
+TABLE.Error {
+    width: 100%;
+    text-align: left;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    border: solid 0px;
+  }
+
+TABLE.Error TD {
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 0, 0);
+  }
+
+TABLE.Error TH {
+    font-weight: bold;
+    font-size: 12pt;
+    white-space: nowrap;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 0, 0);
+  }
+
+TABLE.Fatal {
+    width: 100%;
+    text-align: left;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    border: solid 0px;
+  }
+
+TABLE.Fatal TD {
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 0, 0);
+  }
+
+TABLE.Fatal TH {
+    font-weight: bold;
+    font-size: 14pt;
+    white-space: nowrap;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: rgb(255, 100, 0);
+  }
+
+
+TABLE.Info {
+    width: 100%;
+    text-align: left;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    border: solid 0px;
+  }
+
+TABLE.Info TD {
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #4BFF37;
+  }
+
+TABLE.Info TH {
+    font-weight: bold;
+    font-size: 12pt;
+    white-space: nowrap;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #4BFF37;
+  }
+/* End of message/error tables */
+
+
+TH.title {
+    font-size: 12pt;
+  }
+
+
+/* Modal boxes by jquery */
+#mask{
+    position:absolute; /* important */
+    top:0px; /* start from top */
+    left:0px; /* start from left */
+    height:100%; /* cover the whole page */
+    width:100%;  /* cover the whole page */
+    display:none; /* don't show it '*/
+
+    /* styling bellow */
+    background-color: black;
+}
+
+.modal_window{
+    position:absolute; /* important so we can position it on center later */
+    display:none; /* don't show it */
+
+    /* styling bellow */
+    color:white;
+}
+
+/* style a specific modal window  */
+#modal_window{
+    padding:50px;
+    border:1px solid gray;
+    background: #246493;
+    color:black;
+}
+ /* End Modal boxes by jquery */
+ 
+ 
+/* Nice Buttons: See http://www.oscaralexander.com/tutorials/how-to-make-sexy-buttons-with-css.html */
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+div.BUTTON {
+    background: transparent url('images/bg_button_a.gif') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+div.BUTTON span {
+    background: transparent url('images/bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+/*    padding: 5px 0 5px 18px; */
+	padding-left: 18px;
+	padding-top: 3px;
+	height: 21px;
+}
+
+div.BUTTON input {
+    text-decoration: none;
+    border: solid 0px;
+    background: transparent no-repeat;
+    margin: 0px;
+/*    padding: 3px 0 3px 0; FD20101226*/	
+}
+div.BUTTON:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+div.BUTTON:active span {
+    background-position: bottom left;
+/*    padding: 3px 0 2px 18px; /* push text down 1px */
+	padding-left: 18px;
+} 

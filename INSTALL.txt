@@ -1,0 +1,49 @@
+**********************************************************************************************
+***    Welcome to Clubdata2                                                                ***
+**********************************************************************************************
+
+--
+-- Please read Documentation/Clubdata2_beta.pdf
+-- You will find a lot of hints on concepts of Clubdata2 and the installation notes
+--
+
+If you are impatient:
+
+1. Extract tarfile to $DOCUMENT_ROOT/Clubdata2
+
+2. Make sure you have a mysql user configured which has the permission to create databases and add tables. This can be the root user.
+
+3. Make also sure that this user has a password assigned !!
+
+4. Call http://yourhost/Clubdata2/Installation/install.php with your browser (firefox prefered)
+
+5. Select the appropriate values for your installation and click on “SAVE AND NEXT” to proceed to the next step (SAVE will just save the current values and will stay in the current step)
+
+6. When you have succesfully created the database and loaded the initial datas, copy the file 
+	Installation/configuration.sample.php
+   to
+	include/configuration.php
+
+7. Now, the database contains a test member and some users to play with
+	User: Admin, Password: admin, Function: (guess...))
+	User: AllUser, Password: AllUser, Function: User who may edit all tables
+	User: test, Password: test, Function: Is not allowed to do anything at the moment, but is used to test authentication
+	Member: 147, Password: mitglied, Function: The member uses the "member" interface as described in
+
+8. Create a directory named “small” under DEST_HTTP_DIR (set in section 'Upload' during setup), if you didn't use the default value during setup
+
+9. Change the permission of the following directories to be writtable by the http server (Normally wwwrun) (e.g. chown wwwrun <Directory>):
+	• style/newstyle/templates_c/
+	• style/newstyle/cache/
+	• the directory defined by $DEST_HTTP_DIR
+	• $DEST_HTTP_DIR/small (as created in Step 8)
+
+10. Connect to http://yourhost/Clubdata2/index.php. Login as Admin, AllUser or test.
+    You must have Javascript enabled !!
+
+11. Have fun, add members, etc.
+
+12. If you find any errors (and you will for the moment) send me an email to franz.domes@gmx.de.
+
+Any suggestions and bugfixes are also very welcome.
+

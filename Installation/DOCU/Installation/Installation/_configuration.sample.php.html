@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page configuration.sample.php</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/configuration.sample.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+											<a href="#sec-constants">Constants</a>
+										</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clubdata Administration Modules</p>
+<p class="description"><p>Contains classes to administer Clubdata.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Franz Domes &lt;<a href="mailto:franz.domes@gmx.de">franz.domes@gmx.de</a>&gt;</li>
+				<li><span class="field">version:</span> $Revision: 1.4 $</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2009, Franz Domes</li>
+				<li><span class="field">license:</span> <a href="http://opensource.org/licenses/gpl-license.php">GNU Public License</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+									<span class="disabled">Constants</span>
+											</div>
+		<div class="info-box-body">	
+			<a name="defineADODB_DIR"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">ADODB_DIR</span> = &quot;{{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/adodb/&quot;
+			(line <span class="line-number">64</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines Path ADODB library</p>
+<p class="description"><p>If you don't have the following tools in a path defined by  include_dir in php.ini, you have to set the correct paths here !  The paths here are valid for the complete installation of Clubdata  (the tools are installed in the subdirectoy Tools)<br />  The directories MUST end by a slash !!</p></p>
+	
+		
+</div>
+<a name="defineALLOWED_UPLOAD_TYPES"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">ALLOWED_UPLOAD_TYPES</span> = &quot;image/jpeg,image/pjpeg,image/png,image/gif,application/pdf&quot;
+			(line <span class="line-number">136</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mime-types of allowed uploads, separated by comma WITHOUT spaces</p>
+	
+		
+</div>
+<a name="defineBACKUPDIR"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">BACKUPDIR</span> = &quot;/tmp&quot;
+			(line <span class="line-number">118</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Path to store backup files on the server</p>
+<p class="description"><p>If you plan to store backup files of Clubdata V2 on the server, you must set the path to  a directory which can be written by the webserver  For security reasons, this path should not be directly accessible via a browser, so it should be  located outside of $SERVER['DOCUMENT_ROOT']</p></p>
+	
+		
+</div>
+<a name="defineCHARACTER_ENCODING"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">CHARACTER_ENCODING</span> = &quot;UTF8&quot;
+			(line <span class="line-number">205</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Define character set used</p>
+<p class="description"><p>Be carefull when changing this parameter.  When you upgrade from an old version, you should leave it at  ISO-8859-1, else you can set it to UTF8.  Make sure you have created the database by using the correct  configuration files</p></p>
+	
+		
+</div>
+<a name="defineDB_HOST"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_HOST</span> = &quot;localhost&quot;
+			(line <span class="line-number">157</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define database server</p>
+	
+		
+</div>
+<a name="defineDB_NAME"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_NAME</span> = &quot;Clubdata2&quot;
+			(line <span class="line-number">162</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define name of clubdata database</p>
+	
+		
+</div>
+<a name="defineDB_PASSWD"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_PASSWD</span> = &quot;cluba&quot;
+			(line <span class="line-number">172</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define password of database user</p>
+	
+		
+</div>
+<a name="defineDB_TABLEPREFIX"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_TABLEPREFIX</span> = &quot;cd_&quot;
+			(line <span class="line-number">177</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prefix for database tables. All tables will begin by this prefix</p>
+	
+		
+</div>
+<a name="defineDB_TYPE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_TYPE</span> = &quot;mysql&quot;
+			(line <span class="line-number">152</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define type of database (only mysql at the moment)</p>
+	
+		
+</div>
+<a name="defineDB_USER"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DB_USER</span> = &quot;clubdata2&quot;
+			(line <span class="line-number">167</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define name of database user</p>
+	
+		
+</div>
+<a name="defineDEBUG"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEBUG</span> = 0
+			(line <span class="line-number">224</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant, defining debug mode, value bit coded</p>
+<p class="description"><p>0000 = (0) = no debugging,      0001 = (1) = debug to screen      0010 = (2) = debug to file (@see DEBUGFILE)</p></p>
+	
+		
+</div>
+<a name="defineDEBUGCLASSES"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEBUGCLASSES</span> = &quot;MAIN,ADDRESSES,LIST,DBTABLE,FORMS,MEMBERINFO,M_PAYMENTS,M_FEES,M_ADMIN,M_JOBS,M_SEARCH,M_MEMBER,M_MAIL,M_QUERIES,M_HELP,M_LIST,CDDB,M_CONFERENCES&quot;
+			(line <span class="line-number">266</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant, defining classes to debug:</p>
+<p class="description"><p><strong>MAIN</strong>  debug main functions (like index.php)<br />      <strong>ADDRESSES</strong> debug class addresses<br />      <strong>LIST</strong> debug list<br />      <strong>DBLIST</strong> debug class DBList<br />      <strong>AUTH</strong> debug authentication<br />      <strong>SMARTY</strong> SMARTY classes<br />      <strong>DBTABLE</strong> debug class DBTABLE<br />      <strong>FORMS</strong> debug formsgeneration class<br />      <strong>MEMBERINFO</strong> debug class memberinfo<br />      <strong>M_PAYMENTS</strong> debug module (and class) payments<br />      <strong>M_FEES</strong> debug module (and class) fees<br />      <strong>M_ADMIN</strong> debug module (and class) Admin<br />      <strong>M_JOBS</strong> debug module (and class) Jobs<br />      <strong>M_SEARCH</strong> debug module (and class) search<br />      <strong>M_MEMBER</strong> debug module (and class) member<br />      <strong>M_MAIL</strong> debug module (and class) mail<br />      <strong>M_QUERIES</strong> debug module (and class) query<br />      <strong>M_HELP</strong> debug module (and class) help<br />      <strong>M_LIST</strong> debug module (and class) list<br />      <strong>CDDB</strong> Clubdata Database interface<br />      <strong>M_CONFERENCES</strong> debug module (and class) conferences<br /></p></p>
+	
+		
+</div>
+<a name="defineDEBUGFILE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEBUGFILE</span> = &quot;{{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/tmp/clubdata.log&quot;
+			(line <span class="line-number">234</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant, defining Name of debugging file</p>
+	
+		
+</div>
+<a name="defineDEFAULT_LANGUAGE"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEFAULT_LANGUAGE</span> = &quot;UK&quot;
+			(line <span class="line-number">185</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Predefine default language.</p>
+<p class="description"><p>This language will be used before a user logs in and as standard language where a language can be selected   Possible values: UK, DE, FR (and any other languages defined in Clubdata2/Language/)</p></p>
+	
+		
+</div>
+<a name="defineDEMOMODE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEMOMODE</span> = false
+			(line <span class="line-number">213</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">True of DemoModus should be used, false for normal use</p>
+	
+		
+</div>
+<a name="defineDEST_HTTP_DIR"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEST_HTTP_DIR</span> = 'logos/'
+			(line <span class="line-number">126</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Path to store uploaded pictures</p>
+<p class="description"><p>Where to store uploaded pictures<br />  This directory is relative to <a href="../../Installation/Installation/_configuration.sample.php.html#defineLINKROOT">LINKROOT</a> and must exist and must be writeable by the webserver</p></p>
+	
+		
+</div>
+<a name="defineFORMSGENERATION_DIR"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">FORMSGENERATION_DIR</span> = &quot;{{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/formsgeneration/&quot;
+			(line <span class="line-number">97</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines Path FORMSGENERATION library</p>
+<p class="description"><p>If you don't have the following tools in a path defined by  include_dir in php.ini, you have to set the correct paths here !  The paths here are valid for the complete installation of Clubdata  (the tools are installed in the subdirectoy Tools)<br />  The directories MUST end by a slash !!</p></p>
+	
+		
+</div>
+<a name="defineINDEX_PHP"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">INDEX_PHP</span> = &quot;index.php&quot;
+			(line <span class="line-number">107</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Name of index.php file.</p>
+<p class="description"><p>Normally it should be called index.php  but sometimes the provider needs the extension .php5 to use PHP Version 5 (needed by Clubdata)  In this case you can rename index.php to index.php5 and change the constant INDEX_PHP to  index.php5</p></p>
+	
+		
+</div>
+<a name="defineLINKROOT"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">LINKROOT</span> = &quot;/Clubdata2&quot;
+			(line <span class="line-number">53</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines the root of Clubdata2-Skripts relative to DOCUMENT_ROOT (or SCRIPTROOT)</p>
+<p class="description"><p>Defines how to access Clubdata via the Browser.  LINKROOT is the directory relativ to your home directory of your homepage and should start with a slash (or backslash on Windows systems)</p></p>
+	
+		
+</div>
+<a name="defineMAXTHUMBNAILHEIGHT"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAXTHUMBNAILHEIGHT</span> = &quot;150&quot;
+			(line <span class="line-number">142</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Height of thumnails created from uploaded images</p>
+	
+		
+</div>
+<a name="defineMAXTHUMBNAILWIDTH"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAXTHUMBNAILWIDTH</span> = &quot;150&quot;
+			(line <span class="line-number">147</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Height of thumnails created from uploaded images</p>
+	
+		
+</div>
+<a name="defineMAX_SIZE_LIMIT"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAX_SIZE_LIMIT</span> = &quot;500000&quot;
+			(line <span class="line-number">131</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Maximum size of an upload in bytes</p>
+	
+		
+</div>
+<a name="definePHP2EXCEL_DIR"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP2EXCEL_DIR</span> = &quot;{{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/php2excel/&quot;
+			(line <span class="line-number">75</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines Path PHP2EXCEL library</p>
+<p class="description"><p>If you don't have the following tools in a path defined by  include_dir in php.ini, you have to set the correct paths here !  The paths here are valid for the complete installation of Clubdata  (the tools are installed in the subdirectoy Tools)<br />  The directories MUST end by a slash !!</p></p>
+	
+		
+</div>
+<a name="defineSERVER_SYSTEM_TYPE"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SERVER_SYSTEM_TYPE</span> = &quot;UNIX&quot;
+			(line <span class="line-number">194</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Define system type: UNIX or WINDOWS</p>
+<p class="description"><p>This defines the type of your system where Clubdata runs. Path separators and directoy separators will  be choosen depending on the value.  Allowed values: UNIX and WINDOWS</p></p>
+	
+		
+</div>
+<a name="defineSMARTY_DEBUGGING"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SMARTY_DEBUGGING</span> = false
+			(line <span class="line-number">239</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant, defining debugging of Smarty (true or false)</p>
+	
+		
+</div>
+<a name="defineSMARTY_DIR"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SMARTY_DIR</span> = &quot;{{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/Smarty-2.6.10/libs/&quot;
+			(line <span class="line-number">86</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defines Path SMARTY library</p>
+<p class="description"><p>If you don't have the following tools in a path defined by  include_dir in php.ini, you have to set the correct paths here !  The paths here are valid for the complete installation of Clubdata  (the tools are installed in the subdirectoy Tools)<br />  The directories MUST end by a slash !!</p></p>
+	
+		
+</div>
+<a name="defineSQLDEBUG"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SQLDEBUG</span> = true
+			(line <span class="line-number">229</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant, defining SQL debug mode (true, or false)</p>
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 01 Jan 2011 22:23:42 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,21 @@
+ERROR CORRECTION:
+- Conferences list cannot be exported to Excel
+- Selecting/Delecting all in "Send Invoiceletter" removes letter type selection
+- improve mime-type of XLS-Downloads
+- correct shown addresses tab by access rights (getTabulators in members.php)
+
+TODO:
+
+  -simplify access rights table for users
+
+Gerade in Arbeit:
+    
+  - Zugriffsbrechtigungen
+
+  - das Logoff wäre, wenn es wichtig ist, wahrscheinlich besser, wenn es ein Extra-Punkt wäre - nicht nur ein Unterpunkt, sonst vergisst man es zu leicht - oder?  Ist es nicht wichtig, sich abzumelden?
+  
+  - Startnummer des ersten Mitglieds festlegbar machen. Z.B. auf 100
+  
+  - Bei Buchhaltung und Konferenz ist das gleiche Icon hinterlegt.
+
+Sonst noch:

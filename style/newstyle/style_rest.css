@@ -1,0 +1,423 @@
+/*  */
+INPUT {
+    width: 99.5%;
+    padding-left: 0.1cm;
+    margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+  }
+
+SELECT {
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+TABLE {
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TEXTAREA {
+    width: 100%;
+    height: 10ex;
+    padding-left: 0.1cm;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+.Bottombar {
+    width: 97%;
+    border: inset 0.0cm;
+    background-color: #a5cbf7;
+  }
+
+.email {
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+H1.HELP {
+    text-align: center;
+    font : 9pt Osaka,verdana,Sans-Serif;
+    color: red;
+  }
+
+.help DT {
+    font-weight: bold;
+    margin-top: 0.2cm;
+    margin-bottom: 0.1cm;
+  }
+
+INPUT.CHECKBOX {
+    width: 1em;
+    padding-left: 0.0cm;
+    margin: 0.05cm 0.1cm 0.05cm 0.0cm;
+  }
+
+INPUT.DATEBUTTON {
+    width: 3em;
+    margin: 0.0cm 0.0cm 0cm 0.25cm;
+  }
+
+INPUT.DATUM {
+    width: 4em;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+INPUT.PLZ {
+    width: 5em;
+    margin: 0.0cm 0.0cm 0.1cm 0.0cm;
+  }
+
+.invisible {
+    width: 100%;
+    border: none 0.0cm;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    background-color: #a5cbf7;
+  }
+
+.listTable {
+    margin: 0px;
+    padding: 0px;
+    font: 9pt Osaka,verdana,Sans-Serif;
+  }
+
+.MainNav {
+    width: 100%;
+    background-color: #dae0f1;
+    margin: 0cm;
+    padding: 0cm;
+  }
+
+.MainNavBody {
+    width: 100%;
+    border: none 0.0cm;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    background-color: #dae0f1;
+  }
+
+.Member {
+    background-color: #dae0f1;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+.NavEntry {
+    width: 100%;
+    background-color: #dae0f1;
+    margin: 0cm;
+    padding: 0cm;
+    font-size: 9pt;
+  }
+
+SELECT.ANREDE {
+    width: 7em;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+TABLE.columnselect {
+    width: 100%;
+    border: none 0.0cm;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    background-color: #dae0f1;
+  }
+
+TABLE.columnselect TD {
+    border: solid 0px;
+    margin: 0.0cm;
+    padding: 0.2cm;
+    background-color: #a5cbf7;
+  }
+
+
+TABLE.listTable TH {
+    font-size: 9pt;
+    background-color: #08245b;
+    color: white;
+    list-style-type: disc;
+    list-style-position: inside;
+/*     border: outset #D1D1CD 1px; */
+    height: 4ex;
+}
+
+
+
+TABLE.MainNav {
+    border: none 0.0cm;
+    width: 100%;
+    margin: 0cm;
+    padding: 0cm;
+    background-color: #f0f0f0;
+  }
+/*
+TABLE.Member {
+    border: solid 0.0cm;
+    width: 100%;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.Member TD.description {
+    margin: 0.05cm 0.5cm 0.0cm 0.5cm;
+    width: 4%;
+    padding-left: 0.1cm;
+    border-width: 0.1cm;
+    white-space: nowrap;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+*/
+
+TABLE.NavEntry {
+    border: none 0.0cm;
+    width: 100%;
+    margin: 0cm;
+    padding: 0cm;
+    background-color: #dae0f1;
+    font-size: 9pt;
+  }
+
+TABLE.searchTable {
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TABLE.tabulator {
+    margin-top: 0.0cm;
+  }
+
+TABLE.tabulator TD {
+    margin: 0.0cm;
+    padding: 0.0cm;
+  }
+
+TABLE.Warning {
+    width: 100%;
+    text-align: left;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    border: solid 0px;
+  }
+
+TABLE.Warning TD {
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #FFFF00;
+  }
+
+TABLE.Warning TH {
+    font-weight: bold;
+    font-size: 12pt;
+    white-space: nowrap;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #FFFF00;
+  }
+
+.tabulator {
+    border: none 0.0cm;
+    margin: 0.0cm;
+    padding: 0.0cm;
+    background-color: #f0f0f0;
+  }
+
+TD.email {
+/*     white-space: nowrap; */
+  }
+
+TD.Hauptdaten {
+    font : 9pt Osaka,verdana,Sans-Serif;
+    font-weight: 800;
+    line-height: 140%;
+/*     white-space: nowrap; */
+  }
+
+TD.MainNav {
+    width: 100%;
+    border: solid 0.04cm #101010;
+    margin: 0cm;
+    padding: 0.01cm 0.1cm 0.02cm 0cm;
+    background-color: #dae0f1;
+    font-size: 9pt;
+  }
+
+TD.Member {
+    border: solid 0.0cm;
+    padding-top: 0.0px;
+    margin: 0px;
+    vertical-align: middle;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+TD.NavEntry {
+    width: 100%;
+    border: none 0.04cm #101010;
+    margin: 0cm;
+    padding: 0.01cm 0.1cm 0.02cm 0cm;
+    background-color: #dae0f1;
+    font-size: 9pt;
+  }
+
+TD.PLZ {
+    width: 5em;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+TD.SP1 {
+    width: 5%;
+    border: none 0.0cm;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+    font-size: 9pt;
+    white-space: nowrap;
+  }
+
+TD.SP2 {
+    width: auto;
+    border: none 0.0cm;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+    font-size: 9pt;
+  }
+
+td.tabar {
+    background-color: #a5cbf7;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    border-left: solid #cccccc 2px;
+    border-right: solid #cccccc 2px;
+    border-bottom: solid #cccccc 2px;
+  }
+
+td.taboff {
+    background: #d6ebff;
+    border-top: solid #cccccc 1px;
+    border-left: solid #cccccc 1px;
+    border-right: solid #cccccc 1px;
+    border-bottom: solid #cccccc 2px;
+  }
+
+td.tabon {
+    background: #a5cbf7;
+    border-top: outset #ffffff 2px;
+    border-left: outset #ffffff 2px;
+    border-right: outset #cccccc 2px;
+    border-bottom: none;
+  }
+
+td.tabox {
+    background-color: #a5cbf7;
+    border-left: solid #cccccc 2px;
+    border-right: solid #cccccc 2px;
+    border-bottom: solid #cccccc 2px;
+  }
+
+td.tabsp {
+    border-bottom: solid #cccccc 2px;
+  }
+
+TEXTAREA.email {
+    width: 100%;
+    height: 30ex;
+    padding-left: 0.1cm;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+  }
+
+TEXTAREA.FIRMA {
+    width: 100%;
+    height: 10ex;
+    margin: 0.0cm 0.0cm 0cm 0.0cm;
+    text-align: center;
+    font-weight: bold;
+  }
+
+TH.MainNav {
+    border: outset 0.02cm;
+    margin: 0cm;
+    padding: 0.01cm 0cm 0.01cm 0cm;
+    background-color: #c4c9d8;
+    font-size: 9pt;
+  }
+
+TH.NavEntry {
+    border: none 0.02cm;
+    margin: 0cm;
+    padding: 0.01cm 0cm 0.01cm 0cm;
+    background-color: #dae0f1;
+    font-size: 9pt;
+  }
+
+
+TR.MainNav {
+    margin-top: 0.1cm;
+  }
+
+TR.NavEntry {
+    margin-top: 0.1cm;
+  }
+
+#NavEntryButton {
+    width:9pt;
+    padding-right:0pt;
+    border: none 0.0cm #101010;
+    margin: 0cm;
+    padding: 0.01cm 0.1cm 0.02cm 0cm;
+    background-color: #dae0f1;
+    font-size: 9pt;
+  }
+
+A:active {
+    color: red;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+A.help:hover {
+    color: #000070;
+    text-decoration: none;
+  }
+
+A.help:link {
+    color: #000000;
+    font-weight: normal;
+  }
+
+A:hover {
+    color: #666666;
+    text-decoration: underline;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+A:link {
+    color: #08245b;
+    text-decoration: none;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: normal;
+  }
+
+A.NavEntry:hover {
+    color: #000070;
+    text-decoration: none;
+  }
+
+A.NavEntry:link {
+    color: #0000FF;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+A.NavEntry:visited {
+    color: #0000ff;
+    font-family: Osaka,verdana,Sans-Serif;
+    font-size: 9pt;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+
+.button {
+    width: 32px;
+    height: 32px;
+    border-width: 0px;
+    }

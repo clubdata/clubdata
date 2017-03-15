@@ -1,0 +1,1011 @@
+body {
+  font-family: Osaka,verdana,sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+/* css3 */
+.head1,.head2,.head3,.navigator,.navigator_active,.companyname,.headline
+	{
+	font-size: 20px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	color: #73A2D0;
+	text-decoration: none;
+}
+
+h5 {
+	font-size: 14px;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+}
+
+.light_border_upper {
+	border: none 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 10px;
+	vertical-align: bottom;
+	background-image: url("../images/light_border_u.png");
+}
+
+.light_border_lower {
+	height: 13px;
+	background-image: url("../images/light_border_lower.png");
+}
+
+.light_border_right {
+	width: 13px;
+	background-image: url("../images/light_border_r.png");
+}
+
+.light_border_left {
+	border: none 0px;
+	margin: 0px;
+	padding: 0px;
+	width: 10px;
+	background-image: url("../images/light_border_left.png");
+}
+
+/* Tabulator Anfang */
+.tabulator {
+	margin-top: 0.0cm;
+	background-color: #FFFFFF;
+}
+
+TABLE.tabulator TD {
+	background-color: #FFFFFF;
+	margin: 0.0cm;
+	padding: 0.0cm;
+}
+
+td.tabar {
+	background-color: #a5cbf7;
+	padding-top: 1px;
+	padding-bottom: 0px;
+	border-left: solid #cccccc 2px;
+	border-right: solid #cccccc 2px;
+	border-bottom: solid #cccccc 2px;
+}
+
+td.taboff {
+	/*     background: #d6ebff; */
+	background-color: #FFFFFF;
+	border: none 0px;
+	margin: 0px;
+	background-image: url('images/tabBg.png');
+}
+
+.tabon {
+	/*     background: #a5cbf7; */
+	border: none 0px;
+	margin: 0px;
+	background-image: url('images/tabSelectedBg.png');
+}
+
+/*td.tabox {
+    background-color: #a5cbf7;
+    border-left: solid #cccccc 2px;
+    border-right: solid #cccccc 2px;
+    border-bottom: solid #cccccc 2px;
+  }*/
+td.tabsp {
+	border-bottom: solid #cccccc 2px;
+}
+/* Tabulator Ende */
+
+/* Datapager Anfang */
+TABLE.datapager {
+	font-size: 9pt;
+	font-weight: normal;
+}
+/* Datapager Ende */
+
+
+/* Start Listtable */
+TABLE.listTable {
+	width: 100%;
+	/*     background-color: #dae0f1; */
+	font: 9pt Osaka, verdana, Sans-Serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+TABLE.listTable TR {
+	margin: 0px;
+}
+
+TABLE.listTable TD.even {
+	margin: 0px;
+	background-color: #d6ebff;
+}
+
+TABLE.listTable TD.odd {
+	margin: 0px;
+}
+
+TABLE.listTable TD.Data,TABLE.listTable TD.DataSearch {
+	font: bold 9pt/130% Osaka, verdana, Sans-Serif;
+	margin: 0px;
+	padding: 0px;
+	white-space: nowrap;
+}
+
+TABLE.listTable TD {
+	font: 9pt/130% Osaka, verdana, Sans-Serif;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 1px;
+	white-space: nowrap;
+}
+
+TABLE.listTable INPUT {
+	width: 99.5%;
+	padding-left: 0.1cm;
+	margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+	font: 9pt Osaka, verdana, Sans-Serif;
+}
+
+TABLE.listTable TD.DataSearch INPUT {
+	width: 200pt;
+	padding-left: 0.1cm;
+	margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+	font: 9pt Osaka, verdana, Sans-Serif;
+}
+
+TABLE.listTable SELECT {
+	margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+	font: 9pt Osaka, verdana, Sans-Serif;
+}
+
+TABLE.listTable SELECT.MULTIPLE {
+	height: 6em;
+	margin: 0.0cm 0.0cm 0cm 0.0cm;
+}
+
+TABLE.listTable TEXTAREA {
+	width: 100%;
+	height: 10ex;
+	margin: 0.0cm 0.0cm 0cm 0.0cm;
+/*	font-family: "helvetica", "arial", "geneva", sans-serif; */
+	font-size: x-small;
+	text-align: left;
+	font-weight: bold;
+}
+
+TABLE.listTable TD.Description {
+	font: 9pt/130% Osaka, verdana, Sans-Serif;
+	margin: 0px;
+	padding: 0px 5px 0px 0px;
+	width: 1%;
+	white-space: nowrap;
+	height: 30px;
+}
+
+TABLE.listTable TD.SectionTitle {
+	font: 9pt/130% Osaka, verdana, Sans-Serif;
+	margin: 0px;
+	padding: 5px 0px 2px 0px;
+	width: 100%;
+	white-space: nowrap;
+	text-align: left;
+	font-weight: bold;
+}
+
+TABLE.listTable INPUT.CHECKBOX {
+	width: 1em;
+	padding-left: 0.1cm;
+	margin: 0.05cm 0.1cm 0.05cm 0.0cm;
+}
+
+TABLE.listTable TD.Data INPUT.DATUM {
+	width: 4em;
+}
+
+TABLE.listTable TD.DataSearch INPUT.DATUM {
+	width: 4em;
+}
+
+TABLE.listTable TH {
+	font-size: 9pt;
+	background-color: #08245b;
+	color: white;
+	list-style-type: disc;
+	list-style-position: inside;
+	/*     border: outset #D1D1CD 1px; */
+	height: 4ex;
+}
+
+TH.listTable A:link,TH.listTable A:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+#listTableSortCol {
+	/*      background-color: #9bc5db; */
+	font-style: italic;
+}
+
+TABLE.listTable BUTTON.DATEBUTTON {
+	width: 3em;
+	margin: 0.0cm 0.0cm 0cm 0.25cm;
+	font: 9pt Osaka, verdana, Sans-Serif;
+}
+
+TABLE.listTable TD.Header {
+	font: 9pt Osaka, verdana, Sans-Serif;
+	background-color: #a5cbf7;
+	/* 	color: white; */
+	white-space: nowrap;
+	text-align: center;
+	font-weight: bold;
+	list-style-type: disc;
+	list-style-position: inside;
+	/*     border: outset #D1D1CD 1px; */
+	height: 4ex;
+}
+
+TABLE.listTable TD.Value {
+	margin: 0px;
+	width: 80%;
+	font: 9pt Osaka, verdana, Sans-Serif;
+}
+
+TABLE.listTable TD.Footer {
+	font: 9pt Osaka, verdana, Sans-Serif;
+	background-color: #a5cbf7;
+	/* 	color: white; */
+	white-space: nowrap;
+	text-align: left;
+	font-weight: bold;
+	font-style: italic;
+	/*     border: outset #D1D1CD 1px; */
+	height: 4ex;
+}
+
+/**/
+
+/* End ListTable */
+
+.title {
+	font-size: 12pt;
+}
+
+
+/************************************************
+                        CSS3
+ ************************************************/
+body {
+  font-family: Osaka,verdana,sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+.vMain {
+  background-color: #a5cbf7;
+  vertical-align: top;
+}
+
+/* Modal boxes by jquery */
+#mask {
+  position: absolute; /* important */
+  top: 0px; /* start from top */
+  left: 0px; /* start from left */
+  height: 100%; /* cover the whole page */
+  width: 100%; /* cover the whole page */
+  display: none; /* don't show it '*/
+  /* styling bellow */
+  background-color: black;
+}
+
+.modal_window {
+  position: absolute;
+  /* important so we can position it on center later */
+  display: none; /* don't show it */
+  /* styling bellow */
+  color: white;
+}
+
+/* style a specific modal window  */
+#modal_window {
+  padding: 50px;
+  border: 1px solid gray;
+  background: #246493;
+  color: black;
+}
+/* End Modal boxes by jquery */
+
+/* General link style */
+A:visited {
+  color: #08245b;
+  text-decoration: none;
+  font-size: 9pt;
+  font-weight: normal;
+}
+
+A:active {
+  color: red;
+  text-decoration: none;
+  font-size: 9pt;
+  font-weight: normal;
+}
+
+A:hover {
+  color: #666666;
+  text-decoration: underline;
+  font-size: 9pt;
+  font-weight: normal;
+}
+
+A:link {
+  color: #08245b;
+  text-decoration: none;
+  font-size: 9pt;
+  font-weight: normal;
+}
+/* End General link style */
+
+/* grid */
+.row, .row-nomargin, .row-smallmargin{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin: 0 10px;
+	margin-bottom: 20px;
+}
+
+.row-nomargin, .row-smallmargin {
+	margin: 0;
+}
+
+.row-smallmargin {
+	margin-bottom: 5px;
+}
+
+.row:last-child, .row-nomargin:last-child {
+	margin-bottom: 0;
+}
+
+[class*="col-"] {
+	padding: 0px;
+/*	width: 100%; */
+}
+
+[class*="col-"] .Description, [class*="tablecol-"] .Description {
+  font-size: 9pt;
+  line-height: 130%;
+  margin: 0px;
+  padding: 0px 5px 0px 0px;
+  white-space: nowrap;
+  height: 30px;
+  vertical-align: middle;
+}
+
+[class*="col-"] .SectionTitle, [class*="tablecol-"] .SectionTitle { 
+  font: 9pt/130% Osaka, verdana, Sans-Serif;
+  margin: 0px;
+  padding: 5px 0px 2px 0px;
+/*  width: 100%; */
+  white-space: nowrap;
+  text-align: left;
+  font-weight: bold;
+}
+
+[class*="col-"] .MULTIPLE, [class*="tablecol-"] .MULTIPLE {
+	height: 6em;
+}
+
+[class*="col-"] > * {
+    width: 100%;
+  }
+
+@media all and ( max-width: 599px ) {
+  .row {
+     flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+  }
+}
+@media all and ( min-width: 600px ) {
+	.row {
+		 flex-flow: row nowrap;
+	  -moz-flex-flow: row nowrap;
+	  -webkit-flex-flow: row nowrap;
+}
+	/* set col widths */
+	.col-max {
+    flex-grow: 2;
+    -moz-flex-grow: 2;
+    -webkit-flex-grow: 2;
+	}
+
+  .col-auto {
+	 width: auto;
+	}
+	.col-1-1 {
+		width: 100%;
+	}
+	.col-2-3 {
+		width: 66.66%;
+	}
+	.col-1-2 {
+		width: 50%;
+	}
+	.col-1-3 {
+		width: 33.33%;
+	}
+	.col-1-4 {
+		width: 25%;
+	}
+  .col-3-4 {
+    width: 75%;
+  }
+.col-1-8 {
+    width: 12.5%;
+  }
+  .col-7-8 {
+    width: 87.5%;
+  }
+  
+.col-1-16 {
+	 width: 6.25%;
+}  
+.main-nav {
+		width: 200px;
+		min-width: 200px;
+		flex-shrink: 0;
+		-moz-flex-shrink: 0;
+		-webkit-flex-grow: 0;
+	}
+
+.main-content {
+    flex-grow: 200;
+    -moz-flex-grow: 200;
+    -webkit-flex-grow: 200;
+}
+
+@media all and ( min-width: 600px ) {
+ 
+  .table {
+    display: table;
+   /* table-layout: fixed; */
+    /* width: 100%; */
+    margin: auto 10px;
+  }
+  
+  .tablerow {
+      display: table-row;
+  }
+  
+  [class*="tablecol-"] {
+    display: table-cell;
+    width: 100%;
+  }
+ 
+  /* set col widths */
+  .tablecol-content {
+    width: auto;
+  }
+  
+  .tablecol-2-3 {
+    width: 66.66%;
+  }
+  .tablecol-1-2 {
+    width: 50%;
+  }
+  .tablecol-1-3 {
+    width: 33.33%;
+  }
+  .tablecol-1-4 {
+    width: 25%;
+  }
+  .tablecol-3-4 {
+    width: 75%;
+  }
+  .tablecol-1-8 {
+    width: 12.5%;
+  }
+ 
+}
+
+div.table div.Data {
+  font-size: 9pt;
+  font-weight: bold; 
+	margin: 0px;
+  padding:  2px 0 2px 0;
+  white-space: nowrap;
+}
+
+div.table input {
+  padding-left: 0.1cm;
+  margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+/*  font: 9pt Osaka, verdana, Sans-Serif; */
+}
+
+div.table input.CHECKBOX {
+  width: auto;
+	padding-left: 0.1cm;
+  margin: auto;
+/*  font: 9pt Osaka, verdana, Sans-Serif; */
+}
+
+div.table textarea {
+  height: 10ex;
+  margin: 0.0cm 0.0cm 0cm 0.0cm;
+  /* font-family: "helvetica", "arial", "geneva", sans-serif; */
+  font-size: x-small;
+  text-align: left;
+  font-weight: bold;
+}
+div.table label {
+	font-weight: normal;
+}
+
+div.table .title {
+  font-size: 9pt;
+  font-weight: bold; 
+  background-color: #08245b;
+  color: white;
+  height: 4ex;
+  line-height: 4ex;
+  text-align: center;
+}
+
+div.table .title span {
+  vertical-align: middle;
+}
+
+/* Field with border */
+.field-background {
+	background: #A5CBF7;
+	border: 1px solid #DDD;
+	box-shadow: 2px 2px 1px rgba(82, 101, 123, 0.7);
+	border-radius: 10px;
+	margin-bottom: 3px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.headerline {
+	height: 23px;
+}
+
+.headerline div {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.headerline .left {
+	justify-content: left;
+	-webkit-justify-content: left;
+	-moz-justify-content: left;
+}
+
+.headerline .left span {
+	padding-left: 15px;
+}
+
+.headerline .center {
+  text-align: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+}
+
+.headerline .right {
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
+	-moz-justify-content: flex-end;
+  text-align: right;
+}
+
+.headerline .right span {
+	padding-right: 15px;
+}
+
+.headerline div {
+	font-weight: bold;
+	font-size: 9pt;
+	background-color: #a5cbf7;
+}
+
+.headerline div.col-1-1 {
+	font-weight: bold;
+	font-size: 14pt;
+	background-color: #a5cbf7;
+}
+
+/* message/error tables */
+div.Warning {
+  width: 100%;
+  text-align: left;
+  margin: 0.0cm;
+  padding: 0.0cm;
+  border: solid 0px;
+}
+
+div.Warning TD {
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 200, 0);
+}
+
+div.Warning TH {
+  font-weight: bold;
+  font-size: 14pt;
+  white-space: nowrap;
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 200, 0);
+}
+
+div.Error {
+  width: 100%;
+  text-align: left;
+  margin: 0.0cm;
+  padding: 0.0cm;
+  border: solid 0px;
+}
+
+div.Error {
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 0, 0);
+}
+
+div.Error:first-child {
+  font-weight: bold;
+  font-size: 12pt;
+  white-space: nowrap;
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 0, 0);
+}
+
+div.Fatal {
+  width: 100%;
+  text-align: left;
+  margin: 0.0cm;
+  padding: 0.0cm;
+  border: solid 0px;
+}
+
+div.Fatal > .message {
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 0, 0);
+}
+
+div.Fatal > .header {
+  font-weight: bold;
+  font-size: 14pt;
+  white-space: nowrap;
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: rgb(255, 100, 0);
+}
+
+div.Info {
+  width: 100%;
+  text-align: left;
+  margin: 0.0cm;
+  padding: 0.0cm;
+  border: solid 0px;
+}
+
+div.Info > .message {
+  text-align: center;
+  vertical-align: top;
+  background-color: #4BFF37;
+}
+
+div.Info > .header {
+  font-weight: bold;
+  font-size: 12pt;
+  white-space: nowrap;
+  height: 25px;
+  text-align: center;
+  vertical-align: top;
+  background-color: #4BFF37;
+}
+/* End of message/error tables */
+
+/* Buttonbar Anfang */
+.Buttonbar {
+  width: 100%;
+  border: none 0.0cm;
+  background-color: #a5cbf7;
+}
+
+.Buttonbar > .row {
+	justify-content:space-between; 
+	padding-bottom: 10px; 
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+/* set 10px distance between buttons */
+.Buttonbar div.BUTTON {
+	padding: 0px 10px;
+}
+
+.Buttonbar #newMemberID-DIV {
+margin-top: auto;
+margin-bottom: auto;
+padding-bottom: 2px;
+}
+
+.Buttonbar #newMemberID {
+width: auto;
+}
+
+/* move first button to the left edge, i.e. don't add space to left of first button */
+.leftbuttons > div.BUTTON:nth-of-type(1) {
+	padding-left: 0px;
+}
+
+
+/* Buttonbar Ende */
+
+*:focus {
+    outline: 0;
+}
+div.BUTTON input {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  padding: 2px 25px;
+  border: 1px solid rgb(225,225,225);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+
+  font-size: 0.75em;
+  color: rgb(102, 102, 102);
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: -webkit-linear-gradient(0deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  background: -moz-linear-gradient(90deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  background: linear-gradient(90deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+
+  -webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,0.298039) inset, 0 -1px 1px 0 rgba(255,255,255,0.14902) inset, 0 2px 2px 0 rgb(187,187,187) , 0 3px 3px 0 rgba(0,0,0,0.2) ;
+  box-shadow:         0 1px 0 0 rgba(255,255,255,0.298039) inset, 0 -1px 1px 0 rgba(255,255,255,0.14902) inset, 0 2px 2px 0 rgb(187,187,187) , 0 3px 3px 0 rgba(0,0,0,0.2) ;
+
+-webkit-transition: all 0.1s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  -moz-transition: all 0.1s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  -o-transition: all 0.1s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  transition: all 0.1s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+div.BUTTON input:hover {
+  color: rgba(135,135,135,1);
+  background: -webkit-linear-gradient(-90deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), -webkit-linear-gradient(0deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  background: -moz-linear-gradient(180deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), -moz-linear-gradient(90deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  background: linear-gradient(180deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), linear-gradient(90deg, rgb(243,243,243) 0, rgb(233,233,233) 100%), rgb(238, 238, 238);
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+}
+
+div.BUTTON input:active {
+  top: 3px;
+  color: rgba(160,160,160,1);
+  background: -webkit-linear-gradient(-90deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), rgb(255, 255, 255);
+  background: -moz-linear-gradient(180deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgb(255,255,255) 0, rgb(235,235,235) 100%), rgb(255, 255, 255);
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+  -webkit-box-shadow: 0 1px 0 0 rgba(255,255,255,0.298039) inset, 0 -1px 1px 0 rgba(255,255,255,0.14902) inset;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.298039) inset, 0 -1px 1px 0 rgba(255,255,255,0.14902) inset;
+  -webkit-transition: all 50ms cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  -moz-transition: all 50ms cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  -o-transition: all 50ms cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  transition: all 50ms cubic-bezier(0.25, 0.25, 0.75, 0.75);
+}
+
+.arrowRight, .arrowLeft, .arrowRightLast, .arrowLeftFirst {
+	padding: 0;
+  border: none;
+  display: block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+background-color: #dedede;
+  border-radius: 50%;
+  box-shadow: inset -6px -5px 4px rgba(0,0,0,.25);
+  background-image: -webkit-linear-gradient(-45deg, rgba(255,255,220,.2) 0%, transparent 100%);
+  background-image: -moz-linear-gradient(-45deg, rgba(255,255,220,.2) 0%, transparent 100%);  
+  background-image: -o-linear-gradient(-45deg, rgba(255,255,220,.2) 0%, transparent 100%);
+  background-image: -ms-linear-gradient(-45deg, rgba(255,255,220,.2) 0%, transparent 100%);
+  margin: auto 2px;
+}
+
+.arrowRight:after, .arrowRightLast:after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 11px;
+  width: 0;
+  height: 0;
+	border: 6px solid transparent;
+  border-left: 11px solid #555555;
+}
+
+.arrowRightLast:before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 18px;
+  width: 3px;
+  height: 12px;
+  background-color: #555555;
+}
+
+
+.arrowLeft:after, .arrowLeftFirst:after {
+  content: '';
+  position: absolute;
+  top: 9px;
+	left: 2px;
+  width: 0;
+  height: 0;
+	border: 6px solid transparent;
+  border-right: 11px solid #555555;
+}
+
+.arrowLeftFirst:before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  width: 3px;
+  height: 12px;
+  background-color: #555555;
+}
+
+/* Field with border */
+div.navigator {
+  background: #08245B;
+  border: 1px solid #05144b;
+  box-shadow: 1px 1px 1px rgba(05, 36, 91, 0.7);
+  border-radius: 10px;
+  margin-bottom: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navigator {
+  line-height: normal;
+  font-style: normal;
+  font-weight: normal;
+  color: #FFFFFF;
+  background: #08245b;
+  text-align: left;
+}
+
+.navigator img {
+  vertical-align: middle;
+  margin-bottom: 0px;
+}
+
+.navigator ul {
+  list-style-type: none;
+  padding: 0 0 0 10px;
+  margin-top: 0px;
+/*   list-style-image: url(../images/flash_small.png);*/ 
+}
+
+.navigator > ul > li {
+	  text-decoration: none;
+	  margin: 10px 0;
+}
+
+.subnav_hidden {
+	display: none;
+}
+
+.subnav_display {
+	display: auto;
+}
+.navigator a:link,.navigator a:active,.navigator a:visited {
+  font-size: 14px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.navigator_active {
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.navigator_label {
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.navigator_sub {
+  font-size: 12px;
+  padding-left: 29px;
+  padding-bottom: 5px;
+}
+
+.navigator_sub a:link,.navigator_sub a:active,.navigator_sub a:visited {
+  font-size: 12px;
+  color: #FFFFFF;
+}
+
+.navigator div.triangle-right {
+	width: 0; 
+	height: 0; 
+	border-top: 5px solid transparent; 
+	border-left: 10px solid #A5CBF7; 
+	border-bottom: 5px solid transparent;
+	margin-top: 3px;
+	margin-right: 3px;
+}
+
+.Daten {
+	font-size: 12px;
+	line-height: 130%;
+}
+
+
+.Address .row-smallmargin {
+  margin-top: 15px;
+}
+
+.Address .row-smallmargin ~ .row-smallmargin {
+  margin-top: 0px;
+}

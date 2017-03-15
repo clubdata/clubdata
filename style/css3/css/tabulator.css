@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+
+.tabulatorClass {
+	width: 100%;
+  float: none;
+  list-style: none;
+  position: relative;
+  margin: 0px 0 0 0px;
+  padding-left: 10px;
+  text-align: left;
+}
+
+.clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+
+.tabulatorClass li {
+  float: left;
+  display: block;
+  margin-right: 2px;
+}
+.tabulatorClass input[type="radio"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.tabulatorClass label {
+  display: block;
+  padding: 14px 11px 14px;
+  border-radius: 10px 10px 0 0;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  background: #85ABD7; 
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.tabulatorClass label:hover {
+  background: #A5CBF7;
+}
+.tabulatorClass .tab-content {
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  font-size: 17px;
+  line-height: 25px;
+  padding: 25px;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  background: #612e76;
+}
+.tabulatorClass [id^="tab"]:checked + label {
+  top: 1px;
+/*  padding-top: 17px; */
+  background: #A5CBF7;
+}
+.tabulatorClass [id^="tab"]:checked ~ [id^="tab-content"] {
+  display: block;
+}
+
+p.link {
+  clear: both;
+  margin: 380px 0 0 15px;
+}
+p.link a {
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #A5CBF7;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+p.link a:hover {
+  background-color: #522764;
+}

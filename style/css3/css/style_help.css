@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+/* Labels as link to help texts */
+
+/* Links with help text attached */
+
+A.help {
+	background :#A5CBF7;
+	}
+	
+A.help:hover {
+    color: #000070;
+	background : #a5cbf7;
+    text-decoration: none;
+  }
+
+A.help:link {
+    color: #000000;
+	background : #a5cbf7;
+    font-weight: normal;
+  }
+
+/* Help text itself, a) as tooltip; b) as own window; */
+.help, #cluetip-inner {
+    background : #d6ebff;
+    font: 9pt Osaka,verdana,Sans-Serif;
+    margin: 0px 0px 5px;
+    margin: 0px;	
+	}
+
+.help h1, #cluetip-inner h1 {
+    text-align: center;
+    font : 9pt Osaka,verdana,Sans-Serif;
+    color: red;
+  }
+
+.help td, #cluetip-inner td {
+    text-align: left;
+    padding-left: 0px;
+    font : 9pt Osaka,verdana,Sans-Serif;
+  }
+
+.help dt {
+    font-weight: bold;
+    margin-top: 0.2cm;
+    margin-bottom: 0.1cm;
+  }
+
+/* End labels as link ti help texts */

@@ -1,0 +1,568 @@
+<STYLE>
+    BODY {
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    P {
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TABLE {
+        margin: 0.0px;
+        padding: 0.0px;
+        /* border: solid 0.05cm #757575; */
+        border: none 0.0px;
+        background-color: #7b9cae;
+ 				background-image: none;
+        /* BORDER=0 CELLPADDING=0 CELLSPACING=0 STYLE="page-break-before: always" */
+
+    }
+
+    TH {
+        margin: 0.2cm 0.2cm 0.2cm 0.2cm;
+        border: outset 0.1cm;
+        /* border-width: 0.1cm; */
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        background-color: #99ccff;
+        /* background-color: #c4c9d8; */
+    }
+
+    TD {
+        margin: 0.1cm 0.25cm 0.0cm 0.25cm;
+        padding-left: 0.1cm;
+        border: none 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        /* border-style: none; */
+    }
+
+
+
+    .inner {
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    table.inner {
+        border: solid 0.0cm;
+        width: 100%;
+        /* vertical-align: top; */
+        /* BORDER=0 CELLPADDING=0 CELLSPACING=0 STYLE="page-break-before: always" */
+
+    }
+
+    TD.inner {
+        border: solid 0.0cm;
+        padding-top: 0.0px;
+        margin: 0px;
+        vertical-align: middle;
+    }
+
+
+    .invisible {
+        width: 100%;
+        border: none 0.0cm;
+        margin: 0.0cm;
+        padding: 0.0cm;
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    INPUT.invisible {
+        width: 100%;
+        padding-left: 0.1cm;
+        margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    .visible {
+        padding: 0.01cm 0cm 0.01cm 0cm;
+        border: solid 0.04cm #101010;
+    }
+
+
+    b.Daten {
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        font-weight: 800;
+        line-height: 110%;
+    }
+
+    b.Hauptdaten {
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        font-weight: 800;
+        line-height: 140%;
+    }
+
+
+    }
+    TD.description {
+        margin: 0.1cm 0.5cm 0.0cm 0.5cm;
+        width: 4%;
+        padding-left: 0.1cm;
+        border-width: 0.1cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        white-space: nowrap;
+    }
+
+    TD.SP1 {
+        width: auto;
+        border: none 0.0cm;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TD.SP2 {
+        width: auto;
+        border: solid 0.01cm;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TD.PLZ {
+        width: 5em;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+
+/*
+    TD P.SP1 {
+        margin: 0.1cm 0.5cm 0.0cm 0.5cm;
+        padding-left: 0.1cm;
+        border-width: 0.1cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+*/
+
+    INPUT {
+        width: 99.5%;
+        padding-left: 0.1cm;
+        margin: 0.0cm 0.1cm 0.1cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    INPUT.checkbox{
+        width: auto;
+        padding-left: 0.1cm;
+        margin: 0.05cm 0.1cm 0.05cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+   INPUT.BOTTOM  {
+        width: auto;
+        margin: 0.0cm 0.0cm 0.1cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    INPUT.PLZ {
+        width: 5em;
+        margin: 0.0cm 0.0cm 0.1cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    INPUT.DATUM {
+        width: 10em;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    INPUT.DATEBUTTON {
+        width: 3em;
+        margin: 0.0cm 0.0cm 0cm 0.25cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    INPUT.BROWSE {
+    	width: auto;
+		}
+
+    SELECT {
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    SELECT.ANREDE {
+        width: 7em;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    SELECT.MULTIPLE {
+        height: 6em;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TEXTAREA {
+        width: 100%;
+        height: 10ex;
+        padding-left: 0.1cm;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TEXTAREA.email {
+        width: 100%;
+        height: 30ex;
+        padding-left: 0.1cm;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+
+    TEXTAREA.FIRMA {
+        width: 100%;
+        height: 10ex;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        text-align: center;
+        font-weight:
+         bold;
+    }
+
+    A:visited {
+        color: #F0F0ff;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    A:link {
+        color: #F0F0FF;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    A:hover {
+        color: #000070;
+        /* font-size: 125%; */
+        text-decoration: none;
+    }
+
+    /* Styles for list tables */
+   .listTable {
+        margin: 0.0px;
+        padding: 0.0px;
+    }
+
+    TABLE.listTable{
+        width: 100%;
+        border: none 0.00cm #757575;
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    TD.listTable{
+        margin: 0px;
+        border-bottom: solid 2px #ffffff;
+    }
+
+    TH.listTable{
+      height: 4ex;
+      background-color: #7b9cae;
+      color: white;
+    }
+
+    #listTableSortCol {
+      background-color: #9bc5db;
+    }
+    /* END Styles for list tables */
+
+
+    /* Styles for Bottom bar */
+    .Bottombar {
+        width: 97%;
+        border: none 0.0cm;
+        margin: 0.0cm;
+        padding: 0.0cm;
+        background-color: #7b9cae;
+        /* background-color: #ffffff; */
+    }
+
+    TABLE.Bottombar {
+        width: 97%;
+    }
+
+    TD.Bottombar {
+        width: auto;
+        border: solid 0.0cm;
+        margin: 0.0cm 0.0cm 0cm 0.0cm;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: xx-small;
+    }
+    /* End Styles for Bottom bar */
+
+    /* Styles for Navigator bar (left side bar) */
+    .MainNavBody {
+        width: 100%;
+        border: none 0.0cm;
+        margin: 0.0cm;
+        padding: 0.0cm;
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    .MainNav {
+    		width: 100%;
+        background-color: #7b9cae;
+        margin: 0cm;
+        padding: 0cm;
+        color: #ffffff;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: small;
+    }
+
+    TABLE.MainNav {
+        border: none 0.0cm;
+        width: 100%;
+        margin: 0cm;
+        padding: 0cm;
+        background-color: #7b9cae;
+        color: #ffffff;
+    }
+
+    TH.MainNav {
+        border: none 0.02cm;
+        margin: 0cm;
+        padding: 0.01cm 0cm 0.01cm 0cm;
+        background-color: #7b9cae;
+        color: #ffffff;
+    }
+
+    TD.MainNav {
+    		width: 100%;
+        border: none 0.0cm #101010;
+        margin: 0cm;
+        padding: 0.0cm 0.cm 0.0cm 0cm;
+        background-color: #ffffff;
+    }
+
+    TR.MainNav {
+        margin-top: 0.1cm;
+    }
+
+    #NavEntryButton {
+        width:10pt;
+        padding-right:0pt;
+        border: none 0.0cm #101010;
+        margin: 0cm;
+        padding: 0.01cm 0.1cm 0.02cm 0cm;
+        /*background-color: #dae0f1;*/
+        background-color: #FFFFFF;
+    }
+
+    .NavEntry {
+        width: 100%;
+        background-color: #FFFFFF;
+        margin: 0cm;
+        padding: 0cm;
+    }
+
+    TABLE.NavEntry {
+        border: none 0.0cm;
+        width: 100%;
+        margin: 0cm;
+        padding: 0cm;
+        background-color: #FFFFFF;
+    }
+
+    TH.NavEntry {
+        border: none 0.02cm;
+        margin: 0cm;
+        padding: 0.01cm 0cm 0.01cm 0cm;
+        background-color: #dae0f1;
+    }
+
+    TD.NavEntry {
+        width: 100%;
+        border: none 0.04cm #101010;
+        margin: 0cm;
+        padding: 0.01cm 0.1cm 0.02cm 0cm;
+        /*background-color: #dae0f1;*/
+        background-color: #FFFFFF;
+    }
+
+    TR.NavEntry {
+        margin-top: 0.1cm;
+    }
+
+    A:visited.NavEntry {
+        color: #596A8C;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: x-small;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    A:link.NavEntry {
+        color: #596A8C;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: x-small;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    A:hover.NavEntry {
+        color: #000070;
+        /* font-size: 125%; */
+        text-decoration: none;
+    }
+
+    /* End Styles for Navigator bar (left side bar) */
+
+    /* Styles for Header bar */
+    .head {
+        /* background-color: #7b9cae; */
+        background-color: white;
+        font-family: "helvetica", "arial", "geneva", sans-serif;
+        font-size: 50%;
+        font-weight: bold;
+        padding: 0cm;
+        margin: 0cm;
+
+    }
+
+    TR.head{
+        margin-top: 0.0cm;
+    }
+
+    TD.head{
+        font-weight: bold;
+        font-size: 9pt;
+        padding-left: 0.2cm;
+        padding-right: 0.2cm;
+        border: outset 0.04cm black;
+        width: 33%;
+        /* height: 30px; */
+        background-color: #7b9cae;
+        color: white;
+    }
+
+    TABLE.head{
+        margin: 0.0cm ;
+        margin-top: 0px;
+        border: none 0.2cm;
+        width: 100%;
+        background-color: #7b9cae;
+        vertical-align: baseline;
+        height: 36px;
+    }
+
+    H5.head {
+        background-color: #7b9cae;
+        font-size: small;
+        /* border: solid 0.08cm; */
+        margin: 0.0cm;
+        padding: 6px 0px 0px 0px;
+        /* background-color: #dae0f1; */
+        height: 36px;
+        color: white;
+        vertical-align: bottom;
+        text-align: center;
+    }
+    /* End Styles for Header bar */
+
+    /* Styles for Help links */
+    A.help:link {
+        color: #000000;
+        font-weight: normal;
+    }
+
+    A.help:hover {
+        color: #000070;
+        /* font-size: 125%; */
+        text-decoration: none;
+    }
+
+    .help DT {
+        font-weight: bold;
+        margin-top: 0.2cm;
+        margin-bottom: 0.1cm;
+    }
+    /* End Styles for Help links */
+
+    /* Styles for Search tables */
+    .searchTable {
+        margin: 0.0px;
+        padding: 0.0px;
+    }
+
+    TABLE.searchTable{
+        width: 96%;
+        border: none 0.00cm #757575;
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    TD.searchTable{
+        margin: 0px;
+        border-bottom: solid 2px #ffffff;
+    }
+    /* END Styles for Search tables */
+
+    /* Styles for Member list /edit */
+    .Member {
+        /* background-color: #7b9cae; */
+        background-color: #ffffff;
+    }
+
+    TH.Member {
+      height: 4ex;
+      background-color: #7b9cae;
+      color: white;
+    }
+
+    TABLE.Member {
+        border: solid 0.0cm;
+        width: 100%;
+        /* vertical-align: top; */
+        /* BORDER=0 CELLPADDING=0 CELLSPACING=0 STYLE="page-break-before: always" */
+
+    }
+
+    TD.Member {
+        border: solid 0.0cm;
+        padding-top: 0.0px;
+        margin: 0px;
+        vertical-align: middle;
+    }
+
+    /* End Styles for Member list /edit */
+
+    /* Style for Tabulator line */
+    .tabulator {
+        width: 100%;
+        border: none 0.0cm;
+        margin: 0.0cm;
+        padding: 0.0cm;
+        background-color: white;
+    }
+    TABLE.tabulator {
+         margin-top: 0.0 cm;
+    }
+    /* END Style for Tabulator line */
+
+</STYLE>

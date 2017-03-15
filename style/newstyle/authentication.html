@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>Verwaltung von Clubmitgliedern(Authentication)</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+    <LINK REL=StyleSheet HREF="css/jquery.cluetip.css" TYPE="text/css" MEDIA=screen>
+    <LINK REL=StyleSheet HREF="css/style_help.css" TYPE="text/css" MEDIA=screen>
+    <style type="text/css">
+/*<![CDATA[*/
+
+.content div,.content li,.content p,.content td,.content th {
+	font-size: 8pt;
+}
+
+.content {
+	border: 0px solid #CCC;
+	width: 450px;
+}
+
+.content .title {
+	background: white;
+	border: 1px solid #CCC;
+	color: #369;
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.content th {
+/*	background-color: #BDE; 
+	border: 1px solid #ABD; */
+	font-size: 12pt;
+	font-wight: bold;
+	text-align: right;
+}
+
+.content td {
+	text-align: center;
+}
+
+.content .text {
+	background-color: #DDD;
+	border: 1px inset #CCC;
+	font-size: 8pt;
+	width: 200px;
+}
+
+.content .button {
+	background-color: #DDD;
+	border: 1px outset #CCC;
+	font-size: 8pt;
+	padding: 2px 4px 2px 4px;
+}
+/*]]>*/
+</style>
+    
+</head>
+
+<body>
+<div id='mask' class='close_modal'></div>
+<table width="100%" border="0">
+    <tr>
+        <td ROWSPAN="1" style="width: 2cm;" align="center" valign="top">
+            &nbsp;
+        </td>
+        <td COLSPAN="1">
+<table width="100%" cellspacing="0" cellpadding="0" BORDER="0">
+
+<tr>
+    <td width="10"><img src="images/light_corner_ul.png" height="10" width="10" border="0"></td>
+    <td class="light_border_upper"></td>
+    <td><img src="images/light_corner_ur.png" width="13" border="0"></td>
+</tr>
+<tr>
+<td class="light_border_left"></td>
+<td>
+<table class='head' cellspacing="0" cellpadding="0" border='0' id='head-table'>
+<tr>
+            <td CLASS="single" WIDTH="100%" ALIGN="CENTER">Willkommen</td>
+</tr>
+
+</table>
+</td>
+<td class="light_border_right"></td>
+<tr>
+    <td width="10"><img src="images/light_corner_ll.png" height="13" width="10" border="0"></td>
+    <td class="light_border_lower"></td>
+    <td><img src="images/light_corner_lr.png" width="13" border="0"></td>
+</tr>
+</table>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td ROWSPAN="1" style="width: 2.5cm;" align="center" valign="top">
+        <table class="navigator" cellspacing=0 cellpadding=0 width="200" BORDER="0">
+<tr>
+    <td><img src="images/corner_ul.png" width="10" border="0"></td>
+    <td></td>
+    <td><img src="images/corner_ur.png" width="10" border="0"></td>
+</tr>
+<!-- Main -->
+<tr>
+    <td></td>
+
+    <td>
+        <a href="index.php?mod=main">
+            <img src="images/home3_small.png" alt="back" border="0">
+            Zurück zum Anfang
+        </a>
+    </td>
+</tr>
+    <tr>
+    <td></td>
+    <td class="navigator_sub">
+
+        <a  href="index.php?mod=main&view=Copyright">
+        <img src="images/flash_small.png" align="bottom" alt="members" border="0">
+        Copyright</a>
+    </td>
+    <td></td>
+</tr>    <tr>
+    <td></td>
+    <td class="navigator_sub">
+
+        <a  href="index.php?mod=main&view=Impressum">
+        <img src="images/flash_small.png" align="bottom" alt="members" border="0">
+        Impressum</a>
+    </td>
+    <td></td>
+</tr>    <tr>
+    <td></td>
+    <td class="navigator_sub">
+
+        <a  href="index.php?mod=main&view=Logoff">
+        <img src="images/flash_small.png" align="bottom" alt="members" border="0">
+        Abmelden</a>
+    </td>
+    <td></td>
+</tr><tr>
+    <td colspan="3"><img border="0" height="10" src="images/pixel_transparent.png" width="5"></td>
+</tr>
+<tr>
+<td style="height: 5cm;"></td>
+</tr>
+
+<tr>
+    <td><img src="images/corner_ll.png" width="10" border="0"></td>
+    <td></td>
+    <td><img src="images/corner_lr.png" width="10" border="0"></td>
+</tr>
+
+
+</table>        </td>
+        <td ROWSPAN="1" align="center" valign="top">
+
+            <form method="post" action="index.php" name="tableforms" enctype="multipart/form-data">
+
+            <INPUT TYPE=HIDDEN NAME=view VALUE='Main'>
+            <INPUT TYPE=HIDDEN NAME=mod VALUE='main'>
+                        <!--hidden-->
+            <input type="hidden" name="doit" value="1" />                <input type="hidden" name="Action" value="" />    <!--hiddenend-->
+
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+
+                <td>
+                                </td>
+            </tr>
+            <tr>
+                <td width="100%" COLSPAN="1">
+                    <!--buttonbar-->
+<table class="vMain" width="100%" cellspacing="0" cellpadding="0" BORDER="0">
+<tr>
+<td width="10" class="light_border_left"></td>
+<td>
+</td>
+
+<td width="13" class="light_border_right"></td>
+</tr>
+</table>
+<!--buttonbarende-->
+
+               </td>
+            </tr>
+                        <tr>
+                <td WIDTH="100%" COLSPAN="1">
+                    <table class="vMain" width="100%" cellspacing="0" cellpadding="0" BORDER="0">
+<tr>
+    <td width="10"><img src="images/light_corner_ul.png" height="10" width="10" border="0"></td>
+
+    <td class="light_border_upper"></td>
+    <td><img src="images/light_corner_ur.png" width="13" border="0"></td>
+</tr>
+<tr>
+    <td class="light_border_left"></td>
+    <td>
+        <center>
+            <H3>bei</H3>
+            <img src="images/ClubLogo.png" alt="ClubAdmin" width="690" height="181" align="middle" border="0" />
+
+            <H3>Die Software zur Verwaltung von Clubmitgliedern</H3>
+            <H4>Version 2.01 beta 4<BR>
+            Copyright 2002-2010, <a href="mailto:franz.domes@gmx.de">Franz Domes</a></H4>
+        </center>
+    </td>
+    <td class="light_border_right"></td>
+</tr>
+
+<tr>
+    <td width="10"><img src="images/light_corner_ll.png" height="13" width="10" border="0"></td>
+    <td class="light_border_lower"></td>
+    <td><img src="images/light_corner_lr.png" width="13" border="0"></td>
+</tr>
+</table>                </td>
+            </tr>
+            </table>
+        </FORM>
+        </td>
+
+    </tr>
+</table>
+<div style="position:absolute; top:130px; left:240px; width:300px; height:200px; z-index:1; " }>
+<form action="/Clubdata2/index.php" method="post">
+<table class="navigator" cellspacing=0 cellpadding=0 BORDER="0">
+<tr>
+    <td width="10" style="background-color:yellow;"><img src="images/corner_ul.png" width="10" border="0"></td>
+    <td class="navigator"></td>
+    <td style="float: right;" width="10"><img src="images/corner_ur.png" width="10" border="0"></td>
+</tr>
+<tr>
+<td colspan="3">
+<table align="center" class="content" cellspacing="10">
+
+<tr>
+	<th>Username:</th><td><input class="text" name="Login" type="text" maxlength="32"/></td>
+</tr><tr>
+	<th>Password:</th><td><input class="text" name="PW_Login" type="password"/></td>
+</tr><tr>
+	<td colspan="2">To access Clubdata you need to provide a valid username/password pair.<BR>If you lost your account info you can send an email to <a href="mailto:/franz.domes@gmx.de">franz.domes@gmx.de</a></td></tr><tr><td colspan="2"><input class="button" type="submit" value="Login"/> <input class="button" onclick="history.go(-1);" type="button" value="Cancel"/></td></tr>
+
+</table>
+</td>
+</tr>
+<tr>
+    <td><img src="images/corner_ll.png" width="10" border="0"></td>
+    <td></td>
+    <td style="float: right;" width="10"><img src="images/corner_lr.png" width="10" border="0"></td>
+</tr>
+</table>
+</form>
+</div>
+
+</BODY>
+</html>
