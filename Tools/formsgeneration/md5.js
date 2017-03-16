@@ -9,7 +9,7 @@
  * Permission to use, copy, modify, and distribute this software
  * and its documentation for any purposes and without
  * fee is hereby granted provided that this copyright notice
- * appears in all copies.
+ * appears in all copies. 
  *
  * Of course, this soft is provided "as is" without express or implied
  * warranty of any kind.
@@ -163,7 +163,6 @@ function not(a) {
     function rotateLeft(a,n) {
 	return or(shl(a, n),(shr(a,(32 - n))));
     }
-
 
     function FF(a,b,c,d,x,s,ac) {
         a = a+F(b, c, d) + x + ac;

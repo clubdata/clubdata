@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Test for Manuel Lemos' PHP form class using a custom validation plug-in input</title>
+<style type="text/css"><!--
+.invalid { border-color: #ff0000; background-color: #ffcccc; }
+// --></style>
+</head>
+<body onload="document.forms['custom_validation_form']['first'].focus()" bgcolor="#cccccc">
+<center><h1>Test for Manuel Lemos' PHP form class using a custom validation plug-in input</h1></center>
+<hr />
+<form method="post" action="" name="custom_validation_form" onsubmit="return ValidateForm(this)">
+<script type="text/javascript" defer="defer">
+<!--
+function ValidationError(form, Invalid, error_message, focus)
+{
+	alert(error_message)
+	if(form[focus].focus)
+		form[focus].focus()
+}
+
+function ValidateForm(theform)
+{
+	var e='', i={}, f='', r, s
+	r=theform['first']
+	r.className=''
+	r=theform['second']
+	r.className=''
+	if(!i['first']
+	&& (theform['first'].value==''))
+	{
+		r=theform['first']
+		r.className='invalid'
+		if(e=='')
+			f='first'
+		else
+			e+='\n'
+		e+=(i['first']='It was not specified a valid first name.')
+	}
+	if(!i['second']
+	&& (theform['second'].value==''))
+	{
+		r=theform['second']
+		r.className='invalid'
+		if(e=='')
+			f='second'
+		else
+			e+='\n'
+		e+=(i['second']='It was not specified a valid second name.')
+	}
+	first=theform['first'].value
+	second=theform['second'].value
+	if(!i['first']
+	&& (second.indexOf(first) != -1))
+	{
+		r=theform['first']
+		r.className='invalid'
+		if(e=='')
+			f='first'
+		else
+			e+='\n'
+		e+=(i['first']='The first name is contained in the second name.')
+	}
+	if(!i['second']
+	&& (first.indexOf(second) != -1))
+	{
+		r=theform['second']
+		r.className='invalid'
+		if(e=='')
+			f='second'
+		else
+			e+='\n'
+		e+=(i['second']='The second name is contained in the first name.')
+	}
+	if(e!='')
+	{
+		ValidationError(theform, i, e, f)
+		return false
+	}
+	return true
+}
+// -->
+</script>
+<noscript>
+<div style="display: none"><!-- dummy comment for user agents without Javascript support enabled --></div>
+</noscript>
+<div id="feedback" style="text-align: center;"></div>
+<br />
+<div id="wholeform">
+<center><table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2" cellspacing="1">
+<tr>
+<td bgcolor="#000080" style="border-style: none;"><font color="#ffffff"><b>Form custom validation plug-in test</b></font></td>
+</tr>
+
+<tr>
+<td style="border-style: none;"><center><table summary="Input fields table">
+
+<tr>
+<th align="right"><label for="first" accesskey="F"><u>F</u>irst name</label>:</th>
+<td><input type="text" name="first" id="first" accesskey="F" /></td>
+<td></td>
+</tr>
+
+<tr>
+<th align="right"><label for="second" accesskey="S"><u>S</u>econd name</label>:</th>
+<td><input type="text" name="second" id="second" accesskey="S" /></td>
+<td></td>
+</tr>
+
+<tr>
+<td colspan="3" align="center"><hr /></td>
+</tr>
+
+<tr>
+<td colspan="3" align="center"><input type="submit" name="doit" value="Submit" onclick="sub_form='' ; return true" /></td>
+</tr>
+
+</table></center>
+</td>
+</tr>
+</table></center>
+</div></form>
+<hr />
+</body>
+</html>

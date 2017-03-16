@@ -2,7 +2,7 @@
 /*
  * form_upload_progress.php
  *
- * @(#) $Id: form_upload_progress.php,v 1.2 2006/12/16 20:16:54 mlemos Exp $
+ * @(#) $Id: form_upload_progress.php,v 1.4 2011/03/14 08:38:29 mlemos Exp $
  *
  */
 
@@ -28,15 +28,15 @@ class form_upload_progress_class extends form_custom_class
 	Function AddInput(&$form, $arguments)
 	{
 		if(!function_exists('uploadprogress_get_info'))
-		return('the upload progress extension is not available in this PHP installation');
+			return('the upload progress extension is not available in this PHP installation');
 		if(IsSet($arguments['FeedbackElement']))
 		{
 			if(strlen($arguments['FeedbackElement'])==0)
-			return('it was not specified a valid feedback element identifier');
+				return('it was not specified a valid feedback element identifier');
 			if(IsSet($arguments['FeedbackFormat']))
 			{
 				if(strlen($arguments['FeedbackFormat'])==0)
-				return('it was not specified a valid feedback format');
+					return('it was not specified a valid feedback format');
 				$this->feedback_format=$arguments['FeedbackFormat'];
 			}
 			$this->feedback_element=$arguments['FeedbackElement'];
@@ -57,9 +57,9 @@ class form_upload_progress_class extends form_custom_class
 			'CustomClass'=>'form_ajax_submit_class',
 			'TargetInput'=>$this->input,
 			'ONTIMEOUT'=>''
-			))))
+		))))
 			return($error);
-			return('');
+		return('');
 	}
 
 	Function AddInputPart(&$form)
@@ -67,21 +67,21 @@ class form_upload_progress_class extends form_custom_class
 		$context=array(
 			'Parameters'=>array(
 				'UPLOAD_IDENTIFIER'=>$this->upload_identifier
-		),
+			),
 			'RandomParameter'=>'r'
-			);
-			if(strlen($error=$form->GetJavascriptConnectionAction('f', $this->input, $this->monitor, 'ONMONITOR', 'Load', $context, $monitor)))
+		);
+		if(strlen($error=$form->GetJavascriptConnectionAction('f', $this->input, $this->monitor, 'ONMONITOR', 'Load', $context, $monitor)))
 			return($error);
-			$eol=$form->end_of_line;
-			$javascript='<script type="text/javascript" defer="defer">'.$eol."<!--\n";
-			$javascript.='function '.$this->input.'_monitor(f)'.$eol.'{'.$eol;
-			$javascript.=$monitor;
-			$javascript.='}'.$eol.'// -->'.$eol.'</script>';
-			if(strlen($error=$form->AddDataPart($javascript))
-			|| strlen($error=$form->AddInputPart('UPLOAD_IDENTIFIER'))
-			|| strlen($error=$form->AddInputPart($this->monitor)))
+		$eol=$form->end_of_line;
+		$javascript='<script type="text/javascript" defer="defer">'.$eol."<!--\n";
+		$javascript.='function '.$this->input.'_monitor(f)'.$eol.'{'.$eol;
+		$javascript.=$monitor;
+		$javascript.='}'.$eol.'// -->'.$eol.'</script>';
+		if(strlen($error=$form->AddDataPart($javascript))
+		|| strlen($error=$form->AddInputPart('UPLOAD_IDENTIFIER'))
+		|| strlen($error=$form->AddInputPart($this->monitor)))
 			return($error);
-			return('');
+		return('');
 	}
 
 	Function GetJavascriptConnectionAction(&$form, $form_object, $from, $event, $action, &$context, &$javascript)
@@ -100,13 +100,13 @@ class form_upload_progress_class extends form_custom_class
 	Function FormatNumber($number)
 	{
 		if($number<1024)
-		return($number);
+			return($number);
 		$number=intval($number/1024);
 		if($number<1024)
-		return($number.'K');
+			return($number.'K');
 		$number=intval($number/1024);
 		if($number<1024)
-		return($number.'M');
+			return($number.'M');
 		$number=intval($number/1024);
 		return($number.'G');
 	}
@@ -114,9 +114,9 @@ class form_upload_progress_class extends form_custom_class
 	Function FormatTime($time)
 	{
 		if($time<60)
-		return(sprintf('00:%02d', $time));
+			return(sprintf('00:%02d', $time));
 		if($time<3600)
-		return(sprintf('00:%02d:%02d', intval($time/60), $time % 60));
+			return(sprintf('00:%02d:%02d', intval($time/60), $time % 60));
 		return(sprintf('%02d:%02d:%02d', intval($time/3600), intval($time/60) % 60, $time % 60));
 	}
 
@@ -131,9 +131,9 @@ class form_upload_progress_class extends form_custom_class
 				{
 					$progress=uploadprogress_get_info($id);
 					if(IsSet($progress))
-					$more=1;
+						$more=1;
 					else
-					$this->uploaded=$this->total;
+						$this->uploaded=$this->total;
 				}
 				else
 				{
@@ -150,7 +150,7 @@ class form_upload_progress_class extends form_custom_class
 						$more=1;
 					}
 					elseif(time()-$this->start_time<$this->wait_time)
-					$more=1;
+						$more=1;
 				}
 				$message['Actions']=array();
 				if(strlen($this->feedback_element))
@@ -185,6 +185,11 @@ class form_upload_progress_class extends form_custom_class
 				break;
 		}
 		return($form->ReplyMessage($message, $processed));
+	}
+
+	Function LoadInputValues(&$form, $submitted)
+	{
+		return($form->SetInputValue('UPLOAD_IDENTIFIER', $this->upload_identifier));
 	}
 
 };

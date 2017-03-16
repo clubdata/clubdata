@@ -3,7 +3,7 @@
 /*
  * insert.formaddinputpart.php
  *
- * @(#) $Header: /home/mlemos/cvsroot/PHPlibrary/plugins/insert.formaddinputpart.php,v 1.1 2003/03/20 02:52:03 mlemos Exp $
+ * @(#) $Header: /opt2/ena/metal/forms/smarty/2/plugins/insert.formaddinputpart.php,v 1.1 2003/03/20 02:52:03 mlemos Exp $
  *
  */
 
@@ -15,7 +15,7 @@ function smarty_insert_formaddinputpart($params, &$smarty)
 		$form=&$tpl_vars['form'];
 	}
 	else
-	$form=&$smarty->_tpl_vars['form'];
+		$form=&$smarty->_tpl_vars['form'];
 	$form->AddDataPart($params['data']);
 	$form->AddInputPart($params['input']);
 	return '';

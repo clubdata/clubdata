@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Test for Manuel Lemos' PHP form class using the date plug-in input</title>
+<style type="text/css"><!--
+.invalid { border-color: #ff0000; background-color: #ffcccc; }
+// --></style>
+</head>
+<body onload="document.forms['date_form']['p_date_day'].focus()" bgcolor="#cccccc">
+<center><h1>Test for Manuel Lemos' PHP form class using the date plug-in input</h1></center>
+<hr />
+<form method="post" action="" name="date_form" onsubmit="return ValidateForm(this)">
+<script type="text/javascript" defer="defer">
+<!--
+function ValidationError(form, Invalid, error_message, focus)
+{
+	alert(error_message)
+	if(form[focus].focus)
+		form[focus].focus()
+}
+
+function ValidateForm(theform)
+{
+	var e
+	r=theform['p_date_year']
+	r.className=''
+	r=theform['p_date_month']
+	r.className=''
+	r=theform['p_date_day']
+	r.className=''
+	var year=theform['p_date_year'].options[theform['p_date_year'].selectedIndex].value
+	var month=theform['p_date_month'].options[theform['p_date_month'].selectedIndex].value
+	var day=theform['p_date_day'].options[theform['p_date_day'].selectedIndex].value
+	if(!year.length && (month.length || day.length))
+	{
+		r=theform['p_date_year']
+		r.className='invalid'
+		e='It was not specified a valid year.'
+		ValidationError(theform, {'p_date_year': e }, e, 'p_date_year')
+		return false
+	}
+	if(!month.length && (year.length || day.length))
+	{
+		r=theform['p_date_month']
+		r.className='invalid'
+		e='It was not specified a valid month.'
+		ValidationError(theform, {'p_date_month': e }, e, 'p_date_month')
+		return false
+	}
+	if(!day.length && (year.length || month.length))
+	{
+		r=theform['p_date_day']
+		r.className='invalid'
+		e='It was not specified a valid day.'
+		ValidationError(theform, {'p_date_day': e }, e, 'p_date_day')
+		return false
+	}
+	var month_days
+	if(month=='04'
+	|| month=='06'
+	|| month=='09'
+	|| month=='11')
+		month_days=30
+	else
+	{
+		if(month=='02')
+		{
+			var date_year=parseInt(year)
+			if((date_year % 4)==0
+			&& ((date_year % 100)!=0
+			|| (date_year % 400)==0))
+				month_days=29
+			else
+				month_days=28
+		}
+		else
+			month_days=31
+	}
+	var date=((year.length && month.length && day.length) ? (year.length<3 ? '00' : '') + ((year.length % 2) ? '0' : '') + year + '-' + month + '-' + day : '')
+	if(date.length && month_days<parseInt(day))
+	{
+		r=theform['p_date_day']
+		r.className='invalid'
+		e='It was not specified a valid day.'
+		ValidationError(theform, {'p_date_day': e }, e, 'p_date_day')
+		return false
+	}
+	if(date.length && date<'2000-01-02')
+	{
+		r=theform['p_date_day']
+		r.className='invalid'
+		e='It was specified a schedule date before the start date.'
+		ValidationError(theform, {'p_date_day': e }, e, 'p_date_day')
+		return false
+	}
+	if(date.length && '2000-01-08'<date)
+	{
+		r=theform['p_date_day']
+		r.className='invalid'
+		e='It was specified a schedule date after the end date.'
+		ValidationError(theform, {'p_date_day': e }, e, 'p_date_day')
+		return false
+	}
+	return true
+}
+// -->
+</script>
+<noscript>
+<div style="display: none"><!-- dummy comment for user agents without Javascript support enabled --></div>
+</noscript>
+<div id="feedback" style="text-align: center;"></div>
+<br />
+<div id="wholeform">
+<center><table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2" cellspacing="1">
+<tr>
+<td bgcolor="#000080" style="border-style: none;"><font color="#ffffff"><b>Form Date plug-in test</b></font></td>
+</tr>
+
+<tr>
+<td style="border-style: none;"><fieldset>
+<legend><b><label for="p_date_day" accesskey="D"><u>D</u>ate</label></b> (From <tt>2000-01-02</tt> to <tt>2000-01-08</tt>)</legend>
+<center><select name="p_date_day" id="p_date_day">
+<option value=""><!-- --></option>
+<option value="01" selected="selected"> 1</option>
+<option value="02"> 2</option>
+<option value="03"> 3</option>
+<option value="04"> 4</option>
+<option value="05"> 5</option>
+<option value="06"> 6</option>
+<option value="07"> 7</option>
+<option value="08"> 8</option>
+<option value="09"> 9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>/<select name="p_date_month" id="p_date_month">
+<option value=""><!-- --></option>
+<option value="01" selected="selected">January</option>
+<option value="02">February</option>
+<option value="03">March</option>
+<option value="04">April</option>
+<option value="05">May</option>
+<option value="06">June</option>
+<option value="07">July</option>
+<option value="08">August</option>
+<option value="09">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>/<select name="p_date_year" id="p_date_year">
+<option value=""><!-- --></option>
+<option value="2000" selected="selected">2000</option>
+</select>&nbsp;[Optional]</center>
+</fieldset>
+<hr />
+<center><input type="submit" name="doit" value="Schedule" onclick="sub_form='' ; return true" /></center></td>
+</tr>
+</table></center>
+</div></form>
+<hr />
+</body>
+</html>

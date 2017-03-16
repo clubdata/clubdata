@@ -3,24 +3,15 @@
 <head>
 <title>Test for Manuel Lemos' PHP form class</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-<style type="text/css">
-<!--
-.invalid {
-	border-color: #ff0000;
-	background-color: #ffcccc;
-}
-//
--->
-</style>
+<style type="text/css"><!--
+.invalid { border-color: #ff0000; background-color: #ffcccc; }
+// --></style>
 </head>
-<body onload="PageLoad()" bgcolor="#cccccc">
-<center>
-<h1>Test for Manuel Lemos' PHP form class</h1>
-</center>
+<body onload="document.forms['subscription_form']['email'].focus()" bgcolor="#cccccc">
+<center><h1>Test for Manuel Lemos' PHP form class</h1></center>
 <hr />
-<form method="get" action="" name="subscription_form"
-	onsubmit="return ValidateForm(this)"><script
-	type="text/javascript" defer="defer">
+<form method="post" action="" name="subscription_form" onsubmit="return ValidateForm(this)">
+<script type="text/javascript" defer="defer">
 <!--
 form_submitted=false
 function ValidateEmail(theinput)
@@ -28,12 +19,12 @@ function ValidateEmail(theinput)
 	var s=theinput.value
 	if(s.search)
 	{
-		return (s.search(new RegExp('^([-!#$%&\'*+./0-9=?A-Z^_`a-z{|}~'+unescape('%7F')+'])+@([-!#$%&\'*+/0-9=?A-Z^_`a-z{|}~'+unescape('%7F')+']+\\.)+[a-zA-Z]{2,6}$','gi'))>=0)
+		return (0<=s.search(new RegExp('^([-!#$%&\'*+./0-9=?A-Z^_`a-z{|}~'+unescape('%7f])+@([-!#$%25&\'*+/0-9=?A-Z^_`a-z{|}~%7f]+\\.)+[a-zA-Z]{2,6}$'),'gi')))
 	}
 	if(s.indexOf)
 	{
 		var at_character=s.indexOf('@')
-		if(at_character<=0 || at_character+4>s.length)
+		if(at_character<=0 || s.length<at_character+4)
 			return false
 	}
 	if(s.length<6)
@@ -66,15 +57,15 @@ function ValidateCreditCard(theinput,cardtype)
 			return false
 		if(isNaN(third=parseInt(val.charAt(2),10)))
 			return false
-		if((cardtype=='mastercard') && (len!=16 || first!=5 || second<1 || second>5))
+		if((cardtype=='mastercard') && (len!=16 || first!=5 || second<1 || 5<second))
 			return false
 		if((cardtype=='visa') && ((len!=16 && len!=13) || first!=4))
 			return false
 		if((cardtype=='amex') && (len!=15 || first!=3 || (second!=4 && second!=7)))
 			return false
-		if((cardtype=='dinersclub' || cardtype=='carteblanche') && (len!=14 || first!=3 || ((second!=0 || third<0 || third>5) && second!=6 && second!=8)))
+		if((cardtype=='dinersclub' || cardtype=='carteblanche') && (len!=14 || first!=3 || ((second!=0 || third<0 || 5<third) && second!=6 && second!=8)))
 			return false
-		if((cardtype=='discover') && (len!=16 || ((first!=5 || second<1 || second>5) && val.substring(0,4)!='6011')))
+		if((cardtype=='discover') && (len!=16 || ((first!=5 || second<1 || 5<second) && val.substring(0,4)!='6011')))
 			return false
 		if((cardtype=='enroute') && (len!=15 || (val.substring(0,4)!='2014' && val.substring(0,4)!='2149')))
 			return false
@@ -91,6 +82,13 @@ function ValidateCreditCard(theinput,cardtype)
 	}
 	return((check % 10)==0)
 }
+function ValidationError(form, Invalid, error_message, focus)
+{
+	alert(error_message)
+	if(form[focus].focus)
+		form[focus].focus()
+}
+
 function ValidateForm(theform)
 {
 	var e='', i={}, f='', r, s
@@ -133,8 +131,7 @@ function ValidateForm(theform)
 			f='email'
 		else
 			e+='\n'
-		e+='- It was not specified a valid e-mail address.'
-		i['email']=true;
+		e+=(i['email']='- It was not specified a valid e-mail address.')
 	}
 	if(!i['credit_card_number']
 	&& (theform['credit_card_number'].value!=''
@@ -146,8 +143,7 @@ function ValidateForm(theform)
 			f='credit_card_number'
 		else
 			e+='\n'
-		e+='- It wasn\'t specified a valid credit card number.'
-		i['credit_card_number']=true;
+		e+=(i['credit_card_number']='- It wasn\'t specified a valid credit card number.')
 	}
 	if(!i['credit_card_type']
 	&& (theform['credit_card_type'].options[theform['credit_card_type'].selectedIndex].value=='pick'))
@@ -158,8 +154,7 @@ function ValidateForm(theform)
 			f='credit_card_type'
 		else
 			e+='\n'
-		e+='- Pick the credit card type or set to Unknown if you do not know the type.'
-		i['credit_card_type']=true;
+		e+=(i['credit_card_type']='- Pick the credit card type or set to Unknown if you do not know the type.')
 	}
 	if(!i['user_name']
 	&& (theform['user_name'].value==''))
@@ -170,8 +165,7 @@ function ValidateForm(theform)
 			f='user_name'
 		else
 			e+='\n'
-		e+='- It was not specified a valid name.'
-		i['user_name']=true;
+		e+=(i['user_name']='- It was not specified a valid name.')
 	}
 	if(!i['age']
 	&& (parseInt(theform['age'].value,10).toString()!=theform['age'].value
@@ -184,8 +178,7 @@ function ValidateForm(theform)
 			f='age'
 		else
 			e+='\n'
-		e+='- It was not specified a valid age.'
-		i['age']=true;
+		e+=(i['age']='- It was not specified a valid age.')
 	}
 	if(!i['weight']
 	&& ((theform['weight'].value.search
@@ -199,12 +192,11 @@ function ValidateForm(theform)
 			f='weight'
 		else
 			e+='\n'
-		e+='- It was not specified a valid weight.'
-		i['weight']=true;
+		e+=(i['weight']='- It was not specified a valid weight.')
 	}
 	if(!i['home_page']
 	&& ((theform['home_page'].value.search
-	&& theform['home_page'].value.search(new RegExp('^(http|https)\\://(([-!#\\$%&\'*+.0-9=?A-Z^_`a-z{|}~'+unescape('%7F')+']+\\.)+[A-Za-z]{2,6})(\\:[0-9]+)?(/)?/','g'))==-1)))
+	&& theform['home_page'].value.search(new RegExp('^(http|https)\\://(([-!#\\$%&\'*+.0-9=?A-Z^_`a-z{|}~'+unescape('%7f]+\\.)+[A-Za-z]{2,6})(\\:[0-9]+)?(/)?/'),'g'))==-1)))
 	{
 		r=theform['home_page']
 		r.className='invalid'
@@ -212,8 +204,7 @@ function ValidateForm(theform)
 			f='home_page'
 		else
 			e+='\n'
-		e+='- It was not specified a valid home page URL.'
-		i['home_page']=true;
+		e+=(i['home_page']='- It was not specified a valid home page URL.')
 	}
 	if(!i['alias']
 	&& (theform['alias'].value==''))
@@ -224,8 +215,7 @@ function ValidateForm(theform)
 			f='alias'
 		else
 			e+='\n'
-		e+='- It was not specified the alias.'
-		i['alias']=true;
+		e+=(i['alias']='- It was not specified the alias.')
 	}
 	if(!i['alias']
 	&& (theform['alias'].value.length<5))
@@ -236,8 +226,7 @@ function ValidateForm(theform)
 			f='alias'
 		else
 			e+='\n'
-		e+='- It was specified an alias shorter than 5 characters.'
-		i['alias']=true;
+		e+=(i['alias']='- It was specified an alias shorter than 5 characters.')
 	}
 	if(!i['alias']
 	&& ((theform['alias'].value.search
@@ -249,8 +238,7 @@ function ValidateForm(theform)
 			f='alias'
 		else
 			e+='\n'
-		e+='- The alias must start with a letter.'
-		i['alias']=true;
+		e+=(i['alias']='- The alias must start with a letter.')
 	}
 	if(!i['alias']
 	&& ((theform['alias'].value.search
@@ -262,8 +250,7 @@ function ValidateForm(theform)
 			f='alias'
 		else
 			e+='\n'
-		e+='- The alias may only contain letters and digits.'
-		i['alias']=true;
+		e+=(i['alias']='- The alias may only contain letters and digits.')
 	}
 	if(!i['password']
 	&& (theform['password'].value==''))
@@ -274,8 +261,7 @@ function ValidateForm(theform)
 			f='password'
 		else
 			e+='\n'
-		e+='- It was not specified a valid password.'
-		i['password']=true;
+		e+=(i['password']='- It was not specified a valid password.')
 	}
 	if(!i['confirm_password']
 	&& (theform['confirm_password'].value!=theform['password'].value))
@@ -286,8 +272,7 @@ function ValidateForm(theform)
 			f='confirm_password'
 		else
 			e+='\n'
-		e+='- The password is not equal to the confirmation.'
-		i['confirm_password']=true;
+		e+=(i['confirm_password']='- The password is not equal to the confirmation.')
 	}
 	if(!i['reminder']
 	&& (theform['reminder'].value==''))
@@ -298,8 +283,7 @@ function ValidateForm(theform)
 			f='reminder'
 		else
 			e+='\n'
-		e+='- It was not specified a reminder phrase.'
-		i['reminder']=true;
+		e+=(i['reminder']='- It was not specified a reminder phrase.')
 	}
 	if(!i['reminder']
 	&& (theform['reminder'].value==theform['password'].value))
@@ -310,8 +294,7 @@ function ValidateForm(theform)
 			f='reminder'
 		else
 			e+='\n'
-		e+='- The reminder phrase may not be equal to the password.'
-		i['reminder']=true;
+		e+=(i['reminder']='- The reminder phrase may not be equal to the password.')
 	}
 	if(!i['interests']
 	&& (theform['interests'].selectedIndex==-1))
@@ -322,8 +305,7 @@ function ValidateForm(theform)
 			f='interests'
 		else
 			e+='\n'
-		e+='- It were not specified any interests.'
-		i['interests']=true;
+		e+=(i['interests']='- It were not specified any interests.')
 	}
 	if(!i['email_notification']
 	&& (theform['email_notification'].checked==false && theform['phone_notification'].checked==false))
@@ -334,8 +316,7 @@ function ValidateForm(theform)
 			f='email_notification'
 		else
 			e+='\n'
-		e+='- It were not specified any types of notification.'
-		i['email_notification']=true;
+		e+=(i['email_notification']='- It were not specified any types of notification.')
 	}
 	if(!i['administrator_subscription']
 	&& (theform['administrator_subscription'].checked==false && theform['user_subscription'].checked==false && theform['guest_subscription'].checked==false))
@@ -346,8 +327,7 @@ function ValidateForm(theform)
 			f='administrator_subscription'
 		else
 			e+='\n'
-		e+='- It was not specified the subscription type.'
-		i['administrator_subscription']=true;
+		e+=(i['administrator_subscription']='- It was not specified the subscription type.')
 	}
 	if(!i['agree']
 	&& (theform['agree'].checked==false))
@@ -358,23 +338,15 @@ function ValidateForm(theform)
 			f='agree'
 		else
 			e+='\n'
-		e+='- You have not agreed with the subscription terms.'
-		i['agree']=true;
+		e+=(i['agree']='- You have not agreed with the subscription terms.')
 	}
 	if(e!='')
 	{
-		if(theform[f].focus)
-			theform[f].focus()
-		alert(e)
+		ValidationError(theform, i, e, f)
 		form_submitted=false
 		return false
 	}
 	return true
-}
-
-function PageLoad()
-{
-		document.subscription_form['email'].focus()
 }
 // -->
 </script>
@@ -384,225 +356,189 @@ function PageLoad()
 <div id="feedback" style="text-align: center;"></div>
 <br />
 <div id="wholeform">
-<center>
-<table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2"
-	cellspacing="1">
-	<tr>
-		<td bgcolor="#000080" style="border-style: none;"><font
-			color="#ffffff"><b>Form class test</b></font></td>
-	</tr>
+<center><table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2" cellspacing="1">
+<tr>
+<td bgcolor="#000080" style="border-style: none;"><font color="#ffffff"><b>Form class test</b></font></td>
+</tr>
 
-	<tr>
-		<td style="border-style: none;">
-		<center>
-		<table summary="Input fields table">
+<tr>
+<td style="border-style: none;"><center><table summary="Input fields table">
 
-			<tr>
-				<th align="right"><label for="email" accesskey="E"><u>E</u>-mail
-				address</label>:</th>
-				<td><input type="text" name="email" maxlength="100"
-					onchange="new_value=value; if(new_value.toLowerCase) new_value=new_value.toLowerCase() ;  if(new_value!=value) value=new_value ;"
-					id="email" accesskey="E" /></td>
-			</tr>
+<tr>
+<th align="right"><label for="email" accesskey="E"><u>E</u>-mail address</label>:</th>
+<td><input type="text" name="email" maxlength="100" onchange="new_value=value; if(new_value.toLowerCase) new_value=new_value.toLowerCase() ;  if(new_value!=value) value=new_value ;" id="email" accesskey="E" /></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="credit_card_number" accesskey="n">Credit
-				card <u>n</u>umber</label>:</th>
-				<td><input type="text" name="credit_card_number" size="20"
-					id="credit_card_number" accesskey="n" /></td>
-				<td>[Optional]</td>
-			</tr>
+<tr>
+<th align="right"><label for="credit_card_number" accesskey="n">Credit card <u>n</u>umber</label>:</th>
+<td><input type="text" name="credit_card_number" size="20" id="credit_card_number" accesskey="n" /></td>
+<td>[Optional]</td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="credit_card_type" accesskey="y">Credit
-				card t<u>y</u>pe</label>:</th>
-				<td><select name="credit_card_type" id="credit_card_type"
-					size="1">
-					<option value="pick" selected="selected">Pick a credit
-					card type</option>
-					<option value="unknown">Unknown</option>
-					<option value="mastercard">Master Card</option>
-					<option value="visa">Visa</option>
-					<option value="amex">American Express</option>
-					<option value="dinersclub">Diners Club</option>
-					<option value="carteblanche">Carte Blanche</option>
-					<option value="discover">Discover</option>
-					<option value="enroute">enRoute</option>
-					<option value="jcb">JCB</option>
-				</select></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right"><label for="credit_card_type" accesskey="y">Credit card t<u>y</u>pe</label>:</th>
+<td><select name="credit_card_type" id="credit_card_type" size="1">
+<option value="pick" selected="selected">Pick a credit card type</option>
+<option value="unknown">Unknown</option>
+<option value="mastercard">Master Card</option>
+<option value="visa">Visa</option>
+<option value="amex">American Express</option>
+<option value="dinersclub">Diners Club</option>
+<option value="carteblanche">Carte Blanche</option>
+<option value="discover">Discover</option>
+<option value="enroute">enRoute</option>
+<option value="jcb">JCB</option>
+</select></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="user_name" accesskey="P"><u>P</u>ersonal
-				name</label>:</th>
-				<td><input type="text" name="user_name" maxlength="60"
-					id="user_name" accesskey="P" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="user_name" accesskey="P"><u>P</u>ersonal name</label>:</th>
+<td><input type="text" name="user_name" maxlength="60" id="user_name" accesskey="P" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="age" accesskey="A"><u>A</u>ge</label>:</th>
-				<td><input type="text" name="age" id="age" accesskey="A" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="age" accesskey="A"><u>A</u>ge</label>:</th>
+<td><input type="text" name="age" id="age" accesskey="A" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="weight" accesskey="W"><u>W</u>eight</label>:</th>
-				<td><input type="text" name="weight" id="weight" accesskey="W" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="weight" accesskey="W"><u>W</u>eight</label>:</th>
+<td><input type="text" name="weight" id="weight" accesskey="W" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="home_page" accesskey="o">H<u>o</u>me
-				page</label>:</th>
-				<td><input type="text" name="home_page"
-					onchange="new_value=value; if(new_value.replace) { new_value=new_value.replace(new RegExp('^[ \t\r\n]+','g'), '').replace(new RegExp('[ \t\r\n]+$','g'), '').replace(new RegExp('^([wW]{3}\\.)','g'), 'http://$1').replace(new RegExp('^([^:]+)$','g'), 'http://$1').replace(new RegExp('^(http|https)://(([-!#$%&amp;\'*+.0-9=?A-Z^_`a-z{|}~'+unescape('%7F')+']+\\.)+[A-Za-z]{2,6}(:[0-9]+)?)$','g'), '$1://$2/'); } ;  if(new_value!=value) value=new_value ;"
-					id="home_page" accesskey="o" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="home_page" accesskey="o">H<u>o</u>me page</label>:</th>
+<td><input type="text" name="home_page" onchange="new_value=value; if(new_value.replace) { new_value=new_value.replace(new RegExp('^[ \t\r\n]+','g'), '').replace(new RegExp('[ \t\r\n]+$','g'), '').replace(new RegExp('^([wW]{3}\\.)','g'), 'http://$1').replace(new RegExp('^([^:]+)$','g'), 'http://$1').replace(new RegExp('^(http|https)://(([-!#$%&amp;\'*+.0-9=?A-Z^_`a-z{|}~'+unescape('%7f]+\\.)+[A-Za-z]{2,6}(:[0-9]+)?)$'),'g'), '$1://$2/'); } ;  if(new_value!=value) value=new_value ;" id="home_page" accesskey="o" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="alias" accesskey="s">Acce<u>s</u>s
-				name</label>:</th>
-				<td><input type="text" name="alias" maxlength="20"
-					onchange="new_value=value; if(new_value.toUpperCase) new_value=new_value.toUpperCase() ;  if(new_value!=value) value=new_value ;"
-					id="alias" accesskey="s" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="alias" accesskey="s">Acce<u>s</u>s name</label>:</th>
+<td><input type="text" name="alias" maxlength="20" onchange="new_value=value; if(new_value.toUpperCase) new_value=new_value.toUpperCase() ;  if(new_value!=value) value=new_value ;" id="alias" accesskey="s" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="password" accesskey="d">Passwor<u>d</u></label>:</th>
-				<td><input type="password" name="password"
-					onchange="if(value.toLowerCase) value=value.toLowerCase()"
-					id="password" accesskey="d" /></td>
-				<td rowspan="2"></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="password" accesskey="d">Passwor<u>d</u></label>:</th>
+<td><input type="password" name="password" onchange="if(value.toLowerCase) value=value.toLowerCase()" id="password" accesskey="d" /></td>
+<td rowspan="2"></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="confirm_password" accesskey="C"><u>C</u>onfirm
-				password</label>:</th>
-				<td><input type="password" name="confirm_password"
-					onchange="if(value.toLowerCase) value=value.toLowerCase()"
-					id="confirm_password" accesskey="C" /></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="confirm_password" accesskey="C"><u>C</u>onfirm password</label>:</th>
+<td><input type="password" name="confirm_password" onchange="if(value.toLowerCase) value=value.toLowerCase()" id="confirm_password" accesskey="C" /></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="reminder" accesskey="r">Password
-				<u>r</u>eminder</label>:</th>
-				<td><input type="text" name="reminder" id="reminder"
-					accesskey="r" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="reminder" accesskey="r">Password <u>r</u>eminder</label>:</th>
+<td><input type="text" name="reminder" id="reminder" accesskey="r" /></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th align="right" valign="top"><label for="interests"
-					accesskey="I"><u>I</u>nterests</label>:</th>
-				<td><select name="interests[]" multiple="multiple"
-					id="interests" size="4">
-					<option value="arts">Arts</option>
-					<option value="business">Business</option>
-					<option value="computers">Computers</option>
-					<option value="education">Education</option>
-					<option value="entertainment">Entertainment</option>
-					<option value="health">Health</option>
-					<option value="news">News</option>
-					<option value="politics">Politics</option>
-					<option value="sports">Sports</option>
-					<option value="science">Science</option>
-					<option value="other" selected="selected">Other</option>
-				</select></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right" valign="top"><label for="interests" accesskey="I"><u>I</u>nterests</label>:</th>
+<td><select name="interests[]" multiple="multiple" id="interests" size="4">
+<option value="arts">Arts</option>
+<option value="business">Business</option>
+<option value="computers">Computers</option>
+<option value="education">Education</option>
+<option value="entertainment">Entertainment</option>
+<option value="health">Health</option>
+<option value="news">News</option>
+<option value="politics">Politics</option>
+<option value="sports">Sports</option>
+<option value="science">Science</option>
+<option value="other" selected="selected">Other</option>
+</select></td>
+<td></td>
+</tr>
 
-			<tr>
-				<th colspan="3">When approved, receive notification by:</th>
-			</tr>
+<tr>
+<th colspan="3">When approved, receive notification by:</th>
+</tr>
 
-			<tr>
-				<th align="right"><label for="email_notification" accesskey="m">E-<u>m</u>ail</label>:</th>
-				<td><input type="checkbox" name="notification[]" value="email"
-					id="email_notification" accesskey="m" /></td>
-				<td rowspan="2"></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="email_notification" accesskey="m">E-<u>m</u>ail</label>:</th>
+<td><input type="checkbox" name="notification[]" value="email" id="email_notification" accesskey="m" /></td>
+<td rowspan="2"></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="phone_notification" accesskey="h">P<u>h</u>one</label>:</th>
-				<td><input type="checkbox" name="notification[]" value="phone"
-					id="phone_notification" accesskey="h" /></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="phone_notification" accesskey="h">P<u>h</u>one</label>:</th>
+<td><input type="checkbox" name="notification[]" value="phone" id="phone_notification" accesskey="h" /></td>
+</tr>
 
-			<tr>
-				<th colspan="3">Subscription type:</th>
-			</tr>
+<tr>
+<th colspan="3">Subscription type:</th>
+</tr>
 
-			<tr>
-				<th align="right"><label for="administrator_subscription"
-					accesskey="i">Adm<u>i</u>nistrator</label>:</th>
-				<td><input type="radio" name="subscription_type"
-					value="administrator" id="administrator_subscription" accesskey="i" /></td>
-				<td rowspan="3"></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="administrator_subscription" accesskey="i">Adm<u>i</u>nistrator</label>:</th>
+<td><input type="radio" name="subscription_type" value="administrator" id="administrator_subscription" accesskey="i" /></td>
+<td rowspan="3"></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="user_subscription" accesskey="U"><u>U</u>ser</label>:</th>
-				<td><input type="radio" name="subscription_type" value="user"
-					id="user_subscription" accesskey="U" /></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="user_subscription" accesskey="U"><u>U</u>ser</label>:</th>
+<td><input type="radio" name="subscription_type" value="user" id="user_subscription" accesskey="U" /></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="guest_subscription" accesskey="G"><u>G</u>uest</label>:</th>
-				<td><input type="radio" name="subscription_type" value="guest"
-					id="guest_subscription" accesskey="G" /></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="guest_subscription" accesskey="G"><u>G</u>uest</label>:</th>
+<td><input type="radio" name="subscription_type" value="guest" id="guest_subscription" accesskey="G" /></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="toggle" accesskey="b">Toggle
-				<u>b</u>utton</label>:</th>
-				<td><input type="button" name="toggle" value="On"
-					onclick="this.value=(this.value=='On' ? 'Off' : 'On'); alert('The button is '+this.value); ; return true"
-					id="toggle" accesskey="b" /></td>
-				<td>&nbsp;</td>
-			</tr>
+<tr>
+<th align="right">
+<label for="toggle" accesskey="b">Toggle <u>b</u>utton</label>:</th>
+<td><input type="button" name="toggle" value="On" onclick="this.value=(this.value=='On' ? 'Off' : 'On'); alert('The button is '+this.value); ; return true" id="toggle" accesskey="b" /></td>
+<td >&nbsp;</td>
+</tr>
 
-			<tr>
-				<td colspan="3" align="center">
-				<hr />
-				</td>
-			</tr>
+<tr>
+<td colspan="3" align="center"><hr /></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="agree" accesskey="t">Agree
-				with the <u>t</u>erms</label>:</th>
-				<td><input type="checkbox" name="agree" value="Yes" id="agree"
-					accesskey="t" /></td>
-				<td></td>
-			</tr>
+<tr>
+<th align="right">
+<label for="agree" accesskey="t">Agree with the <u>t</u>erms</label>:</th>
+<td><input type="checkbox" name="agree" value="Yes" id="agree" accesskey="t" /></td>
+<td ></td>
+</tr>
 
-			<tr>
-				<td colspan="3" align="center">
-				<hr />
-				</td>
-			</tr>
+<tr>
+<td colspan="3" align="center"><hr /></td>
+</tr>
 
-			<tr>
-				<td colspan="3" align="center"><input type="image"
-					src="http://www.phpclasses.org/graphics/add.gif"
-					alt="Submit subscription"
-					onclick="if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=true ; form_submitted_test=form_submitted ; form_submitted=true ; form_submitted=(!form_submitted_test || confirm('Are you sure you want to submit this form again?')) ; if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=false ; sub_form='' ; return true"
-					id="image_subscribe" style="border-width: 0px;" /> <input
-					type="submit" value="Submit subscription"
-					onclick="if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=true ; form_submitted_test=form_submitted ; form_submitted=true ; form_submitted=(!form_submitted_test || confirm('Are you sure you want to submit this form again?')) ; if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=false ; sub_form='' ; return true"
-					id="button_subscribe" accesskey="u" /><input type="hidden"
-					name="doit" value="1" /></td>
-			</tr>
-		</table>
-		</center>
-		</td>
-	</tr>
-</table>
-</center>
-</div>
-</form>
+<tr>
+<td colspan="3" align="center"><input type="image" src="http://files.phpclasses.org/graphics/add.gif" alt="Submit subscription" onclick="if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=true ; form_submitted_test=form_submitted ; form_submitted=true ; form_submitted=(!form_submitted_test || confirm('Are you sure you want to submit this form again?')) ; if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=false ; sub_form='' ; return true" id="image_subscribe" style="border-width: 0px;" /> <input type="submit" value="Submit subscription" onclick="if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=true ; form_submitted_test=form_submitted ; form_submitted=true ; form_submitted=(!form_submitted_test || confirm('Are you sure you want to submit this form again?')) ; if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=false ; sub_form='' ; return true" id="button_subscribe" accesskey="u" /></td>
+</tr>
+
+<tr>
+<td colspan="3" align="center"><button type="submit" onclick="if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=true ; form_submitted_test=form_submitted ; form_submitted=true ; form_submitted=(!form_submitted_test || confirm('Are you sure you want to submit this form again?')) ; if(this.disabled || typeof(this.disabled)=='boolean') this.disabled=false ; sub_form='' ; return true" id="button_subscribe_with_content" accesskey="c"><img src="http://files.phpclasses.org/graphics/add.gif" style="border-width: 0px;" /> Submit button with <u>c</u>ontent</button><input type="hidden" name="doit" value="1" /></td>
+</tr>
+
+</table></center>
+</td>
+</tr>
+</table></center>
+</div></form>
 </body>
 </html>

@@ -2,35 +2,35 @@
 /*
  * test_mdb2_auto_complete.php
  *
- * @(#) $Header: /home/mlemos/cvsroot/forms/test_mdb2_auto_complete.php,v 1.2 2006/12/20 06:21:17 mlemos Exp $
+ * @(#) $Header: /opt2/ena/metal/forms/test_mdb2_auto_complete.php,v 1.2 2006/12/20 06:21:17 mlemos Exp $
  *
  */
 
-require 'MDB2.php';
-require 'forms.php';
-require 'form_ajax_submit.php';
-require 'form_auto_complete.php';
-require 'form_mdb2_auto_complete.php';
+	require 'MDB2.php';
+	require 'forms.php';
+	require 'form_ajax_submit.php';
+	require 'form_auto_complete.php';
+	require 'form_mdb2_auto_complete.php';
 
-$dsn=array(
+	$dsn=array(
 		"phptype"=>"mysql",
 		"username"=>"root",
 		"password"=>"",
 		"database"=>"locations",
 		"Debug"=>"error_log",
-);
-$database =& MDB2::connect($dsn);
-if (PEAR::isError($database)) {
-	var_dump($database->getMessage());
-	die();
-}
+	);
+	$database =& MDB2::connect($dsn);
+	if (PEAR::isError($database)) {
+		var_dump($database->getMessage());
+		die();
+	}
 
-$form=new form_class;
-$form->NAME='auto_complete_form';
-$form->METHOD='POST';
-$form->ACTION='';
-$form->debug='error_log';
-$form->AddInput(array(
+	$form=new form_class;
+	$form->NAME='auto_complete_form';
+	$form->METHOD='POST';
+	$form->ACTION='';
+	$form->debug='error_log';
+	$form->AddInput(array(
 		'TYPE'=>'text',
 		'ID'=>'location',
 		'NAME'=>'location',
@@ -40,18 +40,18 @@ $form->AddInput(array(
 		'ExtraAttributes'=>array(
 			'autocomplete'=>'off',
 			'title'=>'Type just the first letters of a location.',
-)
-));
-$form->AddInput(array(
+		)
+	));
+	$form->AddInput(array(
 		'TYPE'=>'button',
 		'NAME'=>'show_locations',
 		'ID'=>'show_locations',
 		'VALUE'=>'...',
 		'ExtraAttributes'=>array(
 			'title'=>'Click to show all locations.'
-			)
-			));
-			$form->AddInput(array(
+		)
+	));
+	$form->AddInput(array(
 		'TYPE'=>'custom',
 		'ID'=>'complete_location',
 		'NAME'=>'complete_location',
@@ -72,78 +72,46 @@ $form->AddInput(array(
 		'ItemStyle'=>'',
 		'SelectedItemClass'=>'groovyselecteditem',
 		'SelectedItemStyle'=>'',
-			));
+	));
 
-			/*
-			 * This code is necessary to handle the requests for fetching
-			 * auto-complete values.
-			 */
-			$form->HandleEvent($processed);
-			if($processed)
-			exit;
+	/*
+	 * This code is necessary to handle the requests for fetching
+	 * auto-complete values.
+	 */
+	$form->HandleEvent($processed);
+	if($processed)
+		exit;
 
-			$form->ConnectFormToInput('location', 'ONLOAD', 'Focus', array());
+	$form->ConnectFormToInput('location', 'ONLOAD', 'Focus', array());
 
-			$onload=HtmlSpecialChars($form->PageLoad());
+	$onload=HtmlSpecialChars($form->PageLoad());
 
-			?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Test for Manuel Lemos' PHP form class using the auto-complete
-plug-in input and PEAR::MDB2 to perform database queries</title>
-<style type="text/css">
-<!--
-BODY {
-	color: black;
-	font-family: arial, helvetica, sans-serif;
-	background-color: #cccccc
-}
-
-.groovymenu {
-	background-color: #cccccc;
-	padding: 4px;
-	border-style: solid;
-	border-top-color: #f9f9f9;
-	border-left-color: #f9f9f9;
-	border-bottom-color: #868686;
-	border-right-color: #868686;
-	border-width: 1px;
-	opacity: 0.9;
-	filter: alpha(opacity = 90);
-}
-
-.groovyitem {
-	padding: 1px;
-}
-
-.groovyselecteditem {
-	padding: 1px;
-	color: #ffffff;
-	background-color: #000080;
-}
-//
--->
-</style>
+<title>Test for Manuel Lemos' PHP form class using the auto-complete plug-in input and PEAR::MDB2 to perform database queries</title>
+<style type="text/css"><!--
+BODY { color: black ; font-family: arial, helvetica, sans-serif ; background-color: #cccccc }
+.groovymenu { background-color: #cccccc; padding: 4px; border-style: solid ; border-top-color: #f9f9f9 ; border-left-color: #f9f9f9 ; border-bottom-color: #868686 ; border-right-color: #868686 ; border-width: 1px; opacity: 0.9; filter: alpha(opacity=90); }
+.groovyitem { padding: 1px; }
+.groovyselecteditem { padding: 1px; color: #ffffff; background-color: #000080; }
+// --></style>
 </head>
 <body onload="<?php echo $onload; ?>" bgcolor="#cccccc">
-<center>
-<h1>Test for Manuel Lemos' PHP form class using the auto-complete
-plug-in input and PEAR::MDB2 to perform database queries</h1>
-</center>
+<center><h1>Test for Manuel Lemos' PHP form class using the auto-complete plug-in input and PEAR::MDB2 to perform database queries</h1></center>
 <hr />
-			<?php
-			$error_message='';
-			$form->StartLayoutCapture();
-			$title='Auto-complete plug-in test';
-			$body_template='form_locations_auto_complete_body.html.php';
-			include('templates/form_frame.html.php');
-			$form->EndLayoutCapture();
+<?php
+	$error_message='';
+	$form->StartLayoutCapture();
+	$title='Auto-complete plug-in test';
+	$body_template='form_locations_auto_complete_body.html.php';
+	include('templates/form_frame.html.php');
+	$form->EndLayoutCapture();
 
-			$form->DisplayOutput();
+	$form->DisplayOutput();
 
-			$database->disconnect();
-			?>
+	$database->disconnect();
+?>
 <hr />
 </body>
 </html>

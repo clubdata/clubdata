@@ -3,7 +3,7 @@
 /*
  * insert.formaddinputhiddenpart.php
  *
- * @(#) $Header: /home/mlemos/cvsroot/PHPlibrary/plugins/insert.formaddinputhiddenpart.php,v 1.1 2003/03/20 02:53:19 mlemos Exp $
+ * @(#) $Header: /opt2/ena/metal/forms/smarty/2/plugins/insert.formaddinputhiddenpart.php,v 1.1 2003/03/20 02:53:19 mlemos Exp $
  *
  */
 
@@ -15,7 +15,7 @@ function smarty_insert_formaddinputhiddenpart($params, &$smarty)
 		$form=&$tpl_vars['form'];
 	}
 	else
-	$form=&$smarty->_tpl_vars['form'];
+		$form=&$smarty->_tpl_vars['form'];
 	$form->AddDataPart($params['data']);
 	$form->AddInputHiddenPart($params['input']);
 	return '';

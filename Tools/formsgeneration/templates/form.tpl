@@ -154,7 +154,11 @@
 </tr>
 
 <tr>
-<td colspan="3" align="center">{input name="image_subscribe"} {input name="button_subscribe"}{input name="doit"}</td>
+<td colspan="3" align="center">{input name="image_subscribe"} {input name="button_subscribe"}</td>
+</tr>
+
+<tr>
+<td colspan="3" align="center">{input name="button_subscribe_with_content"}{input name="doit"}</td>
 </tr>
 {/if}
 </table></center>

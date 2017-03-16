@@ -2,7 +2,7 @@
 <!--
      locations.schema
 
-     @(#) $Header: /home/mlemos/cvsroot/forms/locations.schema,v 1.1 2005/12/30 20:48:05 mlemos Exp $
+     @(#) $Header: /opt2/ena/metal/forms/locations.schema,v 1.1 2005/12/30 20:48:05 mlemos Exp $
   -->
 
 <database>

@@ -1,48 +1,18 @@
 <html>
 <head>
-<title>Test for Manuel Lemos' PHP form class using the
-auto-complete plug-in input</title>
-<style type="text/css">
-<!--
-BODY {
-	color: black;
-	font-family: arial, helvetica, sans-serif;
-	background-color: #cccccc
-}
-
-.groovymenu {
-	background-color: #cccccc;
-	padding: 4px;
-	border-style: solid;
-	border-top-color: #f9f9f9;
-	border-left-color: #f9f9f9;
-	border-bottom-color: #868686;
-	border-right-color: #868686;
-	border-width: 1px;
-	opacity: 0.9;
-	filter: alpha(opacity = 90);
-}
-
-.groovyitem {
-	padding: 1px;
-}
-
-.groovyselecteditem {
-	padding: 1px;
-	color: #ffffff;
-	background-color: #000080;
-}
--->
-</style>
+<title>Test for Manuel Lemos' PHP form class using the auto-complete plug-in input</title>
+<style type="text/css"><!--
+BODY { color: black ; font-family: arial, helvetica, sans-serif ; background-color: #cccccc }
+.groovymenu { background-color: #cccccc; padding: 4px; border-style: solid ; border-top-color: #f9f9f9 ; border-left-color: #f9f9f9 ; border-bottom-color: #868686 ; border-right-color: #868686 ; border-width: 1px; opacity: 0.9; filter: alpha(opacity=90); }
+.groovyitem { padding: 1px; }
+.groovyselecteditem { padding: 1px; color: #ffffff; background-color: #000080; }
+--></style>
 </head>
 <body onload="PageLoad()" bgcolor="#cccccc">
-<center>
-<h1>Test for Manuel Lemos' PHP form class using the auto-complete
-plug-in input</h1>
-</center>
+<center><h1>Test for Manuel Lemos' PHP form class using the auto-complete plug-in input</h1></center>
 <hr />
-<form method="post" action="" name="auto_complete_form"><script
-	type="text/javascript" defer="defer">
+<form method="post" action="" name="auto_complete_form">
+<script type="text/javascript" defer="defer">
 <!--
 
 function PageLoad()
@@ -57,31 +27,20 @@ function PageLoad()
 <div id="feedback" style="text-align: center;"></div>
 <br />
 <div id="wholeform">
-<center>
-<table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2"
-	cellspacing="1">
-	<tr>
-		<td bgcolor="#000080" style="border-style: none;"><font
-			color="#ffffff"><b>Auto-complete plug-in test</b></font></td>
-	</tr>
+<center><table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2" cellspacing="1">
+<tr>
+<td bgcolor="#000080" style="border-style: none;"><font color="#ffffff"><b>Auto-complete plug-in test</b></font></td>
+</tr>
 
-	<tr>
-		<td style="border-style: none;">
-		<fieldset><legend><b>Type a few characters in
-		the color or font fields</b></legend>
-		<center>
-		<table>
+<tr>
+<td style="border-style: none;"><fieldset>
+<legend><b>Type a few characters in the color or font fields</b></legend>
+<center><table>
 
-			<tr>
-				<th align="right"><label for="color" accesskey="C"><u>C</u>olor</label></th>
-				<td><input type="text" name="color" value="" size="32"
-					onblur="__complete_color__h();"
-					onkeydown="if(__complete_color__o) { if(event.keyCode==40 &amp;&amp; __complete_color__is&lt;__complete_color__co.length-1) { __complete_color__si(__complete_color__is+1); __complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_color__is&gt;0) { __complete_color__si(__complete_color__is-1);__complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_color__h(); return false; } };"
-					onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['color'].value.length&gt;=1){ __complete_color__w++; __complete_color__f=this.form; setTimeout('__complete_color__()',500); return false;};"
-					id="color" accesskey="C" autocomplete="off" />
-				<div id="__complete_color__m"
-					style="display: block; position: absolute; overflow: auto; visibility: hidden; background-color: #ffffff; border-width: 1px; border-color: #000000; border-style: solid; padding: 1px;"></div>
-				<script type="text/javascript" defer="defer">
+<tr>
+<th align="right"><label for="color" accesskey="C"><u>C</u>olor</label></th>
+<td><input type="text" name="color" value="" size="32" onblur="__complete_color__h();" onkeydown="if(__complete_color__o) { if(event.keyCode==40 &amp;&amp; __complete_color__is&lt;__complete_color__co.length-1) { __complete_color__si(__complete_color__is+1); __complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_color__is&gt;0) { __complete_color__si(__complete_color__is-1);__complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_color__h(); return false; } };" onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['color'].value.length&gt;=1){ __complete_color__w++; __complete_color__f=this.form; setTimeout('__complete_color__()',500); return false;};" id="color" accesskey="C" autocomplete="off" /><div id="__complete_color__m" style="display: block; position: absolute; overflow: auto; visibility: hidden;background-color: #ffffff; border-width: 1px; border-color: #000000; border-style: solid; padding: 1px;"></div>
+<script type="text/javascript" defer="defer">
 <!--
 var __complete_color__w=0;
 var __complete_color__s='';
@@ -227,21 +186,13 @@ __complete_color__o=false;
 __complete_color__is=-1;
 }
 // -->
-</script><input type="button" name="show_colors" value="..."
-					onclick="__complete_color__f=this.form; __complete_color__bm(__complete_color__i, false); this.form['color'].focus(); return false; ; return true"
-					id="show_colors" /><span id="complete_color_feedback"></span></td>
-			</tr>
+</script><input type="button" name="show_colors" value="..." onclick="__complete_color__f=this.form; __complete_color__bm(__complete_color__i, false); this.form['color'].focus(); return false; ; return true" id="show_colors" /><span id="complete_color_feedback"></span></td>
+</tr>
 
-			<tr>
-				<th align="right"><label for="font" accesskey="F"><u>F</u>ont</label></th>
-				<td><input type="text" name="font" value="" size="32"
-					onblur="__complete_font__h();"
-					onkeydown="if(__complete_font__o) { if(event.keyCode==40 &amp;&amp; __complete_font__is&lt;__complete_font__co.length-1) { __complete_font__si(__complete_font__is+1); __complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_font__is&gt;0) { __complete_font__si(__complete_font__is-1);__complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_font__h(); return false; } };"
-					onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['font'].value.length&gt;=1){ __complete_font__w++; __complete_font__f=this.form; setTimeout('__complete_font__()',500); return false;};"
-					id="font" accesskey="F" autocomplete="off" />
-				<div id="__complete_font__m" class="groovymenu"
-					style="display: block; position: absolute; overflow: auto; visibility: hidden;"></div>
-				<script type="text/javascript" defer="defer">
+<tr>
+<th align="right"><label for="font" accesskey="F"><u>F</u>ont</label></th>
+<td><input type="text" name="font" value="" size="32" onblur="__complete_font__h();" onkeydown="if(__complete_font__o) { if(event.keyCode==40 &amp;&amp; __complete_font__is&lt;__complete_font__co.length-1) { __complete_font__si(__complete_font__is+1); __complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_font__is&gt;0) { __complete_font__si(__complete_font__is-1);__complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_font__h(); return false; } };" onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['font'].value.length&gt;=1){ __complete_font__w++; __complete_font__f=this.form; setTimeout('__complete_font__()',500); return false;};" id="font" accesskey="F" autocomplete="off" /><div id="__complete_font__m" class="groovymenu" style="display: block; position: absolute; overflow: auto; visibility: hidden;"></div>
+<script type="text/javascript" defer="defer">
 <!--
 var __complete_font__w=0;
 var __complete_font__s='';
@@ -387,21 +338,15 @@ __complete_font__o=false;
 __complete_font__is=-1;
 }
 // -->
-</script><input type="image" name="show_fonts" src="pulldown.gif"
-					alt="Show fonts" align="top"
-					onclick="__complete_font__f=this.form; __complete_font__bm(__complete_font__i, false); this.form['font'].focus(); return false; ; return true"
-					id="show_fonts" /><span id="complete_font_feedback"></span></td>
-			</tr>
+</script><input type="image" name="show_fonts" src="pulldown.gif" alt="Show fonts" align="top" onclick="__complete_font__f=this.form; __complete_font__bm(__complete_font__i, false); this.form['font'].focus(); return false; ; return true" id="show_fonts" /><span id="complete_font_feedback"></span>
+</td>
+</tr>
 
-		</table>
-		</center>
-		</fieldset>
-		</td>
-	</tr>
-</table>
-</center>
-</div>
-</form>
+</table></center>
+</fieldset></td>
+</tr>
+</table></center>
+</div></form>
 <hr />
 </body>
 </html>

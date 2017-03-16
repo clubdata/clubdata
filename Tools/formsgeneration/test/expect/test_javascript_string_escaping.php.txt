@@ -1,0 +1,17 @@
+''
+'\n'
+'\r'
+'\t'
+unescape('%3c')
+'%'
+'\''
+'\\'
+unescape('%a0')
+'\n'+unescape('%3c')
+unescape('%3c%25')
+unescape('%3c\'')
+unescape('%3c\\')
+unescape('%3c\n')
+unescape('%3c\r')
+unescape('%3c\t')
+' '+unescape('%3c')

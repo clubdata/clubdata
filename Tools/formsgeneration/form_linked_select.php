@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * @(#) $Id: form_linked_select.php,v 1.15 2006/07/25 06:38:33 mlemos Exp $
+ * @(#) $Id: form_linked_select.php,v 1.18 2012/04/19 10:02:00 mlemos Exp $
  *
  */
 
@@ -22,9 +22,9 @@ class form_linked_select_class extends form_custom_class
 	Function GetGroupOptions(&$options,$group)
 	{
 		if(IsSet($this->groups[$group]))
-		$options=$this->groups[$group];
+			$options=$this->groups[$group];
 		else
-		Unset($options);
+			Unset($options);
 		return("");
 	}
 
@@ -44,15 +44,15 @@ class form_linked_select_class extends form_custom_class
 	{
 		if(!IsSet($arguments["Groups"])
 		|| GetType($arguments["Groups"])!="array")
-		return("it were not specified the groups of options");
+			return("it were not specified the groups of options");
 		$this->groups=$arguments["Groups"];
 		if(!IsSet($this->groups[$this->selected_group]))
-		return("the current linked input value does not match any of the select options groups");
+			return("the current linked input value does not match any of the select options groups");
 		if(!IsSet($this->groups[$this->selected_group]))
 		{
 			if((!IsSet($arguments["Group"])
 			|| !IsSet($arguments["Groups"][$arguments["Group"]])))
-			return("it was not specified a valid group for the current options");
+				return("it was not specified a valid group for the current options");
 			$this->selected_group=$arguments["Group"];
 		}
 		UnSet($arguments["Groups"]);
@@ -63,24 +63,24 @@ class form_linked_select_class extends form_custom_class
 	Function AddInput(&$form, $arguments)
 	{
 		if(!IsSet($arguments["LinkedInput"]))
-		return("it was not specified a valid input to link the select input");
+			return("it was not specified a valid input to link the select input");
 		$this->linked_input=$arguments["LinkedInput"];
 		$this->selected_group=$form->GetInputValue($this->linked_input);
 		if(strlen($error=$this->ValidateGroups($arguments)))
-		return($error);
+			return($error);
 		$this->dynamic=(IsSet($arguments["Dynamic"]) ? intval($arguments["Dynamic"]) : $this->default_dynamic);
 		if(!$this->dynamic
 		&& (IsSet($arguments["AutoWidthLimit"])
 		|| IsSet($arguments["AutoHeightLimit"])))
 		{
 			if(strlen($error=$this->GetGroups($groups)))
-			return($error);
+				return($error);
 			$w=$h=0;
 			for($g=0;$g<count($groups);$g++)
 			{
-				$group=$groups[$g];
+  			$group=$groups[$g];
 				if(strlen($error=$this->GetGroupOptions($options,$group)))
-				return($error);
+					return($error);
 				Reset($options);
 				for($o=0;$o<count($options);$o++)
 				{
@@ -93,13 +93,13 @@ class form_linked_select_class extends form_custom_class
 			if(IsSet($arguments["AutoWidthLimit"]))
 			{
 				if($arguments["AutoWidthLimit"]>0)
-				$w=min($w+1,$arguments["AutoWidthLimit"]);
+					$w=min($w+1,$arguments["AutoWidthLimit"]);
 				$arguments["STYLE"]="width: ".strval($w)."em".(IsSet($arguments["STYLE"]) ? "; ".$arguments["STYLE"] : "");
 			}
 			if(IsSet($arguments["AutoHeightLimit"]))
 			{
 				if($arguments["AutoHeightLimit"]>0)
-				$h=min($h,$arguments["AutoHeightLimit"]);
+					$h=min($h,$arguments["AutoHeightLimit"]);
 				$arguments["SIZE"]=strval($h);
 			}
 		}
@@ -107,7 +107,7 @@ class form_linked_select_class extends form_custom_class
 		UnSet($arguments["AutoWidthLimit"]);
 		UnSet($arguments["AutoHeightLimit"]);
 		if(strlen($error=$this->GetGroupOptions($selected_group,$this->selected_group)))
-		return($error);
+			return($error);
 		$select_arguments=$arguments;
 		UnSet($select_arguments["LinkedInput"]);
 		$this->select=$this->GenerateInputID($form, $this->input, "select");
@@ -122,10 +122,10 @@ class form_linked_select_class extends form_custom_class
 		{
 			$select_arguments["MULTIPLE"]=1;
 			if(!IsSet($select_arguments["SELECTED"]))
-			$select_arguments["SELECTED"]=array();
+				$select_arguments["SELECTED"]=array();
 		}
 		else
-		UnSet($select_arguments["MULTIPLE"]);
+			UnSet($select_arguments["MULTIPLE"]);
 		UnSet($select_arguments["CustomClass"]);
 		if(strlen($error=$form->AddInput($select_arguments))==0
 		&& strlen($error=$form->AddInput(array(
@@ -134,7 +134,7 @@ class form_linked_select_class extends form_custom_class
 			"NAME"=>$this->group,
 			"VALUE"=>$this->selected_group
 		)))==0)
-		$error=$form->Connect($this->linked_input, $this->input, "ONCHANGE", "SwitchGroup", array("GroupProperty"=>"VALUE"));
+			$error=$form->Connect($this->linked_input, $this->input, "ONCHANGE", "SwitchGroup", array("GroupProperty"=>"VALUE"));
 		return($error);
 	}
 
@@ -152,26 +152,26 @@ class form_linked_select_class extends form_custom_class
 		$javascript.="function ".$this->switch_group."(".($this->dynamic ? "" : "g,f").")".$b."{".$b;
 		$javascript.="var n, o, i, s, a, b, bi;".$b;
 		if($this->dynamic)
-		$javascript.="var n=".$this->switch_group."_n;".$b;
+			$javascript.="var n=".$this->switch_group."_n;".$b;
 		else
 		{
 			if(strlen($error=$this->GetGroups($groups)))
-			return($error);
+				return($error);
 			for($g=0, $append="";$g<count($groups); $g++)
 			{
 				$group=$groups[$g];
 				if($g>0)
-				$javascript.="}".$b."else".$b."{".$b;
+					$javascript.="}".$b."else".$b."{".$b;
 				$javascript.="if(g==".$form->EncodeJavascriptString($group).")".$b."{".$b."n=[";
 				$append.="}".$b;
 				if(strlen($error=$this->GetGroupOptions($options,$group)))
-				return($error);
+					return($error);
 				Reset($options);
 				for($o=0;$o<count($options);$o++)
 				{
 					$option=strval(Key($options));
 					if($o>0)
-					$javascript.=",";
+						$javascript.=",";
 					$javascript.=$form->EncodeJavascriptString($options[$option]).",".$form->EncodeJavascriptString($option);
 					Next($options);
 				}
@@ -181,22 +181,22 @@ class form_linked_select_class extends form_custom_class
 		}
 		$javascript.="if(n!=null)".$b."{".$b;
 		if($this->dynamic)
-		$javascript.="var g=".$this->switch_group."_g;".$b."f=".$this->switch_group."_f;".$b;
+			$javascript.="var g=".$this->switch_group."_g;".$b."f=".$this->switch_group."_f;".$b;
 		$javascript.="s=f[".$form->EncodeJavascriptString($this->select)."];".$b."o=s.options;".$b;
 		if(!$this->multiple)
-		$javascript.="bi=bi=s.selectedIndex;".$b."if(bi>=0) { b=o[bi].value };".$b;
+			$javascript.="bi=bi=s.selectedIndex;".$b."if(bi>=0) { b=o[bi].value };".$b;
 		$javascript.="i=0;".$b."while(i<n.length)".$b."{".$b."o[i/2]=new Option(n[i],n[i+1]);".$b."i=i+2;".$b."}".$b."while(i<o.length*2)".$b."{".$b."o[i/2]=null".$b."}".$b."f[".$form->EncodeJavascriptString($this->group)."].value=g;".$b;
 		if(!$this->multiple)
-		$javascript.="o[0].selected=true;".$b."a=s.options[ai=s.selectedIndex].value;".$b."if(bi>=0 && a!=b) s.onchange();".$b;
+			$javascript.="o[0].selected=true;".$b."a=s.options[ai=s.selectedIndex].value;".$b."if(bi>=0 && a!=b && s.onchange) s.onchange();".$b;
 		$javascript.="}".$b;
 		if($this->dynamic)
-		$javascript.="else".$b."{".$b."setTimeout('".$this->switch_group."()',10)".$b."}".$b;
+			$javascript.="else".$b."{".$b."setTimeout('".$this->switch_group."()',10)".$b."}".$b;
 		$javascript.="}".$eol."// -->".$eol."</script>";
 		if($this->dynamic)
-		$javascript.="<iframe id=\"".$this->switch_group."_i\" width=\"0\" height=\"0\" frameborder=\"0\"></iframe>";
+			$javascript.="<iframe id=\"".$this->switch_group."_i\" width=\"0\" height=\"0\" frameborder=\"0\"></iframe>";
 		if(strlen($error=$form->AddDataPart($javascript))==0
 		&& strlen($error=$form->AddInputPart($this->select))==0)
-		$error=$form->AddInputPart($this->group);
+			$error=$form->AddInputPart($this->group);
 		return($error);
 	}
 
@@ -217,18 +217,18 @@ class form_linked_select_class extends form_custom_class
 			case "SwitchGroup":
 				$property=(IsSet($context["GroupProperty"]) ? $context["GroupProperty"] : "VALUE");
 				if(strcmp($property, "VALUE"))
-				return("it is not supported to switch to a group defined by property ".$property);
+					return("it is not supported to switch to a group defined by property ".$property);
 				$value=$form->GetJavascriptInputValue($form_object, $from);
 				if(strlen($value)==0)
-				return("it was not possible to determine how to retrieve ".$property." value");
+					return("it was not possible to determine how to retrieve ".$property." value");
 				if($this->dynamic)
 				{
 					if(strlen($error=$form->GetInputEventURL($this->input,"getoptions",array($this->group_parameter=>"GROUP"),$iframe_url)))
-					return($error);
+						return($error);
 					$javascript="if(document.getElementById && (f=document.getElementById('".$this->switch_group."_i'))){g=".$value.";".$this->switch_group."_g=g;".$this->switch_group."_f=".$form_object.";".$this->switch_group."_n=null;"."g=escape(g);while((p=g.indexOf('+'))!=-1){g=g.substring(0,p)+'%2B'+g.substring(p+1,g.length)}f.src='".str_replace("GROUP", "'+g+'", $iframe_url)."';setTimeout('".$this->switch_group."()',10)}";
 				}
 				else
-				$javascript=$this->switch_group."(".$value.",".$form_object.")";
+					$javascript=$this->switch_group."(".$value.",".$form_object.")";
 				break;
 			default:
 				return($this->DefaultGetJavascriptConnectionAction($form, $form_object, $from, $event, $action, $context, $javascript));
@@ -255,7 +255,7 @@ class form_linked_select_class extends form_custom_class
 				for($option=0; $option<count($selected); $option++)
 				{
 					if(!IsSet($options[$selected[$option]]))
-					break;
+						break;
 				}
 				if($option<count($selected))
 				{
@@ -264,7 +264,7 @@ class form_linked_select_class extends form_custom_class
 					$this->GetGroupOptions($options,$group);
 				}
 				else
-				$this->selected_group=$group;
+					$this->selected_group=$group;
 				$form->SetSelectOptions($this->select, $options, $selected);
 			}
 			else
@@ -285,7 +285,8 @@ class form_linked_select_class extends form_custom_class
 			}
 		}
 		if(strcmp($group, $selected_group))
-		$form->SetInputValue($this->group, $this->selected_group=$group);
+			$form->SetInputValue($this->group, $this->selected_group=$group);
+		return('');
 	}
 
 	Function HandleEvent(&$form, $event, $parameters, &$processed)
@@ -297,15 +298,15 @@ class form_linked_select_class extends form_custom_class
 				{
 					if(!IsSet($parameters[$this->group_parameter])
 					&& GetType($parameters[$this->group_parameter])=="string")
-					return("the group parameter is not being passed to the linked select input getoptions event handler");
+						return("the group parameter is not being passed to the linked select input getoptions event handler");
 					if(strlen($error=$this->GetGroupOptions($g,$parameters[$this->group_parameter])))
-					return($error);
+						return($error);
 					$c=count($g);
 					$v="";
 					for($o=0;$o<$c;$o++)
 					{
 						if($o>0)
-						$v.=",\n";
+							$v.=",\n";
 						$k=Key($g);
 						$v.=$form->EncodeJavascriptString($g[$k]).",".$form->EncodeJavascriptString($k);
 						Next($g);
@@ -330,6 +331,11 @@ class form_linked_select_class extends form_custom_class
 			default:
 				return($this->DefaultGetInputProperty($form, $property, $value));
 		}
+	}
+
+	Function GetJavascriptInputValue(&$form, $form_object)
+	{
+		return($form->GetJavascriptInputValue($form_object, $this->select));
 	}
 };
 

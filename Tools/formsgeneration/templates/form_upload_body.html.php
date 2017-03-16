@@ -1,24 +1,20 @@
-<CENTER>
-<TABLE>
+<CENTER><TABLE>
 
-	<TR>
-		<TH ALIGN="right">File:</TH>
-		<TD><?php $form->AddInputPart("userfile");
-		if(IsSet($verify["userfile"]))
-		$form->AddDataPart("&nbsp;[Verify]");
+<TR>
+<TH ALIGN="right">File:</TH>
+<TD><?php $form->AddInputPart("userfile");
+if(IsSet($verify["userfile"]))
+	$form->AddDataPart("&nbsp;[Verify]");
 
-		?></TD>
-	</TR>
+?></TD>
+</TR>
 
-	<TR>
-		<TD COLSPAN="2" ALIGN="center">
-		<HR>
-		</TD>
-		<TR>
+<TR>
+<TD COLSPAN="2" ALIGN="center"><HR></TD>
+</TR>
 
-			<TR>
-				<TD COLSPAN="2" ALIGN="center"><?php $form->AddInputPart("doit"); ?></TD>
-			</TR>
+<TR>
+<TD COLSPAN="2" ALIGN="center"><?php $form->AddInputPart("doit"); ?></TD>
+</TR>
 
-</TABLE>
-</CENTER>
+</TABLE></CENTER>

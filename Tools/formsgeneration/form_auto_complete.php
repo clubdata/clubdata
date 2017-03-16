@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * @(#) $Id: form_auto_complete.php,v 1.21 2006/07/23 07:50:09 mlemos Exp $
+ * @(#) $Id: form_auto_complete.php,v 1.24 2012/06/22 02:51:44 mlemos Exp $
  *
  */
 
@@ -31,7 +31,7 @@ class form_auto_complete_class extends form_custom_class
 		for($results='[', $f = 0; $f<count($items); Next($items), $f++)
 		{
 			if($f>0)
-			$results.=', ';
+				$results.=', ';
 			$v=Key($items);
 			$results.='{ "v": '.$form->EncodeJavascriptString($v).', "e": '.$form->EncodeJavascriptString($form->EncodeJavascriptString(HtmlSpecialChars($v))).', "d": '.$form->EncodeJavascriptString($items[$v]).' }';
 		}
@@ -43,7 +43,7 @@ class form_auto_complete_class extends form_custom_class
 		if(!IsSet($arguments['CompleteValues'])
 		|| GetType($complete_values=$arguments['CompleteValues'])!='array'
 		|| count($complete_values)==0)
-		return('it were not specified valid complete values');
+			return('it were not specified valid complete values');
 		$this->complete_values=$complete_values;
 		return('');
 	}
@@ -51,7 +51,7 @@ class form_auto_complete_class extends form_custom_class
 	Function SearchCompleteValues(&$form, $text, &$found)
 	{
 		if(strlen($text)==0)
-		$found=$this->complete_values;
+			$found=$this->complete_values;
 		else
 		{
 			$t=strtolower($text);
@@ -59,7 +59,7 @@ class form_auto_complete_class extends form_custom_class
 			{
 				$c=Key($this->complete_values);
 				if(!strcmp($t, strtolower(substr($c, 0, strlen($t)))))
-				$found[$c]=$this->complete_values[$c];
+					$found[$c]=$this->complete_values[$c];
 			}
 		}
 		return('');
@@ -69,44 +69,44 @@ class form_auto_complete_class extends form_custom_class
 	{
 		if(!IsSet($arguments['CompleteInput'])
 		|| strlen($arguments['CompleteInput'])==0)
-		return('it was not specified a valid text input to complete');
+			return('it was not specified a valid text input to complete');
 		$this->text=$arguments['CompleteInput'];
 		if(IsSet($arguments['CompleteMinimumLength']))
 		{
 			$minimum_complete=intval($arguments['CompleteMinimumLength']);
 			if($minimum_complete<=0)
-			return('it was not specified a valid minimum length to complete the text');
+				return('it was not specified a valid minimum length to complete the text');
 			$this->minimum_complete=$minimum_complete;
 		}
 		if(IsSet($arguments['CompleteDelay']))
 		{
 			$complete_delay=intval($arguments['CompleteDelay']*1000);
 			if($complete_delay<=0)
-			return('it was not specified a valid complete delay period');
+				return('it was not specified a valid complete delay period');
 			$this->complete_delay=$complete_delay;
 		}
 		if(IsSet($arguments['ShowButton']))
 		{
 			$button=$arguments['ShowButton'];
 			if(strlen($button)==0)
-			return('it was not specified a valid button input to show all options');
+				return('it was not specified a valid button input to show all options');
 			$this->button=$button;
 		}
 		if(IsSet($arguments['Dynamic'])
 		&& !$arguments['Dynamic'])
-		$this->dynamic=0;
+			$this->dynamic=0;
 		if(IsSet($arguments['MenuClass']))
-		$this->menu_class=$arguments['MenuClass'];
+			$this->menu_class=$arguments['MenuClass'];
 		if(IsSet($arguments['MenuStyle']))
-		$this->menu_style=$arguments['MenuStyle'];
+			$this->menu_style=$arguments['MenuStyle'];
 		if(IsSet($arguments['ItemClass']))
-		$this->item_class=$arguments['ItemClass'];
+			$this->item_class=$arguments['ItemClass'];
 		if(IsSet($arguments['ItemStyle']))
-		$this->item_style=$arguments['ItemStyle'];
+			$this->item_style=$arguments['ItemStyle'];
 		if(IsSet($arguments['SelectedItemClass']))
-		$this->selected_item_class=$arguments['SelectedItemClass'];
+			$this->selected_item_class=$arguments['SelectedItemClass'];
 		if(IsSet($arguments['SelectedItemStyle']))
-		$this->selected_item_style=$arguments['SelectedItemStyle'];
+			$this->selected_item_style=$arguments['SelectedItemStyle'];
 		$this->complete=$this->GenerateInputID($form, $this->input, '_');
 		if($this->dynamic)
 		{
@@ -119,23 +119,23 @@ class form_auto_complete_class extends form_custom_class
 				'TargetInput'=>$this->input
 			);
 			if(IsSet($arguments['Timeout']))
-			$ajax_arguments['Timeout']=intval($arguments['Timeout']);
+				$ajax_arguments['Timeout']=intval($arguments['Timeout']);
 			if(IsSet($arguments['FeedbackElement']))
 			{
 				$ajax_arguments['FeedbackElement']=$arguments['FeedbackElement'];
 				if(IsSet($arguments['SubmitFeedback']))
-				$ajax_arguments['SubmitFeedback']=$arguments['SubmitFeedback'];
+					$ajax_arguments['SubmitFeedback']=$arguments['SubmitFeedback'];
 				if(IsSet($arguments['TimeoutFeedback']))
 				{
 					$ajax_arguments['TimeoutFeedback']=$arguments['TimeoutFeedback'];
 					$ajax_arguments['ONTIMEOUT']='';
 				}
 				if(IsSet($arguments['CompleteFeedback']))
-				$ajax_arguments['CompleteFeedback']=$arguments['CompleteFeedback'];
+					$ajax_arguments['CompleteFeedback']=$arguments['CompleteFeedback'];
 			}
 		}
 		if(strlen($error=$this->GetCompleteValues($form, $arguments)))
-		return($error);
+			return($error);
 		if((!$this->dynamic
 		|| (strlen($error=$form->AddInput($ajax_arguments))==0
 		&& strlen($error=$form->Connect($this->ajax, $this->input, 'ONCOMPLETE', 'Reposition', array()))==0))
@@ -146,12 +146,12 @@ class form_auto_complete_class extends form_custom_class
 			'NAME'=>$this->complete.'t',
 			'ID'=>$this->complete.'t',
 			'VALUE'=>''
-			)))==0)
-			&& strlen($error=$form->Connect($this->button, $this->input, 'ONCLICK', 'Show', array()))==0))
-			&& strlen($error=$form->Connect($this->text, $this->input, 'ONBLUR', 'Hide', array('Delay'=>0.2)))==0
-			&& strlen($error=$form->Connect($this->text, $this->input, 'ONKEYDOWN', 'ControlKeys', array()))==0)
+		)))==0)
+		&& strlen($error=$form->Connect($this->button, $this->input, 'ONCLICK', 'Show', array()))==0))
+		&& strlen($error=$form->Connect($this->text, $this->input, 'ONBLUR', 'Hide', array('Delay'=>0.2)))==0
+		&& strlen($error=$form->Connect($this->text, $this->input, 'ONKEYDOWN', 'ControlKeys', array()))==0)
 			$error=$form->Connect($this->text, $this->input, 'ONKEYUP', 'Complete', array());
-			return($error);
+		return($error);
 	}
 
 	Function GetJavascriptConnectionAction(&$form, $form_object, $from, $event, $action, &$context, &$javascript)
@@ -161,32 +161,32 @@ class form_auto_complete_class extends form_custom_class
 			case 'Complete':
 				$value=$form->GetJavascriptInputValue($form_object, $this->text);
 				if(strlen($value)==0)
-				return('it was not possible to determine how to retrieve value of '.$this->text);
+					return('it was not possible to determine how to retrieve value of '.$this->text);
 				$javascript='if('.(strcmp($event,'ONKEYUP') ? '' : 'event.keyCode!=40 && event.keyCode!=38 && event.keyCode!=27 && event.keyCode!=13 && ').$value.'.length>='.$this->minimum_complete.'){ '.$this->complete.'w++; '.$this->complete.'f='.$form_object.'; setTimeout('."'".$this->complete."()',".$this->complete_delay.'); return false;};';
 				break;
 			case 'Hide':
 				$javascript=$this->complete.'h();';
 				$delay=(IsSet($context['Delay']) ? intval($context['Delay']*1000) : 0);
 				if($delay)
-				$javascript='setTimeout('.$form->EncodeJavascriptString($javascript).', '.$delay.');';
+					$javascript='setTimeout('.$form->EncodeJavascriptString($javascript).', '.$delay.');';
 				break;
 			case 'Show':
 				if($this->dynamic)
 				{
-					$submit_context=array();
-					if(strlen($error=$form->GetJavascriptConnectionAction($form_object, $this->input, $this->ajax, 'ONSHOW', 	'Submit', $submit_context, $complete_javascript)))
-					return($error);
+					$submit_context=array('Validate'=>0);
+					if(strlen($error=$form->GetJavascriptConnectionAction($form_object, $this->input, $this->ajax, 'ONSHOW', 'Submit', $submit_context, $complete_javascript)))
+						return($error);
 					$javascript=$this->complete.'f='.$form_object.'; '.$form->GetJavascriptSetInputValue($this->complete.'f', $this->complete.'t', $form->EncodeJavascriptString('a')).' '.$complete_javascript.';';
 				}
 				else
-				$javascript=$this->complete.'f='.$form_object.'; '.$this->complete.'bm('.$this->complete.'i, false); '.$form->GetJavascriptInputObject($form_object, $this->text).'.focus();';
+					$javascript=$this->complete.'f='.$form_object.'; '.$this->complete.'bm('.$this->complete.'i, false); '.$form->GetJavascriptInputObject($form_object, $this->text).'.focus();';
 				$javascript='if(!'.$this->complete.'o) {'.$javascript.'}  return false;';
 				break;
 			case 'Reposition':
 				$javascript=$this->complete.'rp(document.getElementById('.$form->EncodeJavascriptString($this->complete.'m').'), '.$form->GetJavascriptInputObject($form_object, $this->text).');';
 				break;
 			case 'ControlKeys':
-				$javascript='if('.$this->complete.'o) { if(event.keyCode==40 && '.$this->complete.'is<'.$this->complete.'co.length-1) { '.$this->complete.'si('.$this->complete.'is+1); '.$this->complete.'so(t,'.$this->complete.'is); return false; } if(event.keyCode==38 && '.$this->complete.'is>0) { '.$this->complete.'si('.$this->complete.'is-1);'.$this->complete.'so(t,'.$this->complete.'is); return false; } if(event.keyCode==27) { '.$this->complete.'h(); return false; }  if(event.keyCode==13) { '.$this->complete.'h(); return true; } };';
+ 				$javascript='if('.$this->complete.'o) { if(event.keyCode==40 && '.$this->complete.'is<'.$this->complete.'co.length-1) { '.$this->complete.'si('.$this->complete.'is+1); '.$this->complete.'so(t,'.$this->complete.'is); return false; } if(event.keyCode==38 && '.$this->complete.'is>0) { '.$this->complete.'si('.$this->complete.'is-1);'.$this->complete.'so(t,'.$this->complete.'is); return false; } if(event.keyCode==27) { '.$this->complete.'h(); return false; }  if(event.keyCode==13) { '.$this->complete.'h(); return true; } };';
 				break;
 			default:
 				return($this->DefaultGetJavascriptConnectionAction($form, $form_object, $from, $event, $action, $context, $javascript));
@@ -198,9 +198,9 @@ class form_auto_complete_class extends form_custom_class
 	{
 		if($this->dynamic)
 		{
-			$submit_context=array();
-			if(strlen($error=$form->GetJavascriptConnectionAction($this->complete.'f', $this->input, $this->ajax, 'ONCOMPLETE', 	'Submit', $submit_context, $complete_javascript)))
-			return($error);
+			$submit_context=array('Validate'=>0);
+			if(strlen($error=$form->GetJavascriptConnectionAction($this->complete.'f', $this->input, $this->ajax, 'ONCOMPLETE', 'Submit', $submit_context, $complete_javascript)))
+				return($error);
 		}
 		$eol=$form->end_of_line;
 		$b="\n";
@@ -211,6 +211,7 @@ class form_auto_complete_class extends form_custom_class
 			$this->item_style_attributes=(strlen($this->item_class) ? ' class="'.HtmlSpecialChars($this->item_class).'"' : '').((strlen($this->item_style) || strlen($this->selected_item_style)) ? ' style="'.HtmlSpecialChars($item_style).'"' : '');
 		}
 		$menu=$form->EncodeJavascriptString($this->complete.'m');
+		$text_object = $form->GetJavascriptInputObject($this->complete.'f', $this->text);
 		$html='<div id="'.HtmlSpecialChars($this->complete.'m').'"'.(strlen($this->menu_class) ? ' class="'.HtmlSpecialChars($this->menu_class).'"' : '').' style="display: block; position: absolute; overflow: auto; visibility: hidden;'.HtmlSpecialChars($this->menu_style).'"></div>'.$b.
 			'<script type="text/javascript" defer="defer">'.$eol.'<!--'."\n".
 			'var '.$this->complete.'w=0;'.$b.
@@ -221,14 +222,14 @@ class form_auto_complete_class extends form_custom_class
 			'var '.$this->complete.'o=false;'.$b.
 			'var '.$this->complete.'co=[];'.$b.
 			'var '.$this->complete.'l=0;'.$b.
-		(
-		$this->dynamic
-		?
+			(
+					$this->dynamic
+				?
 					'var '.$this->complete.'c={};'.$b
-		:
+				:
 					''
-					).
-					$eol.
+			).
+			$eol.
 			'function '.$this->complete.'()'.$b.
 			'{'.$b.
 			'if(--'.$this->complete.'w==0)'.$b.
@@ -238,13 +239,13 @@ class form_auto_complete_class extends form_custom_class
 			'{'.$b.
 			'm=document.getElementById('.$menu.');'.$b.
 			'm.style.visibility=\'hidden\'; '.$b.
-					$this->complete.'o=false;'.$b.
-					$this->complete.'is=-1;'.$b.
+			$this->complete.'o=false;'.$b.
+			$this->complete.'is=-1;'.$b.
 			'if(s.length>='.$this->minimum_complete.')'.$b.
 			'{'.$b.
-					(
+			(
 					$this->dynamic
-					?
+				?
 					'if('.$this->complete.'c[s])'.$b.
 					'{'.$b.
 					$this->complete.'s=s;'.$b.
@@ -254,15 +255,15 @@ class form_auto_complete_class extends form_custom_class
 					'{'.$b.
 					$this->complete.'s=s;'.$b.
 					(
-					strlen($this->button)
-					?
-					$form->GetJavascriptSetInputValue($this->complete.'f', $this->complete.'t', $form->EncodeJavascriptString('')).$b
-					:
+							strlen($this->button)
+						?
+							$form->GetJavascriptSetInputValue($this->complete.'f', $this->complete.'t', $form->EncodeJavascriptString('')).$b
+						:
 							''
-							).
-							$complete_javascript.
+					).
+					$complete_javascript.
 					'}'.$b
-							:
+				:
 					'o=[];'.$b.
 					'for (var i=0; i<'.$this->complete.'i.length; i++)'.$b.
 					'{'.$b.
@@ -271,7 +272,7 @@ class form_auto_complete_class extends form_custom_class
 					'}'.$b.
 					'if(o.length)'.$b.
 					''.$this->complete.'bm(o, true);'.$b
-							).
+			).
 			'}'.$b.
 			'}'.$b.
 			'}'.$b.
@@ -323,22 +324,25 @@ class form_auto_complete_class extends form_custom_class
 			'if('.$this->complete.'is!=-1)'.$b.
 			'{'.$b.
 			's=document.getElementById('.$form->EncodeJavascriptString($this->complete.'m').' + '.$this->complete.'is);'.$b.
-							((strlen($this->item_class) || strlen($this->selected_item_class)) ? 's.className='.$form->EncodeJavascriptString($this->item_class).';'.$b : '').
-							((strlen($this->item_style) || strlen($this->selected_item_style)) ? $this->complete.'ss(s, '.$form->EncodeJavascriptString($item_style).');'.$b : '').
+			 ((strlen($this->item_class) || strlen($this->selected_item_class)) ? 's.className='.$form->EncodeJavascriptString($this->item_class).';'.$b : '').
+			 ((strlen($this->item_style) || strlen($this->selected_item_style)) ? $this->complete.'ss(s, '.$form->EncodeJavascriptString($item_style).');'.$b : '').
 			'}'.$b.
 			'if(i!=-1)'.$b.
 			'{'.$b.
 			's=document.getElementById('.$form->EncodeJavascriptString($this->complete.'m').' + i);'.$b.
-							((strlen($this->selected_item_class) || strlen($this->item_class)) ? 's.className='.$form->EncodeJavascriptString($this->selected_item_class).';'.$b : '').
-							((strlen($this->selected_item_style) || strlen($this->item_style)) ? $this->complete.'ss(s, '.$form->EncodeJavascriptString($selected_item_style).');'.$b : '').
+			((strlen($this->selected_item_class) || strlen($this->item_class)) ? 's.className='.$form->EncodeJavascriptString($this->selected_item_class).';'.$b : '').
+			((strlen($this->selected_item_style) || strlen($this->item_style)) ? $this->complete.'ss(s, '.$form->EncodeJavascriptString($selected_item_style).');'.$b : '').
 			'}'.$b.
-							$this->complete.'is=i;'.$b.
+			$this->complete.'is=i;'.$b.
 			'}'.$eol.
 			'function '.$this->complete.'so(t,i)'.$b.
 			'{'.$b.
 			'o='.$this->complete.'co;'.$b.
-							$this->complete.'si(i);'.$b.
+			$this->complete.'si(i);'.$b.
+			'var b=t.value;'.$b.
 			't.value=o[i].v;'.$b.
+			'if(b != t.value && t.onchange)'.$b.
+			' t.onchange()'.$b.
 			'if(t.createTextRange)'.$b.
 			'{'.$b.
 			'if(r=t.createTextRange())'.$b.
@@ -364,44 +368,44 @@ class form_auto_complete_class extends form_custom_class
 			'{'.$b.
 			'for(d=\'\',i=0; i<o.length; i++)'.$b.
 			'{'.$b.
-			'd+='.$form->EncodeJavascriptString('<div id="'.$this->complete.'m').' + i + '.$form->EncodeJavascriptString('"'.$this->item_style_attributes.' onmouseover="'.$this->complete.'si(').' + i +'.$form->EncodeJavascriptString(');" onmouseout="'.$this->complete.'si(-1);" onmousedown="'.$this->complete.'s=\'\'; '.$form->GetJavascriptInputObject($this->complete.'f', $this->text).'.value=').'+o[i].e+'.$form->EncodeJavascriptString('; document.getElementById('.$menu.').style.visibility=\'hidden\';'.$this->complete.'o=false; '.$this->complete.'is=-1;">').'+o[i].d+'.$form->EncodeJavascriptString('</div>'.$b).';'.$b.
+			'd+='.$form->EncodeJavascriptString('<div id="'.$this->complete.'m').' + i + '.$form->EncodeJavascriptString('"'.$this->item_style_attributes.' onmouseover="'.$this->complete.'si(').' + i +'.$form->EncodeJavascriptString(');" onmouseout="'.$this->complete.'si(-1);" onmousedown="'.$this->complete.'s=\'\'; var b='.$text_object.'.value;'.$text_object.'.value=').'+o[i].e+'.$form->EncodeJavascriptString('; document.getElementById('.$menu.').style.visibility=\'hidden\';'.$this->complete.'o=false; '.$this->complete.'is=-1; if('.$text_object.'.value != b && '.$text_object.'.onchange) '.$text_object.'.onchange();">').'+o[i].d+'.$form->EncodeJavascriptString('</div>'.$b).';'.$b.
 			'}'.$b.
 			'm=document.getElementById('.$menu.');'.$b.
 			'm.innerHTML=d;'.$b.
-			't='.$form->GetJavascriptInputObject($this->complete.'f', $this->text).';'.$b.
-							$this->complete.'rp(m,t);'.$b.
+			't='.$text_object.';'.$b.
+			$this->complete.'rp(m,t);'.$b.
 			'm.style.visibility=\'visible\';'.$b.
-							$this->complete.'o=true;'.$b.
-							$this->complete.'co=o;'.$b.
+			$this->complete.'o=true;'.$b.
+			$this->complete.'co=o;'.$b.
 			'if(sv)'.$b.
 			'{'.$b.
-							$this->complete.'l=t.value.length'.$b.
-							$this->complete.'so(t,0);'.$b.
+			$this->complete.'l=t.value.length'.$b.
+			$this->complete.'so(t,0);'.$b.
 			'}'.$b.
 			'else'.$b.
 			'{'.$b.
-							$this->complete.'l=0'.$b.
-							$this->complete.'is=-1;'.$b.
+			$this->complete.'l=0'.$b.
+			$this->complete.'is=-1;'.$b.
 			'}'.$b.
 			'}'.$eol.
 			'function '.$this->complete.'h()'.$b.
 			'{'.$b.
-							$this->complete.'s=\'\';'.$b.
+			$this->complete.'s=\'\';'.$b.
 			'm=document.getElementById('.$form->EncodeJavascriptString($this->complete.'m').');'.$b.
 			'm.style.visibility=\'hidden\';'.$b.
-							$this->complete.'o=false;'.$b.
-							$this->complete.'is=-1;'.$b.
+			$this->complete.'o=false;'.$b.
+			$this->complete.'is=-1;'.$b.
 			'}'.$eol.
 			'// -->'.$eol.'</script>';
-							if(strlen($error=$form->AddDataPart($html))
-							|| ($this->dynamic
-							&& strlen($error=$form->AddInputPart($this->ajax)))
-							|| (strlen($this->button)
-							&& (strlen($error=$form->AddInputPart($this->button))
-							|| ($this->dynamic
-							&& strlen($error=$form->AddInputPart($this->complete.'t'))))))
-							return($error);
-							return('');
+		if(strlen($error=$form->AddDataPart($html))
+		|| ($this->dynamic
+		&& strlen($error=$form->AddInputPart($this->ajax)))
+		|| (strlen($this->button)
+		&& (strlen($error=$form->AddInputPart($this->button))
+		|| ($this->dynamic
+		&& strlen($error=$form->AddInputPart($this->complete.'t'))))))
+			return($error);
+		return('');
 	}
 
 	Function Connect(&$form, $to, $event, $action, &$context)
@@ -420,24 +424,25 @@ class form_auto_complete_class extends form_custom_class
 
 	Function PostMessage(&$form, $message, &$processed)
 	{
-		$form->LoadInputValues();
+		if(strlen($error = $form->LoadInputValues()))
+			return($error);
 		$text=$form->GetInputValue($this->text);
 		$all=(strlen($this->button) && !strcmp($form->GetInputValue($this->complete.'t'), 'a'));
 		$found=array();
 		if(($all
 		|| strlen($text)>=$this->minimum_complete)
 		&& strlen($error=$this->SearchCompleteValues($form, $s=($all ? '' : strtolower($text)), $found)))
-		$form->OutputError($error, $this->input);
+			$form->OutputError($error, $this->input);
 		elseif(count($found))
 		{
 			$results=$this->SerializeItems($form, $found);
 			$s=$form->EncodeJavascriptString($s);
 			$command=$message['Window'].'.'.$this->complete.'i='.$message['Window'].'.'.$this->complete.'c['.$s.']='.$results.'; if('.$message['Window'].'.'.$this->complete.'s.toLowerCase()=='.$s.') {'.$message['Window'].'.'.$this->complete.'bm('.$message['Window'].'.'.$this->complete.'i, '.($all ? 'false' : 'true').'); '.$form->GetJavascriptInputObject($message['Form'], $this->text).'.focus();}';
 			$message['Actions']=array(
-			array(
+				array(
 					'Action'=>'Command',
 					'Command'=>$command
-			)
+				)
 			);
 		}
 		return($form->ReplyMessage($message, $processed));

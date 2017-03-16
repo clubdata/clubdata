@@ -1,88 +1,178 @@
 <?php
 /*
- * form_mysql_linked_select.php
+ * test_metabase_linked_select.php
  *
- * @(#) $Id: form_mysql_linked_select.php,v 1.4 2006/01/02 01:14:11 mlemos Exp $
+ * @(#) $Header: /opt2/ena/metal/forms/test_metabase_linked_select.php,v 1.5 2008/02/16 21:59:31 mlemos Exp $
  *
  */
 
-class form_mysql_linked_select_class extends form_linked_select_class
-{
-	var $connection=0;
-	var $groups_query="";
-	var $options_query="";
-	var $default_option;
-	var $default_option_value;
-	var $default_dynamic=1;
+	define("METABASE_PATH","../metabase");
+	require(METABASE_PATH."/metabase_database.php");
+	require(METABASE_PATH."/metabase_interface.php");
+	require("forms.php");
+	require("form_linked_select.php");
+	require("form_metabase_linked_select.php");
 
-	Function GetGroupOptions(&$o,$group)
+	$arguments=array(
+		"Type"=>"mysql",
+		"User"=>"mysqluser",
+		"Password"=>"mysqlpassword",
+		"Database"=>"locations",
+		"IncludePath"=>METABASE_PATH,
+		"Debug"=>"error_log",
+	);
+	MetabaseSetupDatabase($arguments,$database);
+
+	$continents=array(
+		""=>"Select continent",
+		"na"=>"North America",
+		"eu"=>"Europe",
+		"sa"=>"South America",
+		"as"=>"Asia",
+		"oc"=>"Oceania"
+	);
+
+	$form=new form_class;
+	$form->NAME="location_form";
+	$form->METHOD="GET";
+	$form->ACTION="";
+	$form->debug="error_log";
+	$form->AddInput(array(
+		"TYPE"=>"select",
+		"ID"=>"continent",
+		"NAME"=>"continent",
+		"LABEL"=>"<u>C</u>ontinent",
+		"ACCESSKEY"=>"C",
+		"VALUE"=>"",
+		"OPTIONS"=>$continents,
+		"ValidateAsNotEmpty"=>1,
+		"ValidationErrorMessage"=>"It was not specified a valid continent."
+	));
+	$form->AddInput(array(
+		"TYPE"=>"custom",
+		"ID"=>"country",
+		"NAME"=>"country",
+		"LABEL"=>"Coun<u>t</u>ry",
+		"ACCESSKEY"=>"t",
+		"CustomClass"=>"form_metabase_linked_select_class",
+		"Connection"=>$database,
+		"GroupsQuery"=>"SELECT code FROM continents",
+		"OptionsQuery"=>"SELECT code, name FROM countries WHERE continent=?",
+		"DefaultOption"=>"",
+		"DefaultOptionValue"=>"Select country",
+		"Dynamic"=>1,
+		"VALUE"=>"",
+		"LinkedInput"=>"continent",
+		"SIZE"=>3,
+		"AutoWidthLimit"=>0,
+		"AutoHeightLimit"=>0,
+		"ValidateAsNotEmpty"=>1,
+		"ValidationErrorMessage"=>"It was not specified a valid country."
+	));
+	$form->AddInput(array(
+		"TYPE"=>"custom",
+		"ID"=>"location",
+		"NAME"=>"location",
+		"LABEL"=>"<u>L</u>ocation",
+		"ACCESSKEY"=>"L",
+		"CustomClass"=>"form_metabase_linked_select_class",
+		"Connection"=>$database,
+		"GroupsQuery"=>"SELECT code FROM countries",
+		"OptionsQuery"=>"SELECT code, name FROM locations WHERE country=?",
+		"DefaultOption"=>"",
+		"DefaultOptionValue"=>"Select location",
+		"Dynamic"=>1,
+		"VALUE"=>"",
+		"LinkedInput"=>"country",
+		"SIZE"=>3,
+		"AutoWidthLimit"=>0,
+		"AutoHeightLimit"=>0,
+		"ValidateAsNotEmpty"=>1,
+		"ValidationErrorMessage"=>"It was not specified a valid location."
+	));
+	$form->AddInput(array(
+		"TYPE"=>"submit",
+		"VALUE"=>">",
+		"NAME"=>"update",
+		"SubForm"=>"update"
+	));
+	$form->AddInput(array(
+		"TYPE"=>"submit",
+		"VALUE"=>"Go",
+		"NAME"=>"doit"
+	));
+	$form->Connect("location", "doit", "ONCHANGE", "Click", array());
+
+	/*
+	 * This code is necessary to handle the requests for serving the
+	 * dynamically generated lists of options for linked select inputs.
+	 */
+	$form->HandleEvent($processed);
+	if($processed)
+		exit;
+
+
+	$form->LoadInputValues($form->WasSubmitted("doit"));
+	$verify=array();
+	if($form->WasSubmitted("doit"))
 	{
-		$o=array();
-		if(IsSet($this->default_option))
-		$o[$this->default_option]=$this->default_option_value;
-		$error="";
-		$g=str_replace("'","\\'",str_replace("\\","\\\\",$group));
-		$query=str_replace("{GROUP}", "'".$g."'", $this->options_query);
-		if(($r=@mysql_query($query,$this->connection)))
+		if(($error_message=$form->Validate($verify))=="")
+			$doit=1;
+		else
 		{
-			while(($d=@mysql_fetch_array($r)))
-			{
-				$o[$d[0]]=$d[1];
-			}
-			if(count($o)==0)
-			$error="there are no options for group ".$group;
-			mysql_free_result($r);
+			$doit=0;
+			$error_message=HtmlEntities($error_message);
+		}
+	}
+	else
+	{
+		$error_message="";
+		$doit=0;
+	}
+
+	if(!$doit)
+	{
+		if(strlen($error_message))
+		{
+			Reset($verify);
+			$focus=Key($verify);
 		}
 		else
-		$error="Options query execution failed: ".@mysql_error($this->connection);
-		if(strlen($error))
-		UnSet($o);
-		return($error);
+			$focus='continent';
+		$form->ConnectFormToInput($focus, 'ONLOAD', 'Focus', array());
 	}
 
-	Function GetGroups(&$g)
+	$onload=HtmlSpecialChars($form->PageLoad());
+
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Test for Manuel Lemos' PHP form class using the linked select plug-in input</title>
+</head>
+<body onload="<?php echo $onload; ?>" bgcolor="#cccccc">
+<center><h1>Test for Manuel Lemos' PHP form class using the linked select plug-in input</h1></center>
+<hr />
+<?php
+  if($doit)
 	{
-		if(strlen($this->groups_query)==0)
-		return("it was not specified a valid query to retrieve all the options groups");
-		$g=array();
-		if(IsSet($this->default_option))
-		$g[]=$this->default_option;
-		$error="";
-		if(($r=@mysql_query($this->groups_query,$this->connection)))
-		{
-			while(($d=@mysql_fetch_array($r)))
-			$g[]=$d[0];
-			if(count($g)==0
-			&& strlen($error)==0)
-			$error="there are no group options";
-			mysql_free_result($r);
-		}
-		else
-		$error="Groups query execution failed: ".@mysql_error($this->connection);
-		if(strlen($error))
-		UnSet($g);
-		return($error);
-	}
-
-	Function ValidateGroups(&$arguments)
-	{
-		if(!IsSet($arguments["Connection"])
-		|| !$arguments["Connection"])
-		return("it was not specified the database connection");
-		$this->connection=$arguments["Connection"];
-		if(IsSet($arguments["GroupsQuery"]))
-		$this->groups_query=$arguments["GroupsQuery"];
-		if(!IsSet($arguments["OptionsQuery"]))
-		return("it was not specified the query to retrieve the options");
-		$this->options_query=$arguments["OptionsQuery"];
-		if(IsSet($arguments["DefaultOption"]))
-		{
-			$this->default_option=$arguments["DefaultOption"];
-			if(IsSet($arguments["DefaultOptionValue"]))
-			$this->default_option_value=$arguments["DefaultOptionValue"];
-		}
-		return("");
-	}
-};
-
+		$form->GetInputProperty("continent", "SelectedOption", $continent);
+		$form->GetInputProperty("country", "SelectedOption", $country);
+		$form->GetInputProperty("location", "SelectedOption", $location);
 ?>
+<center><h2>The chosen location is <?php echo HtmlEntities($location), " (",HtmlEntities($country),", ",HtmlEntities($continent),")"; ?></h2></center>
+<?php
+	}
+	else
+	{
+		$form->StartLayoutCapture();
+		$title="Linked select plug-in test";
+		$body_template="form_linked_select_body.html.php";
+		include("templates/form_frame.html.php");
+		$form->EndLayoutCapture();
+
+		$form->DisplayOutput();
+	}
+?>
+<hr />
+</body>
+</html>

@@ -1,17 +1,12 @@
 <html>
 <head>
-<title>Test for Manuel Lemos's PHP form class using the linked
-select plug-in input</title>
+<title>Test for Manuel Lemos's PHP form class using the linked select plug-in input</title>
 </head>
 <body onload="PageLoad()" bgcolor="#cccccc">
-<center>
-<h1>Test for Manuel Lemos's PHP form class using the linked select
-plug-in input</h1>
-</center>
+<center><h1>Test for Manuel Lemos's PHP form class using the linked select plug-in input</h1></center>
 <hr />
-<form method="get" action="" name="location_form"
-	onsubmit="return ValidateForm(this)"><script
-	type="text/javascript" defer="defer">
+<form method="get" action="" name="location_form" onsubmit="return ValidateForm(this)">
+<script type="text/javascript" defer="defer">
 <!--
 
 sub_form=''
@@ -51,103 +46,68 @@ function PageLoad()
 }
 // -->
 </script>
-<noscript><!-- dummy comment for user agents without Javascript support enabled -->
+<noscript>
+<!-- dummy comment for user agents without Javascript support enabled -->
 </noscript>
-<center>
-<table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2"
-	cellspacing="1">
-	<tr>
-		<td bgcolor="#000080" style="border-style: none;"><font
-			color="#ffffff"><b>Linked select plug-in test</b></font></td>
-	</tr>
+<center><table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2" cellspacing="1">
+<tr>
+<td bgcolor="#000080" style="border-style: none;"><font color="#ffffff"><b>Linked select plug-in test</b></font></td>
+</tr>
 
-	<tr>
-		<td style="border-style: none;">
-		<fieldset><legend><b>Choose location</b></legend>
-		<center>
-		<table>
+<tr>
+<td style="border-style: none;"><fieldset>
+<legend><b>Choose location</b></legend>
+<center><table>
 
-			<tr>
-				<th><label for="continent" accesskey="C"><u>C</u>ontinent</label></th>
-				<td>&nbsp;</td>
-				<th><label for="__country_select" accesskey="t">Coun<u>t</u>ry</label></th>
-				<td>&nbsp;</td>
-				<th><label for="__location_select" accesskey="t"><u>L</u>ocation</label></th>
-			</tr>
+<tr>
+<th><label for="continent" accesskey="C"><u>C</u>ontinent</label></th>
+<td>&nbsp;</td>
+<th><label for="__country_select" accesskey="t">Coun<u>t</u>ry</label></th>
+<td>&nbsp;</td>
+<th><label for="__location_select" accesskey="t"><u>L</u>ocation</label></th>
+</tr>
 
-			<tr>
-				<td>
-				<center><select name="continent"
-					onchange="if(__country_switch_group(g=this.form['continent'].options[this.form['continent'].selectedIndex].value,this.form['__country_select'].options)){this.form['__country_group'].value=g}"
-					id="continent">
-					<option value="" selected="selected">Select continent</option>
-					<option value="na">North America</option>
-					<option value="eu">Europe</option>
-					<option value="sa">South America</option>
-					<option value="as">Asia</option>
-					<option value="oc">Oceania</option>
-				</select></center>
-				</td>
-				<td>
-				<center><input type="submit" name="update" value=">"
-					onclick="sub_form='update' ; return true" /></center>
-				</td>
-				<td>
-				<center><select name="__country_select"
-					onchange="if(__location_switch_group(g=this.form['__country_select'].options[this.form['__country_select'].selectedIndex].value,this.form['__location_select'].options)){this.form['__location_group'].value=g}"
-					id="__country_select" size="3" style="width: 14em">
-					<option value="" selected="selected">Select country</option>
-				</select><input type="hidden" name="__country_group" value=""
-					id="__country_group" /><script type="text/javascript"
-					defer="defer">
+<tr>
+<td><center><select name="continent" onchange="if(__country_switch_group(g=this.form['continent'].options[this.form['continent'].selectedIndex].value,this.form['__country_select'].options)){this.form['__country_group'].value=g}" id="continent">
+<option value="" selected="selected">Select continent</option>
+<option value="na">North America</option>
+<option value="eu">Europe</option>
+<option value="sa">South America</option>
+<option value="as">Asia</option>
+<option value="oc">Oceania</option>
+</select></center></td>
+<td><center><input type="submit" name="update" value=">" onclick="sub_form='update' ; return true" /></center></td>
+<td><center><select name="__country_select" onchange="if(__location_switch_group(g=this.form['__country_select'].options[this.form['__country_select'].selectedIndex].value,this.form['__location_select'].options)){this.form['__location_group'].value=g}" id="__country_select" size="3" style="width: 14em">
+<option value="" selected="selected">Select country</option>
+</select><input type="hidden" name="__country_group" value="" id="__country_group" /><script type="text/javascript" defer="defer">
 <!--
 function __country_switch_group(g,o){if(g==''){n=['Select country','']}else{if(g=='na'){n=['Select country','','United States','us','Canada','ca']}else{if(g=='eu'){n=['Select country','','Portugal','pt','Germany','de']}else{if(g=='sa'){n=['Select country','','Brazil','br','Argentina','ar']}else{if(g=='as'){n=['Select country','','Japan','jp','Korea','kr']}else{if(g=='oc'){n=['Select country','','Australia','au','New Zeland','nz']}else{n=null}}}}}}if(n==null){return false}i=0;while(i<n.length){o[i/2]=new Option(n[i],n[i+1]);i=i+2}while(i<o.length*2){o[i/2]=null}o[0].selected=true;return true}
 // -->
-</script></center>
-				</td>
-				<td>
-				<center><input type="submit" name="update" value=">"
-					onclick="sub_form='update' ; return true" /></center>
-				</td>
-				<td>
-				<center><select name="__location_select"
-					onchange="this.form['doit'].click()" id="__location_select"
-					size="3" style="width: 15em">
-					<option value="" selected="selected">Select location</option>
-				</select><input type="hidden" name="__location_group" value=""
-					id="__location_group" /><script type="text/javascript"
-					defer="defer">
+</script></center></td>
+<td><center><input type="submit" name="update" value=">" onclick="sub_form='update' ; return true" /></center></td>
+<td><center><select name="__location_select" onchange="this.form['doit'].click()" id="__location_select" size="3" style="width: 15em">
+<option value="" selected="selected">Select location</option>
+</select><input type="hidden" name="__location_group" value="" id="__location_group" /><script type="text/javascript" defer="defer">
 <!--
 function __location_switch_group(g,o){if(g==''){n=['Select location','']}else{if(g=='us'){n=['Select location','','New York','ny','Los Angeles','la']}else{if(g=='ca'){n=['Select location','','Toronto','to','Montr'+unescape('%E9')+'al','mo']}else{if(g=='pt'){n=['Select location','','Lisbon','li','Aveiro','av']}else{if(g=='de'){n=['Select location','','Frankfurt','fr','Berlin','be']}else{if(g=='br'){n=['Select location','','S'+unescape('%E3')+'o Paulo','sa','Rio de Janeiro','ri']}else{if(g=='ar'){n=['Select location','','Buenos Aires','bu','Mar del Plata','ma']}else{if(g=='jp'){n=['Select location','','Tokio','to','Osaka','os']}else{if(g=='kr'){n=['Select location','','Seoul','se','Yosu','yo']}else{if(g=='au'){n=['Select location','','Sydney','sy','Melbourne','me']}else{if(g=='nz'){n=['Select location','','Wellington','we','Auckland','au']}else{n=null}}}}}}}}}}}if(n==null){return false}i=0;while(i<n.length){o[i/2]=new Option(n[i],n[i+1]);i=i+2}while(i<o.length*2){o[i/2]=null}o[0].selected=true;return true}
 // -->
-</script></center>
-				</td>
-			</tr>
+</script></center></td>
+</tr>
 
-			<tr>
-				<td>
-				<center></center>
-				</td>
-				<td>&nbsp;</td>
-				<td>
-				<center></center>
-				</td>
-				<td>&nbsp;</td>
-				<td>
-				<center></center>
-				</td>
-			</tr>
+<tr>
+<td><center></center></td>
+<td>&nbsp;</td>
+<td><center></center></td>
+<td>&nbsp;</td>
+<td><center></center></td>
+</tr>
 
-		</table>
-		</center>
-		</fieldset>
-		<br />
-		<center><input type="submit" name="doit" value="Go"
-			onclick="sub_form='' ; return true" /></center>
-		</td>
-	</tr>
-</table>
-</center>
+</table></center>
+</fieldset>
+<br />
+<center><input type="submit" name="doit" value="Go" onclick="sub_form='' ; return true" /></center></td>
+</tr>
+</table></center>
 
 </form>
 <hr />

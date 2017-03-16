@@ -2,20 +2,20 @@
 /*
  * test_auto_complete.php
  *
- * @(#) $Header: /home/mlemos/cvsroot/forms/test_auto_complete.php,v 1.9 2006/12/20 06:21:16 mlemos Exp $
+ * @(#) $Header: /opt2/ena/metal/forms/test_auto_complete.php,v 1.9 2006/12/20 06:21:16 mlemos Exp $
  *
  */
 
-require('forms.php');
-require('form_ajax_submit.php');
-require('form_auto_complete.php');
+	require('forms.php');
+	require('form_ajax_submit.php');
+	require('form_auto_complete.php');
 
-$form=new form_class;
-$form->NAME='auto_complete_form';
-$form->METHOD='POST';
-$form->ACTION='';
-$form->debug='error_log';
-$form->AddInput(array(
+	$form=new form_class;
+	$form->NAME='auto_complete_form';
+	$form->METHOD='POST';
+	$form->ACTION='';
+	$form->debug='error_log';
+	$form->AddInput(array(
 		'TYPE'=>'text',
 		'ID'=>'color',
 		'NAME'=>'color',
@@ -25,15 +25,15 @@ $form->AddInput(array(
 		'SIZE'=>32,
 		'ExtraAttributes'=>array(
 			'autocomplete'=>'off'
-			)
-			));
-			$form->AddInput(array(
+		)
+	));
+	$form->AddInput(array(
 		'TYPE'=>'button',
 		'NAME'=>'show_colors',
 		'ID'=>'show_colors',
 		'VALUE'=>'...'
-		));
-		$form->AddInput(array(
+	));
+	$form->AddInput(array(
 		'TYPE'=>'custom',
 		'ID'=>'complete_color',
 		'NAME'=>'complete_color',
@@ -65,8 +65,8 @@ $form->AddInput(array(
 			<img src="indicator.gif" width="16" height="16" alt="Looking up for colors" title="Looking up for colors" /> ',
 		'CompleteFeedback'=>'
 			<img src="indicator.gif" width="16" height="16" style="visibility: hidden;" /> ',
-		));
-		$form->AddInput(array(
+	));
+	$form->AddInput(array(
 		'TYPE'=>'text',
 		'ID'=>'font',
 		'NAME'=>'font',
@@ -76,17 +76,17 @@ $form->AddInput(array(
 		'SIZE'=>32,
 		'ExtraAttributes'=>array(
 			'autocomplete'=>'off'
-			)
-			));
-			$form->AddInput(array(
+		)
+	));
+	$form->AddInput(array(
 		'TYPE'=>'image',
 		'NAME'=>'show_fonts',
 		'ID'=>'show_fonts',
 		'SRC'=>'pulldown.gif',
 		'ALT'=>'Show fonts',
 		'ALIGN'=>'top'
-		));
-		$form->AddInput(array(
+	));
+	$form->AddInput(array(
 		'TYPE'=>'custom',
 		'ID'=>'complete_font',
 		'NAME'=>'complete_font',
@@ -113,74 +113,49 @@ $form->AddInput(array(
 		'ItemClass'=>'groovyitem',
 		'SelectedItemClass'=>'groovyselecteditem',
 		'ShowButton'=>'show_fonts',
-		));
+	));
 
-		/*
-		 * This code is necessary to handle the requests for fetching
-		 * auto-complete values.
-		 */
-		$form->HandleEvent($processed);
-		if($processed)
+	/*
+	 * This code is necessary to handle the requests for fetching
+	 * auto-complete values.
+	 */
+	$form->HandleEvent($processed);
+	if($processed)
 		exit;
 
-		$form->ConnectFormToInput('color', 'ONLOAD', 'Focus', array());
+	$form->ConnectFormToInput('color', 'ONLOAD', 'Focus', array());
 
-		$onload=HtmlSpecialChars($form->PageLoad());
+	$onload=HtmlSpecialChars($form->PageLoad());
 
-		?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Test for Manuel Lemos' PHP form class using the auto-complete
-plug-in input</title>
-<style type="text/css">
-<!--
-BODY {
-	color: black;
-	font-family: arial, helvetica, sans-serif;
-	background-color: #cccccc
-}
-
-.groovymenu {
-	background-color: #cccccc;
-	padding: 4px;
-	border-style: solid;
-	border-top-color: #f9f9f9;
-	border-left-color: #f9f9f9;
-	border-bottom-color: #868686;
-	border-right-color: #868686;
-	border-width: 1px;
-	opacity: 0.9;
-	filter: alpha(opacity = 90);
-}
-
-.groovyitem {
-	padding: 1px;
-}
-
-.groovyselecteditem {
-	padding: 1px;
-	color: #ffffff;
-	background-color: #000080;
-}
-//
--->
-</style>
+<title>Test for Manuel Lemos' PHP form class
+using the auto-complete plug-in input</title>
+<style type="text/css"><!--
+BODY { color: black; font-family: arial, helvetica, sans-serif;
+	background-color: #cccccc }
+.groovymenu { background-color: #cccccc; padding: 4px; border-style: solid;
+	border-top-color: #f9f9f9; border-left-color: #f9f9f9;
+	border-bottom-color: #868686; border-right-color: #868686;
+	border-width: 1px; opacity: 0.9; filter: alpha(opacity=90); }
+.groovyitem { padding: 1px; }
+.groovyselecteditem { padding: 1px; color: #ffffff;
+	background-color: #000080; }
+// --></style>
 </head>
 <body onload="<?php	echo $onload; ?>" bgcolor="#cccccc">
-<center>
-<h1>Test for Manuel Lemos' PHP form class using the auto-complete
-plug-in input</h1>
-</center>
+<center><h1>Test for Manuel Lemos' PHP form class
+using the auto-complete plug-in input</h1></center>
 <hr />
-		<?php
-		$error_message='';
-		$form->StartLayoutCapture();
-		$title='Auto-complete plug-in test';
-		$body_template='form_auto_complete_body.html.php';
-		include('templates/form_frame.html.php');
-		$form->EndLayoutCapture();
-		$form->DisplayOutput();
+<?php
+	$error_message='';
+	$form->StartLayoutCapture();
+	$title='Auto-complete plug-in test';
+	$body_template='form_auto_complete_body.html.php';
+	include('templates/form_frame.html.php');
+	$form->EndLayoutCapture();
+	$form->DisplayOutput();
 ?>
 <hr />
 </body>
