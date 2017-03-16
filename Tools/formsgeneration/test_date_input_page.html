@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>Test for Manuel Lemos's PHP form class using the date
+plug-in input</title>
+</head>
+<body onload="PageLoad()" bgcolor="#cccccc">
+<center>
+<h1>Test for Manuel Lemos's PHP form class using the date plug-in
+input</h1>
+</center>
+<hr />
+<form method="get" action="" name="date_form"
+	onsubmit="return ValidateForm(this)"><script
+	type="text/javascript" defer="defer">
+<!--
+function ValidateForm(theform)
+{
+	if(theform['__date_day'].selectedIndex==-1 || theform['__date_day'].options[theform['__date_day'].selectedIndex].value=='')
+	{
+		if(theform['__date_day'].focus)
+			theform['__date_day'].focus()
+		alert('It was not specified a valid day.')
+		return false
+	}
+	if(theform['__date_month'].selectedIndex==-1 || theform['__date_month'].options[theform['__date_month'].selectedIndex].value=='')
+	{
+		if(theform['__date_month'].focus)
+			theform['__date_month'].focus()
+		alert('It was not specified a valid month')
+		return false
+	}
+	if(isNaN(parseInt(theform['__date_year'].value,10))
+	|| parseInt(theform['__date_year'].value,10) < 1)
+	{
+		if(theform['__date_year'].focus)
+			theform['__date_year'].focus()
+		alert('It was not specified a valid year.')
+		return false
+	}
+	month=theform['__date_month'].options[theform['__date_month'].selectedIndex].value
+	if(month=='04'
+	|| month=='06'
+	|| month=='09'
+	|| month=='11')
+		month_days=30
+	else
+	{
+		if(month=='02')
+		{
+			year=parseInt(theform['__date_year'].value)
+			if((year % 4)==0
+			&& ((year % 100)!=0
+			|| (year % 400)==0))
+				month_days=29
+			else
+				month_days=28
+		}
+		else
+			month_days=31
+	}
+	date_day=theform['__date_day'].options[theform['__date_day'].selectedIndex].value
+	if(month_days<parseInt(date_day))
+	{
+		if(theform['__date_day'].focus)
+			theform['__date_day'].focus()
+		alert('It was not specified a valid day.')
+		return false
+	}
+	date=(theform['__date_year'].value.length<3 ? '00' : '') + ((theform['__date_year'].value.length % 2) ? '0' : '') + theform['__date_year'].value + '-' + month + '-' + date_day
+	if(date<'2005-05-24')
+	{
+		if(theform['__date_day'].focus)
+			theform['__date_day'].focus()
+		alert('It was specified a schedule date before the start date.')
+		return false
+	}
+	if('2005-05-30'<date)
+	{
+		if(theform['__date_day'].focus)
+			theform['__date_day'].focus()
+		alert('It was specified a schedule date after the end date.')
+		return false
+	}
+	return true
+}
+
+function PageLoad()
+{
+		document.date_form['__date_day'].focus()
+}
+// -->
+</script>
+<noscript><!-- dummy comment for user agents without Javascript support enabled -->
+</noscript>
+<center>
+<table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2"
+	cellspacing="1">
+	<tr>
+		<td bgcolor="#000080" style="border-style: none;"><font
+			color="#ffffff"><b>Form Date plug-in test</b></font></td>
+	</tr>
+
+	<tr>
+		<td style="border-style: none;">
+		<fieldset><legend><b><label for="__date_day"
+			accesskey="D"><u>D</u>ate</label></b> (From <tt>2005-05-24</tt> to <tt>2005-05-30</tt>)</legend>
+		<center><select name="__date_day" id="__date_day">
+			<option value=""></option>
+			<option value="01">1</option>
+			<option value="02">2</option>
+			<option value="03">3</option>
+			<option value="04">4</option>
+			<option value="05">5</option>
+			<option value="06">6</option>
+			<option value="07">7</option>
+			<option value="08">8</option>
+			<option value="09">9</option>
+			<option value="10">10</option>
+			<option value="11">11</option>
+			<option value="12">12</option>
+			<option value="13">13</option>
+			<option value="14">14</option>
+			<option value="15">15</option>
+			<option value="16">16</option>
+			<option value="17">17</option>
+			<option value="18">18</option>
+			<option value="19">19</option>
+			<option value="20">20</option>
+			<option value="21">21</option>
+			<option value="22">22</option>
+			<option value="23" selected="selected">23</option>
+			<option value="24">24</option>
+			<option value="25">25</option>
+			<option value="26">26</option>
+			<option value="27">27</option>
+			<option value="28">28</option>
+			<option value="29">29</option>
+			<option value="30">30</option>
+			<option value="31">31</option>
+		</select>/<select name="__date_month" id="__date_month">
+			<option value=""></option>
+			<option value="01">January</option>
+			<option value="02">February</option>
+			<option value="03">March</option>
+			<option value="04">April</option>
+			<option value="05" selected="selected">May</option>
+			<option value="06">June</option>
+			<option value="07">July</option>
+			<option value="08">August</option>
+			<option value="09">September</option>
+			<option value="10">October</option>
+			<option value="11">November</option>
+			<option value="12">December</option>
+		</select>/<input type="text" name="__date_year" value="2005" maxlength="4"
+			size="5" id="__date_year" /></center>
+		</fieldset>
+		<hr />
+		<center><input type="submit" name="doit" value="Schedule"
+			onclick="sub_form='' ; return true" /></center>
+		</td>
+	</tr>
+</table>
+</center>
+
+</form>
+<hr />
+</body>
+</html>

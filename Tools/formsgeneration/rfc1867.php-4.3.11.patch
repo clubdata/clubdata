@@ -1,0 +1,518 @@
+diff -x '*.o' -x '*.lo' -c -r php-4.3.11.original/main/rfc1867.c php-4.3.11/main/rfc1867.c
+*** php-4.3.11.original/main/rfc1867.c	2005-02-14 22:28:39.000000000 -0200
+--- php-4.3.11/main/rfc1867.c	2006-12-18 14:15:29.000000000 -0200
+***************
+*** 34,39 ****
+--- 34,41 ----
+  
+  #undef DEBUG_FILE_UPLOAD
+  
++ PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC) = NULL;
++ 
+  #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
+  #include "ext/mbstring/mbstring.h"
+  
+***************
+*** 127,132 ****
+--- 129,136 ----
+  #define UPLOAD_ERROR_C    3  /* Partially uploaded */
+  #define UPLOAD_ERROR_D    4  /* No file uploaded */
+  #define UPLOAD_ERROR_E    6  /* Missing /tmp or similar directory */
++ #define UPLOAD_ERROR_F    7  /* Failed to write file to disk */
++ #define UPLOAD_ERROR_X    8  /* File upload stopped by extension */
+  
+  void php_rfc1867_register_constants(TSRMLS_D)
+  {
+***************
+*** 136,141 ****
+--- 140,147 ----
+  	REGISTER_MAIN_LONG_CONSTANT("UPLOAD_ERR_PARTIAL",    UPLOAD_ERROR_C,  CONST_CS | CONST_PERSISTENT);
+  	REGISTER_MAIN_LONG_CONSTANT("UPLOAD_ERR_NO_FILE",    UPLOAD_ERROR_D,  CONST_CS | CONST_PERSISTENT);
+  	REGISTER_MAIN_LONG_CONSTANT("UPLOAD_ERR_NO_TMP_DIR", UPLOAD_ERROR_E,  CONST_CS | CONST_PERSISTENT);
++ 	REGISTER_MAIN_LONG_CONSTANT("UPLOAD_ERR_CANT_WRITE", UPLOAD_ERROR_F,  CONST_CS | CONST_PERSISTENT);
++ 	REGISTER_MAIN_LONG_CONSTANT("UPLOAD_ERR_EXTENSION",  UPLOAD_ERROR_X,  CONST_CS | CONST_PERSISTENT);
+  }
+  
+  static void normalize_protected_variable(char *varname TSRMLS_DC)
+***************
+*** 700,706 ****
+  
+  
+  /* read until a boundary condition */
+! static int multipart_buffer_read(multipart_buffer *self, char *buf, int bytes TSRMLS_DC)
+  {
+  	int len, max;
+  	char *bound;
+--- 706,712 ----
+  
+  
+  /* read until a boundary condition */
+! static int multipart_buffer_read(multipart_buffer *self, char *buf, int bytes, int *end TSRMLS_DC)
+  {
+  	int len, max;
+  	char *bound;
+***************
+*** 713,718 ****
+--- 719,727 ----
+  	/* look for a potential boundary match, only read data up to that point */
+  	if ((bound = php_ap_memstr(self->buf_begin, self->bytes_in_buffer, self->boundary_next, self->boundary_next_len, 1))) {
+  		max = bound - self->buf_begin;
++ 		if (end && php_ap_memstr(self->buf_begin, self->bytes_in_buffer, self->boundary_next, self->boundary_next_len, 0)) {
++ 			*end = 1;
++ 		}
+  	} else {
+  		max = self->bytes_in_buffer;
+  	}
+***************
+*** 744,761 ****
+    XXX: this is horrible memory-usage-wise, but we only expect
+    to do this on small pieces of form data.
+  */
+! static char *multipart_buffer_read_body(multipart_buffer *self TSRMLS_DC)
+  {
+  	char buf[FILLUNIT], *out=NULL;
+  	int total_bytes=0, read_bytes=0;
+  
+! 	while((read_bytes = multipart_buffer_read(self, buf, sizeof(buf) TSRMLS_CC))) {
+  		out = erealloc(out, total_bytes + read_bytes + 1);
+  		memcpy(out + total_bytes, buf, read_bytes);
+  		total_bytes += read_bytes;
+  	}
+  
+  	if (out) out[total_bytes] = '\0';
+  
+  	return out;
+  }
+--- 753,771 ----
+    XXX: this is horrible memory-usage-wise, but we only expect
+    to do this on small pieces of form data.
+  */
+! static char *multipart_buffer_read_body(multipart_buffer *self, unsigned int *len TSRMLS_DC)
+  {
+  	char buf[FILLUNIT], *out=NULL;
+  	int total_bytes=0, read_bytes=0;
+  
+! 	while((read_bytes = multipart_buffer_read(self, buf, sizeof(buf), NULL TSRMLS_CC))) {
+  		out = erealloc(out, total_bytes + read_bytes + 1);
+  		memcpy(out + total_bytes, buf, read_bytes);
+  		total_bytes += read_bytes;
+  	}
+  
+  	if (out) out[total_bytes] = '\0';
++ 	*len = total_bytes;
+  
+  	return out;
+  }
+***************
+*** 779,786 ****
+  	zend_bool magic_quotes_gpc;
+  	multipart_buffer *mbuff;
+  	zval *array_ptr = (zval *) arg;
+! 	FILE *fp;
+  	zend_llist header;
+  
+  	if (SG(request_info).content_length > SG(post_max_size)) {
+  		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %ld bytes exceeds the limit of %ld bytes", SG(request_info).content_length, SG(post_max_size));
+--- 789,797 ----
+  	zend_bool magic_quotes_gpc;
+  	multipart_buffer *mbuff;
+  	zval *array_ptr = (zval *) arg;
+! 	int fd=-1;
+  	zend_llist header;
++ 	void *event_extra_data = NULL;
+  
+  	if (SG(request_info).content_length > SG(post_max_size)) {
+  		sapi_module.sapi_error(E_WARNING, "POST Content-Length of %ld bytes exceeds the limit of %ld bytes", SG(request_info).content_length, SG(post_max_size));
+***************
+*** 839,858 ****
+  #endif
+  	zend_llist_init(&header, sizeof(mime_header_entry), (llist_dtor_func_t) php_free_hdr_entry, 0);
+  
+  	while (!multipart_buffer_eof(mbuff TSRMLS_CC))
+  	{
+  		char buff[FILLUNIT];
+  		char *cd=NULL,*param=NULL,*filename=NULL, *tmp=NULL;
+! 		int blen=0, wlen=0;
+  
+  		zend_llist_clean(&header);
+  
+  		if (!multipart_buffer_headers(mbuff, &header TSRMLS_CC)) {
+! 			SAFE_RETURN;
+  		}
+  
+  		if ((cd = php_mime_get_hdr_value(header, "Content-Disposition"))) {
+  			char *pair=NULL;
+  			
+  			while (isspace(*cd)) {
+  				++cd;
+--- 850,880 ----
+  #endif
+  	zend_llist_init(&header, sizeof(mime_header_entry), (llist_dtor_func_t) php_free_hdr_entry, 0);
+  
++ 	if (php_rfc1867_callback != NULL) {
++ 		multipart_event_start event_start;
++ 
++ 		event_start.content_length = SG(request_info).content_length;
++ 		if (php_rfc1867_callback(MULTIPART_EVENT_START, &event_start, &event_extra_data TSRMLS_CC) == FAILURE) {
++ 			goto fileupload_done;
++ 		}
++ 	}
++ 
+  	while (!multipart_buffer_eof(mbuff TSRMLS_CC))
+  	{
+  		char buff[FILLUNIT];
+  		char *cd=NULL,*param=NULL,*filename=NULL, *tmp=NULL;
+! 		size_t blen=0, wlen=0;
+! 		off_t offset;
+  
+  		zend_llist_clean(&header);
+  
+  		if (!multipart_buffer_headers(mbuff, &header TSRMLS_CC)) {
+! 			goto fileupload_done;
+  		}
+  
+  		if ((cd = php_mime_get_hdr_value(header, "Content-Disposition"))) {
+  			char *pair=NULL;
++ 			int end=0;
+  			
+  			while (isspace(*cd)) {
+  				++cd;
+***************
+*** 889,901 ****
+  
+  			/* Normal form variable, safe to read all data into memory */
+  			if (!filename && param) {
+! 
+! 				char *value = multipart_buffer_read_body(mbuff TSRMLS_CC);
+  
+  				if (!value) {
+  					value = estrdup("");
+  				}
+  
+  #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
+  				if (php_mb_encoding_translation(TSRMLS_C)) {
+  					php_mb_gpc_stack_variable(param, value, &val_list, &len_list, 
+--- 911,935 ----
+  
+  			/* Normal form variable, safe to read all data into memory */
+  			if (!filename && param) {
+! 				unsigned int value_len;
+! 				char *value = multipart_buffer_read_body(mbuff, &value_len TSRMLS_CC);
+! 				unsigned int new_val_len; /* Dummy variable */
+  
+  				if (!value) {
+  					value = estrdup("");
+  				}
+  
++ 				if (php_rfc1867_callback != NULL) {
++ 					multipart_event_formdata event_formdata;
++ 
++ 					event_formdata.post_bytes_processed = SG(read_post_bytes);
++ 					event_formdata.name = param;
++ 					event_formdata.value = &value;
++ 					event_formdata.length = value_len;
++ 					event_formdata.newlength = NULL;
++ 					php_rfc1867_callback(MULTIPART_EVENT_FORMDATA, &event_formdata, &event_extra_data TSRMLS_CC);
++ 				}
++ 
+  #if HAVE_MBSTRING && !defined(COMPILE_DL_MBSTRING)
+  				if (php_mb_encoding_translation(TSRMLS_C)) {
+  					php_mb_gpc_stack_variable(param, value, &val_list, &len_list, 
+***************
+*** 917,938 ****
+  
+  			/* If file_uploads=off, skip the file part */
+  			if (!PG(file_uploads)) {
+! 				if (filename) {
+! 					efree(filename);
+! 				}
+! 				if (param) {
+! 					efree(param);
+! 				}
+! 				continue;
+  			}
+  
+  			/* Return with an error if the posted data is garbled */
+! 			if (!param) {
+  				sapi_module.sapi_error(E_WARNING, "File Upload Mime headers garbled");
+! 				if (filename) {
+! 					efree(filename);
+! 				}
+! 				SAFE_RETURN;
+  			}
+  			
+  			/* New Rule: never repair potential malicious user input */
+--- 951,963 ----
+  
+  			/* If file_uploads=off, skip the file part */
+  			if (!PG(file_uploads)) {
+! 				skip_upload = 1;
+  			}
+  
+  			/* Return with an error if the posted data is garbled */
+! 			if (!param && !filename) {
+  				sapi_module.sapi_error(E_WARNING, "File Upload Mime headers garbled");
+! 				goto fileupload_done;
+  			}
+  			
+  			/* New Rule: never repair potential malicious user input */
+***************
+*** 962,973 ****
+  
+  			if (!skip_upload) {
+  				/* Handle file */
+! 				fp = php_open_temporary_file(PG(upload_tmp_dir), "php", &temp_filename TSRMLS_CC);
+! 				if (!fp) {
+  					sapi_module.sapi_error(E_WARNING, "File upload error - unable to create a temporary file");
+  					cancel_upload = UPLOAD_ERROR_E;
+  				}
+  			}
+  			if (skip_upload) {
+  				efree(param);
+  				efree(filename);
+--- 987,1021 ----
+  
+  			if (!skip_upload) {
+  				/* Handle file */
+! 				fd = php_open_temporary_fd(PG(upload_tmp_dir), "php", &temp_filename TSRMLS_CC);
+! 				if (fd==-1) {
+  					sapi_module.sapi_error(E_WARNING, "File upload error - unable to create a temporary file");
+  					cancel_upload = UPLOAD_ERROR_E;
+  				}
+  			}
++ 			
++ 			if (!skip_upload && php_rfc1867_callback != NULL) {
++ 				multipart_event_file_start event_file_start;
++ 
++ 				event_file_start.post_bytes_processed = SG(read_post_bytes);
++ 				event_file_start.name = param;
++ 				event_file_start.filename = &filename;
++ 				if (php_rfc1867_callback(MULTIPART_EVENT_FILE_START, &event_file_start, &event_extra_data TSRMLS_CC) == FAILURE) {
++ 					if (temp_filename) {
++ 						if (cancel_upload != UPLOAD_ERROR_E) { /* file creation failed */
++ 							close(fd);
++ 							unlink(temp_filename);
++ 						}
++ 						efree(temp_filename);
++ 					}
++ 					temp_filename="";
++ 					efree(param);
++ 					efree(filename);
++ 					continue;
++ 				}
++ 			}
++ 
++ 			
+  			if (skip_upload) {
+  				efree(param);
+  				efree(filename);
+***************
+*** 981,988 ****
+  				cancel_upload = UPLOAD_ERROR_D;
+  			}
+  
+! 			while (!cancel_upload && (blen = multipart_buffer_read(mbuff, buff, sizeof(buff) TSRMLS_CC)))
+  			{
+  				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
+  					sapi_module.sapi_error(E_WARNING, "upload_max_filesize of %ld bytes exceeded - file [%s=%s] not saved", PG(upload_max_filesize), param, filename);
+  					cancel_upload = UPLOAD_ERROR_A;
+--- 1029,1053 ----
+  				cancel_upload = UPLOAD_ERROR_D;
+  			}
+  
+! 			offset = 0;
+! 			end = 0;
+! 			while (!cancel_upload && (blen = multipart_buffer_read(mbuff, buff, sizeof(buff), &end TSRMLS_CC)))
+  			{
++ 				if (php_rfc1867_callback != NULL) {
++ 					multipart_event_file_data event_file_data;
++ 
++ 					event_file_data.post_bytes_processed = SG(read_post_bytes);
++ 					event_file_data.offset = offset;
++ 					event_file_data.data = buff;
++ 					event_file_data.length = blen;
++ 					event_file_data.newlength = &blen;
++ 					if (php_rfc1867_callback(MULTIPART_EVENT_FILE_DATA, &event_file_data, &event_extra_data TSRMLS_CC) == FAILURE) {
++ 						cancel_upload = UPLOAD_ERROR_X;
++ 						continue;
++ 					}
++ 				}
++ 				
++ 			
+  				if (PG(upload_max_filesize) > 0 && total_bytes > PG(upload_max_filesize)) {
+  					sapi_module.sapi_error(E_WARNING, "upload_max_filesize of %ld bytes exceeded - file [%s=%s] not saved", PG(upload_max_filesize), param, filename);
+  					cancel_upload = UPLOAD_ERROR_A;
+***************
+*** 990,1007 ****
+  					sapi_module.sapi_error(E_WARNING, "MAX_FILE_SIZE of %ld bytes exceeded - file [%s=%s] not saved", max_file_size, param, filename);
+  					cancel_upload = UPLOAD_ERROR_B;
+  				} else if (blen > 0) {
+! 					wlen = fwrite(buff, 1, blen, fp);
+  			
+  					if (wlen < blen) {
+  						sapi_module.sapi_error(E_WARNING, "Only %d bytes were written, expected to write %d", wlen, blen);
+! 						cancel_upload = UPLOAD_ERROR_C;
+  					} else {
+  						total_bytes += wlen;
+  					}
+  				} 
+  			} 
+! 			if (fp) {
+! 				fclose(fp);
+  			}
+  
+  #ifdef DEBUG_FILE_UPLOAD
+--- 1055,1081 ----
+  					sapi_module.sapi_error(E_WARNING, "MAX_FILE_SIZE of %ld bytes exceeded - file [%s=%s] not saved", max_file_size, param, filename);
+  					cancel_upload = UPLOAD_ERROR_B;
+  				} else if (blen > 0) {
+! 					wlen = write(fd, buff, blen);
+  			
+  					if (wlen < blen) {
+  						sapi_module.sapi_error(E_WARNING, "Only %d bytes were written, expected to write %d", wlen, blen);
+! 						cancel_upload = UPLOAD_ERROR_F;
+  					} else {
+  						total_bytes += wlen;
+  					}
++ 					
++ 					offset += wlen;
+  				} 
+  			} 
+! 			if (fd!=-1) {
+! 				close(fd);
+! 			}
+! 
+! 			if (!cancel_upload && !end) {
+! #ifdef DEBUG_FILE_UPLOAD
+! 				sapi_module.sapi_error(E_NOTICE, "Missing mime boundary at the end of the data for file %s", strlen(filename) > 0 ? filename : "");
+! #endif
+! 				cancel_upload = UPLOAD_ERROR_C;
+  			}
+  
+  #ifdef DEBUG_FILE_UPLOAD
+***************
+*** 1011,1016 ****
+--- 1085,1101 ----
+  			}
+  #endif		
+  
++ 			if (php_rfc1867_callback != NULL) {
++ 				multipart_event_file_end event_file_end;
++ 
++ 				event_file_end.post_bytes_processed = SG(read_post_bytes);
++ 				event_file_end.temp_filename = temp_filename;
++ 				event_file_end.cancel_upload = cancel_upload;
++ 				if (php_rfc1867_callback(MULTIPART_EVENT_FILE_END, &event_file_end, &event_extra_data TSRMLS_CC) == FAILURE) {
++ 					cancel_upload = UPLOAD_ERROR_X;
++ 				}
++ 			}
++ 
+  			if (cancel_upload) {
+  				if (temp_filename) {
+  					if (cancel_upload != UPLOAD_ERROR_E) { /* file creation failed */
+***************
+*** 1202,1208 ****
+  			efree(param);
+  		}
+  	}
+! 
+  	SAFE_RETURN;
+  }
+  
+--- 1287,1300 ----
+  			efree(param);
+  		}
+  	}
+! fileupload_done:
+! 	if (php_rfc1867_callback != NULL) {
+! 		multipart_event_end event_end;
+! 		
+! 		event_end.post_bytes_processed = SG(read_post_bytes);
+! 		php_rfc1867_callback(MULTIPART_EVENT_END, &event_end, &event_extra_data TSRMLS_CC);
+! 	}
+! 	
+  	SAFE_RETURN;
+  }
+  
+diff -x '*.o' -x '*.lo' -c -r php-4.3.11.original/main/rfc1867.h php-4.3.11/main/rfc1867.h
+*** php-4.3.11.original/main/rfc1867.h	2002-07-11 22:49:58.000000000 -0300
+--- php-4.3.11/main/rfc1867.h	2006-12-16 20:44:47.000000000 -0200
+***************
+*** 1,13 ****
+--- 1,76 ----
++ /*
++   +----------------------------------------------------------------------+
++   | PHP Version 5                                                        |
++   +----------------------------------------------------------------------+
++   | Copyright (c) 1997-2006 The PHP Group                                |
++   +----------------------------------------------------------------------+
++   | This source file is subject to version 3.01 of the PHP license,      |
++   | that is bundled with this package in the file LICENSE, and is        |
++   | available through the world-wide-web at the following url:           |
++   | http://www.php.net/license/3_01.txt                                  |
++   | If you did not receive a copy of the PHP license and are unable to   |
++   | obtain it through the world-wide-web, please send a note to          |
++   | license@php.net so we can mail you a copy immediately.               |
++   +----------------------------------------------------------------------+
++   | Author:                                                              |
++   +----------------------------------------------------------------------+
++ */
++ 
++ /* $Id: rfc1867.h,v 1.13.2.1.2.2 2006/07/26 13:22:06 tony2001 Exp $ */
++ 
+  #ifndef RFC1867_H
+  #define RFC1867_H
+  
+  #include "SAPI.h"
+  
+  #define MULTIPART_CONTENT_TYPE "multipart/form-data"
++ #define MULTIPART_EVENT_START		0
++ #define MULTIPART_EVENT_FORMDATA	1
++ #define MULTIPART_EVENT_FILE_START	2
++ #define MULTIPART_EVENT_FILE_DATA	3
++ #define MULTIPART_EVENT_FILE_END	4
++ #define MULTIPART_EVENT_END		5
++ 
++ typedef struct _multipart_event_start {
++ 	size_t	content_length;
++ } multipart_event_start;
++ 
++ typedef struct _multipart_event_formdata {
++ 	size_t	post_bytes_processed;
++ 	char	*name;
++ 	char	**value;
++ 	size_t	length;
++ 	size_t	*newlength;
++ } multipart_event_formdata;
++ 
++ typedef struct _multipart_event_file_start {
++ 	size_t	post_bytes_processed;
++ 	char	*name;
++ 	char	**filename;
++ } multipart_event_file_start;
++ 
++ typedef struct _multipart_event_file_data {
++ 	size_t	post_bytes_processed;
++ 	off_t	offset;
++ 	char	*data;
++ 	size_t	length;
++ 	size_t	*newlength;	
++ } multipart_event_file_data;
++ 
++ typedef struct _multipart_event_file_end {
++ 	size_t	post_bytes_processed;
++ 	char	*temp_filename;
++ 	int	cancel_upload;
++ } multipart_event_file_end;
++ 
++ typedef struct _multipart_event_end {
++ 	size_t	post_bytes_processed;
++ } multipart_event_end;
+  
+  SAPI_API SAPI_POST_HANDLER_FUNC(rfc1867_post_handler);
+  
+  void destroy_uploaded_files_hash(TSRMLS_D);
+  void php_rfc1867_register_constants(TSRMLS_D);
++ extern PHPAPI int (*php_rfc1867_callback)(unsigned int event, void *event_data, void **extra TSRMLS_DC);
+  
+  #endif /* RFC1867_H */

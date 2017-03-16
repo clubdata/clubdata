@@ -1,0 +1,407 @@
+<html>
+<head>
+<title>Test for Manuel Lemos' PHP form class using the
+auto-complete plug-in input</title>
+<style type="text/css">
+<!--
+BODY {
+	color: black;
+	font-family: arial, helvetica, sans-serif;
+	background-color: #cccccc
+}
+
+.groovymenu {
+	background-color: #cccccc;
+	padding: 4px;
+	border-style: solid;
+	border-top-color: #f9f9f9;
+	border-left-color: #f9f9f9;
+	border-bottom-color: #868686;
+	border-right-color: #868686;
+	border-width: 1px;
+	opacity: 0.9;
+	filter: alpha(opacity = 90);
+}
+
+.groovyitem {
+	padding: 1px;
+}
+
+.groovyselecteditem {
+	padding: 1px;
+	color: #ffffff;
+	background-color: #000080;
+}
+-->
+</style>
+</head>
+<body onload="PageLoad()" bgcolor="#cccccc">
+<center>
+<h1>Test for Manuel Lemos' PHP form class using the auto-complete
+plug-in input</h1>
+</center>
+<hr />
+<form method="post" action="" name="auto_complete_form"><script
+	type="text/javascript" defer="defer">
+<!--
+
+function PageLoad()
+{
+		document.auto_complete_form['color'].focus()
+}
+// -->
+</script>
+<noscript>
+<div style="display: none"><!-- dummy comment for user agents without Javascript support enabled --></div>
+</noscript>
+<div id="feedback" style="text-align: center;"></div>
+<br />
+<div id="wholeform">
+<center>
+<table summary="Form table" border="1" bgcolor="#c0c0c0" cellpadding="2"
+	cellspacing="1">
+	<tr>
+		<td bgcolor="#000080" style="border-style: none;"><font
+			color="#ffffff"><b>Auto-complete plug-in test</b></font></td>
+	</tr>
+
+	<tr>
+		<td style="border-style: none;">
+		<fieldset><legend><b>Type a few characters in
+		the color or font fields</b></legend>
+		<center>
+		<table>
+
+			<tr>
+				<th align="right"><label for="color" accesskey="C"><u>C</u>olor</label></th>
+				<td><input type="text" name="color" value="" size="32"
+					onblur="__complete_color__h();"
+					onkeydown="if(__complete_color__o) { if(event.keyCode==40 &amp;&amp; __complete_color__is&lt;__complete_color__co.length-1) { __complete_color__si(__complete_color__is+1); __complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_color__is&gt;0) { __complete_color__si(__complete_color__is-1);__complete_color__so(t,__complete_color__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_color__h(); return false; } };"
+					onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['color'].value.length&gt;=1){ __complete_color__w++; __complete_color__f=this.form; setTimeout('__complete_color__()',500); return false;};"
+					id="color" accesskey="C" autocomplete="off" />
+				<div id="__complete_color__m"
+					style="display: block; position: absolute; overflow: auto; visibility: hidden; background-color: #ffffff; border-width: 1px; border-color: #000000; border-style: solid; padding: 1px;"></div>
+				<script type="text/javascript" defer="defer">
+<!--
+var __complete_color__w=0;
+var __complete_color__s='';
+var __complete_color__f;
+var __complete_color__i=[{ "v": 'Black', "e": '\'Black\'', "d": unescape('%3C')+'span style="background-color: black; color: white;">B'+unescape('%3C')+'/span>lack' }, { "v": 'Blue', "e": '\'Blue\'', "d": unescape('%3C')+'span style="background-color: blue; color: white;">B'+unescape('%3C')+'/span>lue' }, { "v": 'Cyan', "e": '\'Cyan\'', "d": unescape('%3C')+'span style="background-color: cyan;  color: #000000">C'+unescape('%3C')+'/span>yan' }, { "v": 'Green', "e": '\'Green\'', "d": unescape('%3C')+'span style="background-color: green; color: white;">G'+unescape('%3C')+'/span>reen' }, { "v": 'Magenta', "e": '\'Magenta\'', "d": unescape('%3C')+'span style="background-color: magenta">M'+unescape('%3C')+'/span>agenta' }, { "v": 'Red', "e": '\'Red\'', "d": unescape('%3C')+'span style="background-color: red">R'+unescape('%3C')+'/span>ed' }, { "v": 'White', "e": '\'White\'', "d": unescape('%3C')+'span style="background-color: white; color: #000000">W'+unescape('%3C')+'/span>hite' }, { "v": 'Yellow', "e": '\'Yellow\'', "d": unescape('%3C')+'span style="background-color: yellow; color: #000000">Y'+unescape('%3C')+'/span>ellow' }];
+var __complete_color__is=-1;
+var __complete_color__o=false;
+var __complete_color__co=[];
+
+function __complete_color__()
+{
+if(--__complete_color__w==0)
+{
+s=__complete_color__f['color'].value.toLowerCase();
+if(__complete_color__s!=s)
+{
+m=document.getElementById('__complete_color__m');
+m.style.visibility='hidden'; 
+__complete_color__o=false;
+__complete_color__is=-1;
+if(s.length>=1)
+{
+o=[];
+for (var i=0; i<__complete_color__i.length; i++)
+{
+if(__complete_color__i[i].v.toLowerCase().substr(0,s.length)==s)
+o[o.length]=__complete_color__i[i];
+}
+if(o.length)
+__complete_color__bm(o, true);
+}
+}
+}
+}
+function __complete_color__ss(e,s)
+{
+if(e.currentStyle)
+{
+e.style.cssText=s;
+}
+else
+{
+e.setAttribute('style', s);
+}
+}
+function __complete_color__rp(m,t)
+{
+if(document.getBoxObjectFor)
+{
+b=document.getBoxObjectFor(t);
+x=b.x;
+y=b.y+b.height;
+w=b.width;
+if(window.getComputedStyle)
+{
+s=window.getComputedStyle(t,null);
+x-=parseInt(s.borderLeftWidth);
+y-=parseInt(s.borderTopWidth);
+w-=parseInt(s.borderLeftWidth)+parseInt(s.borderRightWidth);
+s=window.getComputedStyle(m,null);
+w+=parseInt(s.borderLeftWidth)+parseInt(s.borderRightWidth)-parseInt(s.paddingLeft)-parseInt(s.paddingRight);
+}
+}
+else
+{
+p=t.style.position;
+t.style.position="relative";
+x=t.offsetLeft;
+y=t.offsetTop+t.offsetHeight;
+w=t.offsetWidth;
+t.style.position=p;
+}
+m.style.left=x+"px";
+m.style.top=y+"px";
+m.style.width=w+"px";
+}
+function __complete_color__si(i)
+{
+if(__complete_color__is!=-1)
+{
+s=document.getElementById('__complete_color__m' + __complete_color__is);
+__complete_color__ss(s, 'padding: 1px; color: #000000;');
+}
+if(i!=-1)
+{
+s=document.getElementById('__complete_color__m' + i);
+__complete_color__ss(s, 'padding: 1px; color: #ffffff; background-color: #000080;');
+}
+__complete_color__is=i;
+}
+function __complete_color__so(t,i,l)
+{
+o=__complete_color__co;
+__complete_color__si(i);
+t.value=o[i].v;
+if(t.createTextRange)
+{
+if(r=t.createTextRange())
+{
+r.collapse(true);
+r.moveEnd('character', o[i].v.length);
+r.moveStart('character', l);
+r.select();
+}
+}
+else
+{
+if(t.setSelectionRange)
+t.setSelectionRange(l,o[i].v.length);
+else
+{
+t.selectionStart=l;
+t.selectionEnd=o[i].v.length;
+}
+}
+}
+function __complete_color__bm(o, sv)
+{
+for(d='',i=0; i<o.length; i++)
+{
+d+=unescape('%3C')+'div id="__complete_color__m' + i + '" style="padding: 1px; color: #000000;" onmouseover="__complete_color__si(' + i +');" onmouseout="__complete_color__si(-1);" onmousedown="__complete_color__s=\'\'; __complete_color__f[\'color\'].value='+o[i].e+'; document.getElementById(\'__complete_color__m\').style.visibility=\'hidden\';__complete_color__o=false; __complete_color__is=-1;">'+o[i].d+unescape('%3C')+'/div>'+"\n";
+}
+m=document.getElementById('__complete_color__m');
+m.innerHTML=d;
+t=__complete_color__f['color'];
+__complete_color__rp(m,t);
+m.style.visibility='visible';
+__complete_color__o=true;
+__complete_color__co=o;
+if(sv)
+{
+__complete_color__so(t,0,t.value.length);
+}
+else
+__complete_color__is=-1;
+}
+function __complete_color__h()
+{
+__complete_color__s='';
+m=document.getElementById('__complete_color__m');
+m.style.visibility='hidden';
+__complete_color__o=false;
+__complete_color__is=-1;
+}
+// -->
+</script><input type="button" name="show_colors" value="..."
+					onclick="__complete_color__f=this.form; __complete_color__bm(__complete_color__i, false); this.form['color'].focus(); return false; ; return true"
+					id="show_colors" /><span id="complete_color_feedback"></span></td>
+			</tr>
+
+			<tr>
+				<th align="right"><label for="font" accesskey="F"><u>F</u>ont</label></th>
+				<td><input type="text" name="font" value="" size="32"
+					onblur="__complete_font__h();"
+					onkeydown="if(__complete_font__o) { if(event.keyCode==40 &amp;&amp; __complete_font__is&lt;__complete_font__co.length-1) { __complete_font__si(__complete_font__is+1); __complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==38 &amp;&amp; __complete_font__is&gt;0) { __complete_font__si(__complete_font__is-1);__complete_font__so(t,__complete_font__is,0); return false; } if(event.keyCode==27 || event.keyCode==13) { __complete_font__h(); return false; } };"
+					onkeyup="if(event.keyCode!=40 &amp;&amp; event.keyCode!=38 &amp;&amp; event.keyCode!=27 &amp;&amp; event.keyCode!=13 &amp;&amp; this.form['font'].value.length&gt;=1){ __complete_font__w++; __complete_font__f=this.form; setTimeout('__complete_font__()',500); return false;};"
+					id="font" accesskey="F" autocomplete="off" />
+				<div id="__complete_font__m" class="groovymenu"
+					style="display: block; position: absolute; overflow: auto; visibility: hidden;"></div>
+				<script type="text/javascript" defer="defer">
+<!--
+var __complete_font__w=0;
+var __complete_font__s='';
+var __complete_font__f;
+var __complete_font__i=[{ "v": 'sans-serif', "e": '\'sans-serif\'', "d": unescape('%3C')+'span style="font-family: sans-serif; float: right">ABC'+unescape('%3C')+'/span>Sans Serif' }, { "v": 'serif', "e": '\'serif\'', "d": unescape('%3C')+'span style="font-family: serif; float: right">ABC'+unescape('%3C')+'/span>Serif' }, { "v": 'cursive', "e": '\'cursive\'', "d": unescape('%3C')+'span style="font-family: cursive; float: right">ABC'+unescape('%3C')+'/span>Cursive' }, { "v": 'fantasy', "e": '\'fantasy\'', "d": unescape('%3C')+'span style="font-family: fantasy; float: right">ABC'+unescape('%3C')+'/span>Fantasy' }, { "v": 'monospace', "e": '\'monospace\'', "d": unescape('%3C')+'span style="font-family: monospace; float: right">ABC'+unescape('%3C')+'/span>Monospace' }];
+var __complete_font__is=-1;
+var __complete_font__o=false;
+var __complete_font__co=[];
+
+function __complete_font__()
+{
+if(--__complete_font__w==0)
+{
+s=__complete_font__f['font'].value.toLowerCase();
+if(__complete_font__s!=s)
+{
+m=document.getElementById('__complete_font__m');
+m.style.visibility='hidden'; 
+__complete_font__o=false;
+__complete_font__is=-1;
+if(s.length>=1)
+{
+o=[];
+for (var i=0; i<__complete_font__i.length; i++)
+{
+if(__complete_font__i[i].v.toLowerCase().substr(0,s.length)==s)
+o[o.length]=__complete_font__i[i];
+}
+if(o.length)
+__complete_font__bm(o, true);
+}
+}
+}
+}
+function __complete_font__ss(e,s)
+{
+if(e.currentStyle)
+{
+e.style.cssText=s;
+}
+else
+{
+e.setAttribute('style', s);
+}
+}
+function __complete_font__rp(m,t)
+{
+if(document.getBoxObjectFor)
+{
+b=document.getBoxObjectFor(t);
+x=b.x;
+y=b.y+b.height;
+w=b.width;
+if(window.getComputedStyle)
+{
+s=window.getComputedStyle(t,null);
+x-=parseInt(s.borderLeftWidth);
+y-=parseInt(s.borderTopWidth);
+w-=parseInt(s.borderLeftWidth)+parseInt(s.borderRightWidth);
+s=window.getComputedStyle(m,null);
+w+=parseInt(s.borderLeftWidth)+parseInt(s.borderRightWidth)-parseInt(s.paddingLeft)-parseInt(s.paddingRight);
+}
+}
+else
+{
+p=t.style.position;
+t.style.position="relative";
+x=t.offsetLeft;
+y=t.offsetTop+t.offsetHeight;
+w=t.offsetWidth;
+t.style.position=p;
+}
+m.style.left=x+"px";
+m.style.top=y+"px";
+m.style.width=w+"px";
+}
+function __complete_font__si(i)
+{
+if(__complete_font__is!=-1)
+{
+s=document.getElementById('__complete_font__m' + __complete_font__is);
+s.className='groovyitem';
+}
+if(i!=-1)
+{
+s=document.getElementById('__complete_font__m' + i);
+s.className='groovyselecteditem';
+}
+__complete_font__is=i;
+}
+function __complete_font__so(t,i,l)
+{
+o=__complete_font__co;
+__complete_font__si(i);
+t.value=o[i].v;
+if(t.createTextRange)
+{
+if(r=t.createTextRange())
+{
+r.collapse(true);
+r.moveEnd('character', o[i].v.length);
+r.moveStart('character', l);
+r.select();
+}
+}
+else
+{
+if(t.setSelectionRange)
+t.setSelectionRange(l,o[i].v.length);
+else
+{
+t.selectionStart=l;
+t.selectionEnd=o[i].v.length;
+}
+}
+}
+function __complete_font__bm(o, sv)
+{
+for(d='',i=0; i<o.length; i++)
+{
+d+=unescape('%3C')+'div id="__complete_font__m' + i + '" class="groovyitem" onmouseover="__complete_font__si(' + i +');" onmouseout="__complete_font__si(-1);" onmousedown="__complete_font__s=\'\'; __complete_font__f[\'font\'].value='+o[i].e+'; document.getElementById(\'__complete_font__m\').style.visibility=\'hidden\';__complete_font__o=false; __complete_font__is=-1;">'+o[i].d+unescape('%3C')+'/div>'+"\n";
+}
+m=document.getElementById('__complete_font__m');
+m.innerHTML=d;
+t=__complete_font__f['font'];
+__complete_font__rp(m,t);
+m.style.visibility='visible';
+__complete_font__o=true;
+__complete_font__co=o;
+if(sv)
+{
+__complete_font__so(t,0,t.value.length);
+}
+else
+__complete_font__is=-1;
+}
+function __complete_font__h()
+{
+__complete_font__s='';
+m=document.getElementById('__complete_font__m');
+m.style.visibility='hidden';
+__complete_font__o=false;
+__complete_font__is=-1;
+}
+// -->
+</script><input type="image" name="show_fonts" src="pulldown.gif"
+					alt="Show fonts" align="top"
+					onclick="__complete_font__f=this.form; __complete_font__bm(__complete_font__i, false); this.form['font'].focus(); return false; ; return true"
+					id="show_fonts" /><span id="complete_font_feedback"></span></td>
+			</tr>
+
+		</table>
+		</center>
+		</fieldset>
+		</td>
+	</tr>
+</table>
+</center>
+</div>
+</form>
+<hr />
+</body>
+</html>

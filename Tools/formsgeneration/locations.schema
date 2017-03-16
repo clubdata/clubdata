@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+     locations.schema
+
+     @(#) $Header: /home/mlemos/cvsroot/forms/locations.schema,v 1.1 2005/12/30 20:48:05 mlemos Exp $
+  -->
+
+<database>
+
+ <name><variable>name</variable></name>
+ <create><variable>create</variable></create>
+
+ <table>
+  <name>continents</name>
+  <declaration>
+   <field> <name>code</name> <type>text</type> <length>2</length>  <notnull>1</notnull> <default></default> </field>
+   <field> <name>name</name> <type>text</type> <length>16</length> <notnull>1</notnull> <default></default> </field>
+
+   <primarykey>
+    <field> <name>code</name> </field>
+   </primarykey>
+
+  </declaration>
+
+  <initialization>
+
+   <insert>
+    <field> <name>code</name> <value>na</value> </field>
+    <field> <name>name</name> <value>North America</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>eu</value> </field>
+    <field> <name>name</name> <value>Europe</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>sa</value> </field>
+    <field> <name>name</name> <value>South America</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>as</value> </field>
+    <field> <name>name</name> <value>Asia</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>oc</value> </field>
+    <field> <name>name</name> <value>Oceania</value> </field>
+   </insert>
+
+  </initialization>
+
+ </table>
+
+ <table>
+  <name>countries</name>
+  <declaration>
+   <field> <name>code</name>      <type>text</type> <length>2</length>  <notnull>1</notnull> <default></default> </field>
+   <field> <name>name</name>      <type>text</type> <length>16</length> <notnull>1</notnull> <default></default> </field>
+   <field> <name>continent</name> <type>text</type> <length>2</length>  <notnull>1</notnull> <default></default> </field>
+
+   <primarykey>
+    <field> <name>code</name> </field>
+    <field> <name>continent</name> </field>
+   </primarykey>
+
+  </declaration>
+
+  <initialization>
+
+   <insert>
+    <field> <name>code</name> <value>us</value> </field>
+    <field> <name>name</name> <value>United States</value> </field>
+    <field> <name>continent</name> <value>na</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>ca</value> </field>
+    <field> <name>name</name> <value>Canada</value> </field>
+    <field> <name>continent</name> <value>na</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>pt</value> </field>
+    <field> <name>name</name> <value>Portugal</value> </field>
+    <field> <name>continent</name> <value>eu</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>de</value> </field>
+    <field> <name>name</name> <value>Germany</value> </field>
+    <field> <name>continent</name> <value>eu</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>br</value> </field>
+    <field> <name>name</name> <value>Brazil</value> </field>
+    <field> <name>continent</name> <value>sa</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>ar</value> </field>
+    <field> <name>name</name> <value>Argentina</value> </field>
+    <field> <name>continent</name> <value>sa</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>jp</value> </field>
+    <field> <name>name</name> <value>Japan</value> </field>
+    <field> <name>continent</name> <value>as</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>kr</value> </field>
+    <field> <name>name</name> <value>Korea</value> </field>
+    <field> <name>continent</name> <value>as</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>au</value> </field>
+    <field> <name>name</name> <value>Australia</value> </field>
+    <field> <name>continent</name> <value>oc</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>nz</value> </field>
+    <field> <name>name</name> <value>New Zeland</value> </field>
+    <field> <name>continent</name> <value>oc</value> </field>
+   </insert>
+
+  </initialization>
+
+ </table>
+
+ <table>
+  <name>locations</name>
+  <declaration>
+   <field> <name>code</name>    <type>text</type> <length>2</length>  <notnull>1</notnull> <default></default> </field>
+   <field> <name>name</name>    <type>text</type> <length>16</length> <notnull>1</notnull> <default></default> </field>
+   <field> <name>country</name> <type>text</type> <length>2</length>  <notnull>1</notnull> <default></default> </field>
+
+   <primarykey>
+    <field> <name>code</name> </field>
+    <field> <name>country</name> </field>
+   </primarykey>
+
+  </declaration>
+
+  <initialization>
+
+   <insert>
+    <field> <name>code</name> <value>ny</value> </field>
+    <field> <name>name</name> <value>New York</value> </field>
+    <field> <name>country</name> <value>us</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>la</value> </field>
+    <field> <name>name</name> <value>Los Angeles</value> </field>
+    <field> <name>country</name> <value>us</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>to</value> </field>
+    <field> <name>name</name> <value>Toronto</value> </field>
+    <field> <name>country</name> <value>ca</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>mo</value> </field>
+    <field> <name>name</name> <value>Montréal</value> </field>
+    <field> <name>country</name> <value>ca</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>li</value> </field>
+    <field> <name>name</name> <value>Lisbon</value> </field>
+    <field> <name>country</name> <value>pt</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>av</value> </field>
+    <field> <name>name</name> <value>Aveiro</value> </field>
+    <field> <name>country</name> <value>pt</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>fr</value> </field>
+    <field> <name>name</name> <value>Frankfurt</value> </field>
+    <field> <name>country</name> <value>de</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>be</value> </field>
+    <field> <name>name</name> <value>Berlin</value> </field>
+    <field> <name>country</name> <value>de</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>sa</value> </field>
+    <field> <name>name</name> <value>São Paulo</value> </field>
+    <field> <name>country</name> <value>br</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>ri</value> </field>
+    <field> <name>name</name> <value>Rio de Janeiro</value> </field>
+    <field> <name>country</name> <value>br</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>bu</value> </field>
+    <field> <name>name</name> <value>Buenos Aires</value> </field>
+    <field> <name>country</name> <value>ar</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>ma</value> </field>
+    <field> <name>name</name> <value>Mar del Plata</value> </field>
+    <field> <name>country</name> <value>ar</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>to</value> </field>
+    <field> <name>name</name> <value>Tokio</value> </field>
+    <field> <name>country</name> <value>jp</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>os</value> </field>
+    <field> <name>name</name> <value>Osaka</value> </field>
+    <field> <name>country</name> <value>jp</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>se</value> </field>
+    <field> <name>name</name> <value>Seoul</value> </field>
+    <field> <name>country</name> <value>ky</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>yo</value> </field>
+    <field> <name>name</name> <value>Yosu</value> </field>
+    <field> <name>country</name> <value>kr</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>sy</value> </field>
+    <field> <name>name</name> <value>Sydney</value> </field>
+    <field> <name>country</name> <value>au</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>me</value> </field>
+    <field> <name>name</name> <value>Melbourne</value> </field>
+    <field> <name>country</name> <value>au</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>we</value> </field>
+    <field> <name>name</name> <value>Wellington</value> </field>
+    <field> <name>country</name> <value>nz</value> </field>
+   </insert>
+
+   <insert>
+    <field> <name>code</name> <value>au</value> </field>
+    <field> <name>name</name> <value>Auckland</value> </field>
+    <field> <name>country</name> <value>nz</value> </field>
+   </insert>
+
+  </initialization>
+
+ </table>
+
+</database>
