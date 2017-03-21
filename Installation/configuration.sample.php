@@ -32,7 +32,9 @@
  */
 /**
  */
-set_magic_quotes_runtime(0);
+if (get_magic_quotes_runtime()) {
+    set_magic_quotes_runtime(0);
+}
 
 /**
  * Defines Root of HTML-Documents. This overwrites the global $_SERVER['DOCUMENT_ROOT']
@@ -42,7 +44,7 @@ set_magic_quotes_runtime(0);
  * In this case, uncomment the following line and set SCRIPTROOT to the root directory
  * of Clubdata
  */
-//define("SCRIPTROOT", "/home/frado/ownCloud/workspace.privat/Clubdata2");
+//define("SCRIPTROOT", "");
 
 /**
  * Defines the root of Clubdata2-Skripts relative to DOCUMENT_ROOT (or SCRIPTROOT)
@@ -259,4 +261,3 @@ ini_set('display_errors', false);
 
 // FD20110101 Set start value of language to DEFAULT_LANGUAGE. Will be overwritten by user defined value later
 $language = DEFAULT_LANGUAGE;
-?>
