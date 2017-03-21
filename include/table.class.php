@@ -19,8 +19,8 @@ require_once('include/clubdataFG.class.php');
 
 global $db;
 
-define('NO_EDIT', FALSE);
-define('EDIT',  TRUE);
+define('NO_EDIT', false);
+define('EDIT', true);
 
 /**
  * @package Clubdata
@@ -43,37 +43,30 @@ class Table {
     var $subTableName = NULL;
 
     var $formsgeneration;
-    
-    function Table(&$formsgeneration)
-    {
+
+    function Table(&$formsgeneration) {
         $this->subTable = array();
         $this->formsgeneration = &$formsgeneration;
     }
 
-    function showRecordDetails($edit = false, $title='')
-    {
+    function showRecordDetails($edit = false, $title = '') {
     }
 
-    function showRecord($title = '')
-    {
+    function showRecord($title = '') {
         $this->showRecordDetails(NO_EDIT, $title);
     }
 
-    function editRecord($title = '')
-    {
+    function editRecord($title = '') {
         $this->showRecordDetails(EDIT, $title);
     }
 
-    function newRecord($presetVals=array(), $presetEditVals=array())
-    {
+    function newRecord($presetVals = array(), $presetEditVals = array()) {
     }
 
-    function updateRecord($uploadID = '')
-    {
+    function updateRecord($uploadID = '') {
     }
 
-    function insertRecord($presetVals = array())
-    {
+    function insertRecord($presetVals = array()) {
     }
 
     /*****************************************************************
@@ -82,38 +75,32 @@ class Table {
     /*****************************************************************
      * 1. MASTER FUNCTIONS
      ****************************************************************/
-    function addSubTable($subTableName, $subTableObj)
-    {
+    function addSubTable($subTableName, $subTableObj) {
          $this->subTableArr[$subTableName] = $subTableObj;
     }
 
-    function getSubTableNames()
-    {
+    function getSubTableNames() {
         return array_keys($this->subTableArr);
     }
+
     /*****************************************************************
      * 2. SUBTABLE FUNCTIONS
      ****************************************************************/
-    function getRecordAsSubtable($forms)
-    {
+    function getRecordAsSubtable($forms) {
         global $APerr;
 
         $APerr->setFatal(__FILE__,__LINE__,"getRecordAsSubtable must be overloaded !");
     }
 
-    function updateSubtable($subTableName)
-    {
+    function updateSubtable($subTableName) {
         $this->subTableArr[$subTableName]->updateRecord();
     }
 
-    function setMasterTable($masterID)
-    {
+    function setMasterTable($masterID) {
         $this->masterID = $masterID;
     }
 
-    function setSubtableName($subTableName)
-    {
+    function setSubtableName($subTableName) {
         $this->formsgeneration->NAME=$this->subTableName = $subTableName;
     }
 }
-?>

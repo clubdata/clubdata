@@ -1,4 +1,7 @@
 # There is no need to commit the current configuration
 /include/configuration.php
 
-/style/**/templates_c/*.tpl.php
+*.tpl.php
+
+/vendor/
+/bower_components/
