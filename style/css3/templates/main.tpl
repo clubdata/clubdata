@@ -69,14 +69,14 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="javascript/jquery-1.11.3.js" charset="UTF8"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js" charset="utf8"></script>
     <!--
     @todo: Find a tooltip script for jquery which loads tooltips via Ajax
     -->
     <script type="text/javascript" src="style/css3/jscript/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
     <script type="text/javascript" src="javascript/jquery.hoverIntent.js"></script>
     <script type="text/javascript" src="javascript/jquery.cluetip.js"></script>
-    <script type="text/javascript" src="javascript/modalbox.js" charset="UTF8"></script>
+    <script type="text/javascript" src="javascript/modalbox.js" charset="utf8"></script>
 
     {if isset($personalSettings.SHOW_TOOLTIP) && $personalSettings.SHOW_TOOLTIP == 0}
     <script type="text/javascript">
@@ -84,7 +84,7 @@
     </script>
     {/if}
 
-    <script type="text/javascript" src="javascript/js_main.js" charset="UTF8"></script>
+    <script type="text/javascript" src="javascript/js_main.js" charset="utf8"></script>
     <script type="text/javascript" src="style/css3/jscript/js_css3.js"></script>
 
     {$javascript}

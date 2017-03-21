@@ -808,6 +808,6 @@ print_r($_POST);
 print("</pre>");
 ?>
 
-<script type="text/javascript" src="../javascript/jquery-1.11.3.js" charset="utf8"></script>
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js" charset="utf8"></script>
 </body>
 </html>

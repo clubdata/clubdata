@@ -6,7 +6,7 @@
     <LINK REL=StyleSheet HREF="style/newstyle/style.css" TYPE="text/css" MEDIA=screen>
     <LINK REL=StyleSheet HREF="style/newstyle/css/jquery.cluetip.css" TYPE="text/css" MEDIA=screen>
     <LINK REL=StyleSheet HREF="style/newstyle/css/style_help.css" TYPE="text/css" MEDIA=screen>
-    <SCRIPT TYPE="text/javascript" SRC="javascript/jquery-1.3.2.js" CHARSET="UTF8"></SCRIPT>
+    <SCRIPT TYPE="text/javascript" SRC="bower_components/jquery/dist/jquery.min.js" CHARSET="UTF8"></SCRIPT>
 <!--
 @todo: Find a tooltip script for jquery which loads tooltips via Ajax
 -->

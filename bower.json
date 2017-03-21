@@ -1,0 +1,20 @@
+{
+  "name": "clubdata",
+  "homepage": "https://github.com/clubdata/clubdata",
+  "description": "A Club member administration tool written in PHP using a MySQL database.",
+  "main": "index.php",
+  "authors": [
+    "Franz Domes <franz.domes@gmx.de>"
+  ],
+  "license": "GPL-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^1.12.4"
+  }
+}
