@@ -1,0 +1,16 @@
+{
+    "name": "clubdata/clubdata",
+    "description": "A Club member administration tool written in PHP using a MySQL database.",
+    "type": "project",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    },
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Franz Domes",
+            "email": "franz.domes@gmx.de"
+        }
+    ],
+    "require": {}
+}
