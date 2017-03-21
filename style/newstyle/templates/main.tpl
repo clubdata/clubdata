@@ -10,7 +10,7 @@
 <!--
 @todo: Find a tooltip script for jquery which loads tooltips via Ajax
 -->
-    <script type="text/javascript" src="javascript/jquery.hoverIntent.js" ></script>
+    <script type="text/javascript" src="bower_components/jquery-hoverintent/jquery.hoverIntent.js" ></script>
     <script type="text/javascript" src="javascript/jquery.cluetip.js" ></script>
     <SCRIPT TYPE="text/javascript" SRC="javascript/modalbox.js" CHARSET="UTF8"></SCRIPT>
 {if isset($personalSettings.SHOW_TOOLTIP) && $personalSettings.SHOW_TOOLTIP == 0 }

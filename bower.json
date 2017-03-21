@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^1.12.4"
+    "jquery": "^1.12.4",
+    "jquery-hoverintent": "1.8.1"
   }
 }

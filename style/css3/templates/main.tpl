@@ -74,7 +74,7 @@
     @todo: Find a tooltip script for jquery which loads tooltips via Ajax
     -->
     <script type="text/javascript" src="style/css3/jscript/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="javascript/jquery.hoverIntent.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-hoverintent/jquery.hoverIntent.js"></script>
     <script type="text/javascript" src="javascript/jquery.cluetip.js"></script>
     <script type="text/javascript" src="javascript/modalbox.js" charset="utf8"></script>
 
