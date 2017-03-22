@@ -19,88 +19,90 @@ require_once 'include/table.class.php';
  */
 class PersonalSettings extends Table {
 
-  /**
-   *
-   * holds the database object
-   * @var object $db
-   */
-  var $db;
+    /**
+     *
+     * holds the database object
+     * @var object $db
+     */
+    protected $db;
 
-  /**
-   *
-   * holds authentication infos of current user
-   * @var object $auth
-   */
-  var $auth;
+    /**
+     *
+     * holds authentication infos of current user
+     * @var object $auth
+     */
+    protected $auth;
 
-  /**
-   *
-   * Default settings for current user
-   * @var assoc $personalSettings
-   */
-  var $defaultPersonalSettings = array (
-      'SHOW_TOOLTIP' => 1,    // Show tooltips
-      'TEST' => 'TESTVAL',    // Test overwriting, not in use
+    /**
+     *
+     * Default settings for current user
+     * @var assoc $personalSettings
+     */
+    protected $defaultPersonalSettings = array(
+        'SHOW_TOOLTIP' => 1,    // Show tooltips
+        'TEST' => 'TESTVAL',    // Test overwriting, not in use
     );
 
-  /**
-   *
-   * Personal settings for current user
-   * @var assoc $personalSettings
-   */
-  var $personalSettings;
+    /**
+     *
+     * Personal settings for current user
+     * @var assoc $personalSettings
+     */
+    protected $personalSettings;
 
+    public function __construct($db, &$formsgeneration, &$auth) {
+        parent::__construct($formsgeneration);
 
-  function PersonalSettings($db, &$formsgeneration, &$auth)
-  {
+        $this->db = $db;
+        $this->auth = &$auth;
 
-    Table::Table($formsgeneration);
+        debug_r('TABLE', $this->auth->{'user'}, '[PersonalSettings::PersonalSettings] this->auth->{user}');
 
-    $this->db = $db;
-    $this->auth = &$auth;
+        if (isset($this->auth->{'user'}['PersonalSettings_ro'])) {
+            $this->personalSettings = (array) json_decode($this->auth->{'user'}['PersonalSettings_ro'], true) + $this->defaultPersonalSettings;
+        } else {
+            $this->personalSettings = (array) $this->defaultPersonalSettings;
+        }
 
-    debug_r('TABLE', $this->auth->{'user'}, '[PersonalSettings::PersonalSettings] this->auth->{user}');
+        debug_r('TABLE', $this->personalSettings, '[PersonalSettings::PersonalSettings] this->personalSettings');
+    }
 
-    $this->personalSettings = (array)json_decode($this->auth->{'user'}['PersonalSettings_ro'], true) + $this->defaultPersonalSettings;
+    public function showRecordDetails($edit = false, $title = '') {
+        global $APerr;
 
-    debug_r('TABLE', $this->personalSettings, '[PersonalSettings::PersonalSettings] this->personalSettings');
-  }
+        $personalSettings = $this->auth->{'user'}['PERSONAL_SETTINGS'];
 
-    function showRecordDetails($edit = false, $title='')
-    {
-      global $APerr;
+        $this->formsgeneration->ReadOnly = ( $edit === false ? 1 : 0 );
 
-      $personalSettings = $this->auth->{'user'}['PERSONAL_SETTINGS'];
+        $errTxt = array();
 
-      $this->formsgeneration->ReadOnly = ( $edit === false ? 1 : 0 );
-
-      // List of personal settings
-      $errTxt[] .= $this->formsgeneration->AddInput(array(
-                          "TYPE"=>"select",
-                          "LABEL"=>helpAndText('Settings','Persoal','Show Tooltips'),
-                          "MULTIPLE"=>0,
-                          "NAME"=>"SHOW_TOOLTIP",
-                          "ID"=>"SHOW_TOOLTIP",
-                          "VALUE"=>(isset($personalSettings->{'SHOW_TOOLTIP'}) ? $personalSettings->{'SHOW_TOOLTIP'} : 1),
-                          "SIZE"=>1,
-                          "OPTIONS"=>array('1' => lang('Yes'),
-                                              '0' => lang('No'))
-                          ));
+        // List of personal settings
+        $errTxt[] = $this->formsgeneration->AddInput(array(
+            "TYPE"     => "select",
+            "LABEL"    => helpAndText('Settings', 'Persoal', 'Show Tooltips'),
+            "MULTIPLE" => 0,
+            "NAME"     => "SHOW_TOOLTIP",
+            "ID"       => "SHOW_TOOLTIP",
+            "VALUE"    => (isset($personalSettings->{'SHOW_TOOLTIP'}) ? $personalSettings->{'SHOW_TOOLTIP'} : 1),
+            "SIZE"     => 1,
+            "OPTIONS"  => array('1' => lang('Yes'), '0' => lang('No'))
+        ));
 
         // END List of personal settings
 
         // Load values from formular, if submitted
-        $errTxt[] .= $this->formsgeneration->LoadInputValues($this->formsgeneration->WasSubmitted("doit"));
+        $errTxt[] = $this->formsgeneration->LoadInputValues($this->formsgeneration->WasSubmitted("doit"));
 
         // process errors
         debug_r('DBTABLE', $errTxt, "[DBTABLE, showRecordDetails] errTxt");
-        if ( count($errTxt = array_filter($errTxt)) )
-        {
+
+        if (count($errTxt = array_filter($errTxt))) {
             debug_backtr("DBTABLE");
-            $str = join("<BR>",$errTxt);
-            $APerr->setFatal(__FILE__,__LINE__,$str);
+            $str = join("<br>", $errTxt);
+            $APerr->setFatal(__FILE__, __LINE__, $str);
         }
-        debug_r("DBTABLE", $this->formsgeneration, "showRecordDetails ($value))");
+
+        debug_r("DBTABLE", $this->formsgeneration, "showRecordDetails ($edit, $title))");
 
         // return forms object
         return $this->formsgeneration;
@@ -115,8 +117,7 @@ class PersonalSettings extends Table {
      *
      * @see include/Table::updateRecord()
      */
-    function updateRecord($uploadID = '')
-    {
+    public function updateRecord($uploadID = '') {
         global $APerr;
 
         $error = false;
@@ -124,62 +125,44 @@ class PersonalSettings extends Table {
         /*
         * Therefore we need to validate the submitted form values.
         */
-        if(($error_message=$this->formsgeneration->Validate($verify))=="")
-        {
-
+        if (($error_message=$this->formsgeneration->Validate($verify)) == "") {
             /*
             * It's valid, set the $doit flag variable to 1 to tell the form is ready to
             * processed.
             */
-            $doit=1;
-
-        }
-        else
-        {
-
+            $doit = 1;
+        } else {
             /*
             * It's invalid, set the $doit flag to 0 and encode the returned error message
             * to escape any HTML special characters.
             */
-            $doit=0;
-            $error_message=nl2br(HtmlSpecialChars($error_message));
+            $doit = 0;
+            $error_message = nl2br(HtmlSpecialChars($error_message));
             debug("DBTABLE", "[DBTABLE, updateRecord] Formserror: $error_message");
-            $APerr->setFatal(__FILE__,__LINE__,$error_message);
+            $APerr->setFatal(__FILE__, __LINE__, $error_message);
+
             return false;
         }
 
-        foreach ($this->personalSettings as $key => $value)
-        {
-          $newPersonalSettings[$key] = getGlobVar($key);
+        foreach ($this->personalSettings as $key => $value) {
+            $newPersonalSettings[$key] = getGlobVar($key);
         }
 
-//              print("<PRE>"); print_r($auth);print("</PRE>");
-//              print($auth->{'user'}['id'] . "<PRE>"); print_r($newPersonalSettings);print("</PRE>: JSON = " . json_encode($newPersonalSettings));
-//                      debug_r("TABLE", $this->formsgeneration, "showRecordDetails");
-        $sql = "UPDATE `###_Users` SET PersonalSettings_ro = '" . json_encode($newPersonalSettings) . "' WHERE ID = " .  $this->auth->{'user'}['id'];
+        $sql = "UPDATE `###_Users` SET PersonalSettings_ro = '" . json_encode($newPersonalSettings) . "' WHERE ID = " . $this->auth->{'user'}['id'];
 
-//              print("$sql<BR>");
-        if ( $this->db->Execute($sql) === false )
-        {
-                $APerr->setFatal(__FILE__,__LINE__,$this->db->errormsg(),"SQL: $sql");
+        if ($this->db->Execute($sql) === false) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: {$sql}");
         }
-//              print("<PRE>"); print_r($auth);print("</PRE>");
+
         $this->auth->refreshInfo();
-//              print("<PRE>"); print_r($auth);print("</PRE>");
-
     }
 
     /**
-     *
      * getPersonalSettings returns the personal settings as an associative array
      *
      * @return assoc personal settings
      */
-    function getPersonalSettings()
-    {
-      return $this->personalSettings;
-
+    public function getPersonalSettings() {
+        return $this->personalSettings;
     }
 }
-
-?>

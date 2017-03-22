@@ -31,7 +31,7 @@ class DbTable extends Table {
     );
 
     public function __construct($db, &$formsgeneration, $table, $where, $fields = '*') {
-        Table::Table($formsgeneration);
+        parent::__construct($formsgeneration);
 
         $this->db = $db;
         $this->table = $table;
@@ -96,36 +96,28 @@ class DbTable extends Table {
     }
 
     function getFieldListArray($tablename = '', $exclude = array(), $include = array(), $noAlias = false) {
-        global $APerr;
-
         $colArr = $this->db->MetaColumnNames($this->table, true);
 
-        if (!empty($exclude) || !empty($include)) {
-            $tmpArr = array();
+        if (!empty($colArr)) {
+            $resultArr = array();
+            $shouldFilter = (!empty($exclude) || !empty($include));
+            $shouldFormat = !empty($tablename);
 
             foreach ($colArr as $column) {
-                if (in_array($column, $include) || !in_array($column, $exclude)) {
-                    $tmpArr[] = $column;
+                if ($shouldFilter && (!in_array($column, $include) && in_array($column, $exclude))) {
+                    continue;
                 }
+
+                $resultArr[] = ($shouldFormat) ? formatColumn($tablename, $column, $noAlias) : $column;
             }
 
-            $colArr = $tmpArr;
+            return $resultArr;
         }
 
-        if (!empty($tablename)) {
-            // Must count $colArr outside of for loop, otherwise we get a
-            // indefinite loop !! (Why : ????? no idea)
-            $colCount=count($colArr);
-
-            for ($i = 0; $i < $colCount; $i++) {
-                $colArr[$i] = formatColumn($tablename, $colArr[$i], $noAlias);
-            }
-        }
-
-        return $colArr;
+        return array();
     }
 
-    function getFieldList($tablename = '',$exclude = array(), $include = array()) {
+    function getFieldList($tablename = '', $exclude = array(), $include = array()) {
         $fieldList = join(',', $this->getFieldListArray($tablename, $exclude, $include));
         return $fieldList;
     }
@@ -306,7 +298,7 @@ class DbTable extends Table {
                             ));
                             $errTxt[] = $this->formsgeneration->AddInput(array(
                                 'TYPE'                   => 'password',
-                                'LABEL'                  => helpAndText($this->table, $name['raw'], $name[pretty]),
+                                'LABEL'                  => helpAndText($this->table, $name['raw'], $name['pretty']),
                                 'NAME'                   => "{$name['raw']}_1",
                                 'ID'                     => "{$name['raw']}_1",
                                 'VALUE'                  => '*****',

@@ -27,46 +27,46 @@ define('EDIT', true);
  */
 class Table {
 
-    var $maxNumCols = 0;
+    protected $maxNumCols = 0;
 
-    var $tableBodyRows;
-    var $tableBodyAttrs;
+    protected $tableBodyRows;
+    protected $tableBodyAttrs;
 
     // If this table has dependent tables, subTableArr holds an array
     // of DBTable-Objects (mostly overloaded) to this subtables.
-    var $subTableArr = array();  //array of subtable objects
+    protected $subTableArr = array();  //array of subtable objects
 
     // If this table has a master table (e.g. it is a subtable),
     // then the following variables holds the id of the master table
     // and the name of this subtable
-    var $masterID = NULL;
-    var $subTableName = NULL;
+    protected $masterID = null;
+    protected $subTableName = null;
 
-    var $formsgeneration;
+    protected $formsgeneration;
 
-    function Table(&$formsgeneration) {
+    public function __construct(&$formsgeneration) {
         $this->subTable = array();
         $this->formsgeneration = &$formsgeneration;
     }
 
-    function showRecordDetails($edit = false, $title = '') {
+    public function showRecordDetails($edit = false, $title = '') {
     }
 
-    function showRecord($title = '') {
+    public function showRecord($title = '') {
         $this->showRecordDetails(NO_EDIT, $title);
     }
 
-    function editRecord($title = '') {
+    public function editRecord($title = '') {
         $this->showRecordDetails(EDIT, $title);
     }
 
-    function newRecord($presetVals = array(), $presetEditVals = array()) {
+    public function newRecord($presetVals = array(), $presetEditVals = array()) {
     }
 
-    function updateRecord($uploadID = '') {
+    public function updateRecord($uploadID = '') {
     }
 
-    function insertRecord($presetVals = array()) {
+    public function insertRecord($presetVals = array()) {
     }
 
     /*****************************************************************
@@ -75,32 +75,32 @@ class Table {
     /*****************************************************************
      * 1. MASTER FUNCTIONS
      ****************************************************************/
-    function addSubTable($subTableName, $subTableObj) {
-         $this->subTableArr[$subTableName] = $subTableObj;
+    public function addSubTable($subTableName, $subTableObj) {
+        $this->subTableArr[$subTableName] = $subTableObj;
     }
 
-    function getSubTableNames() {
+    public function getSubTableNames() {
         return array_keys($this->subTableArr);
     }
 
     /*****************************************************************
      * 2. SUBTABLE FUNCTIONS
      ****************************************************************/
-    function getRecordAsSubtable($forms) {
+    public function getRecordAsSubtable($forms) {
         global $APerr;
 
-        $APerr->setFatal(__FILE__,__LINE__,"getRecordAsSubtable must be overloaded !");
+        $APerr->setFatal(__FILE__, __LINE__, "getRecordAsSubtable must be overloaded !");
     }
 
-    function updateSubtable($subTableName) {
+    public function updateSubtable($subTableName) {
         $this->subTableArr[$subTableName]->updateRecord();
     }
 
-    function setMasterTable($masterID) {
+    public function setMasterTable($masterID) {
         $this->masterID = $masterID;
     }
 
-    function setSubtableName($subTableName) {
+    public function setSubtableName($subTableName) {
         $this->formsgeneration->NAME=$this->subTableName = $subTableName;
     }
 }
