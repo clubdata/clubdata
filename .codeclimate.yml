@@ -23,4 +23,7 @@ ratings:
   - "**.module"
   - "**.php"
   - "**.py"
-exclude_paths: []
+exclude_paths:
+- "Documentation/"
+- "Installation/DOCU"
+- "Tools/"
