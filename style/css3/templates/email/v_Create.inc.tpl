@@ -1,9 +1,5 @@
 {if ($htmlEdit == true) }
 {literal}
-<SCRIPT type="text/javascript">
-    _editor_url = "javascript/htmlarea/";
-    _editor_lang = "de";
-</script>
 <!-- TinyMCE -->
 <script type="text/javascript" src="bower_components/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">

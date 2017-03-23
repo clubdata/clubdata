@@ -1,11 +1,9 @@
-<!--//--><SCRIPT TYPE="text/javascript">
-<!-- comment to end of line
 var HelpWindow = "";
 
 /**
  * Use ajax calls where available. Set to true to enable ajax calls via jquery
  * false if you do prefer submitting pages
- * 
+ *
  * @var boolean use ajax calls where available
  */
 var useAjax = true;
@@ -14,7 +12,7 @@ function checkIfRange(selObj)
 {
   objectName = /^(.*)_select/.exec(selObj.name)[1];
   selectedValue = selObj.options[selObj.selectedIndex].value;
-  
+
 //   alert(objectName + ": " + selectedValue);
 
   if ( selectedValue.substr(0,3) == 'BET' )
@@ -25,8 +23,8 @@ function checkIfRange(selObj)
   {
     document.getElementById(objectName + '_rangeEnd').style.display='none';
   }
-  
-  
+
+
 }
 
 function doSubmit(mod, view)
@@ -112,12 +110,12 @@ function checkEnter(event)
 {
   var code = 0;
   NS4 = (document.layers) ? true : false;
-   
+
   if (NS4)
     code = event.which;
   else
     code = event.keyCode;
-    
+
 //  if (code==13)
 //    submitMemberMainForm();
 }
@@ -126,12 +124,12 @@ function isEnter(event)
 {
   var code = 0;
   NS4 = (document.layers) ? true : false;
-   
+
   if (NS4)
     code = event.which;
   else
     code = event.keyCode;
-    
+
   if (code==13)
     return true;
   else
@@ -141,9 +139,9 @@ function isEnter(event)
 function bottomMemberOrSearch(event, myFrame)
 {
   if ( isEnter(event) )
-    { 
+    {
       var txt = myFrame.value;
-      
+
       if ( txt.match(/^[0-9]+$/) )
       {
         location = ('?mod=members&MemberID=' + txt);
@@ -244,21 +242,16 @@ function askInvoiceData()
 
 /**
  * Do setup stuff after page is loaded.
- * 
+ *
  * This piece of code should for convinience be the last one in js_main.js
- * 
+ *
  */
 $(document).ready(function() {
-	
+
 	// Start Tooltips, @see http://plugins.learningjquery.com/cluetip/
 	if ( typeof show_tooltip == 'undefined' || show_tooltip != false )
 	{
 		$('a.help').cluetip({width: '200px', cluetipClass: 'rounded', dropShadow: false,  sticky: false, closePosition: 'bottom', /* */ arrows: true});
 	}
-	  
+
 });
-
-
-
-// comment to end of line -->
-<!--//--></SCRIPT>
