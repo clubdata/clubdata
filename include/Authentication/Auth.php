@@ -33,11 +33,6 @@
  * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. */
 
 /**
- *
- */
-require_once('include/compat/compat.php');
-
-/**
  * Need a valid username/password pair.
  *
  * @access public
@@ -248,8 +243,6 @@ class Auth {
 		session_set_cookie_params($this->_options['cookieLifetime'],
 		$this->_options['cookiePath'], $this->_options['cookieDomain']);
 		session_start();
-//		$_SESSION[$this->_options['sessionVariable']] = ${$this->_options['sessionVariable']};
-		//session_register($this->_options['sessionVariable']);
 
 		if (!isset($_SESSION)) { // PHP 4.0.x
 			$_SESSION = &$GLOBALS['HTTP_SESSION_VARS'];

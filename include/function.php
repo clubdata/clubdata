@@ -60,8 +60,6 @@ ini_set('include_path', ini_get('include_path') . "$sep" .
                         SCRIPTROOT . "$sep" .
                         SCRIPTROOT . "/include/phpmailer");
 
-require_once('compat/compat.php');
-
 // FD20101118: Will be defined later by database !
 //$suppLangs = array("UK", "DE", "FR", "NL");
 
