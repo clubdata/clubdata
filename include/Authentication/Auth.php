@@ -373,8 +373,9 @@ class Auth {
 
             // Get Tablenames used (Check if tables have already a prefix or not)
             $tableNamesArr = $this->conn->MetaTables('TABLES');
+            $tableName = clubdata_mysqli::replaceDBprefix($this->tableNames['USERS'], DB_TABLEPREFIX);
 
-            if (array_lsearch(clubdata_mysqli::replaceDBprefix($this->tableNames['USERS'], DB_TABLEPREFIX), $tableNamesArr) === false) {
+            if (array_search(strtolower($tableName), array_map('strtolower', $tableNamesArr)) === false) {
                 $this->tableNames['USERS']         = 'Users';
                 $this->tableNames['MEMBERS']       = 'Members';
                 $this->tableNames['Log']           = 'Log';

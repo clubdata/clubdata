@@ -47,28 +47,6 @@ function cryptPassword($password) {
     return (empty($password)) ? "** EMPTY PASSWORD **" : md5($password);
 }
 
-if (!function_exists("array_lsearch")) {
-    function array_lsearch($str, $array) {
-        $found = array();
-
-        foreach ($array as $k => $v) {
-            if (strtolower($v) == strtolower($str)) {
-                $found[] = $v;
-            }
-        }
-
-        $f = count($found);
-
-        if ($f === 0) {
-            return false;
-        } elseif ($f === 1) {
-            return $found[0];
-        } else {
-            return $found;
-        }
-    }
-}
-
 function getClubUserInfo($field, $user = "") {
     global $auth;
 
