@@ -1,3 +1,5 @@
+{math equation="100/numCols" numCols=$headArr|@count assign="width"}
+
 {foreach name=headers item=headerItem from=$headArr}
     {assign var="align" value="center"}
 
@@ -7,5 +9,7 @@
         {assign var="align" value="right"}
     {/if}
 
-    <span>{$headerItem}</span>
+    <div class="page-title-item" style="width: {$width}%; text-align: {$align};">
+        {$headerItem}
+    </div>
 {/foreach}

@@ -355,7 +355,7 @@ class Auth {
      */
     protected function connect() {
         if ($this->conn === null) {
-            $conn = &ADONewConnection($this->dbdriver);
+            $conn = ADONewConnection($this->dbdriver);
 
             if ($conn === null) {
                 trigger_error("$this->dbdriver is not supported", E_USER_ERROR);

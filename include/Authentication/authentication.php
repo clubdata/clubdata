@@ -56,7 +56,7 @@ function getClubUserInfo($field, $user = "") {
         $auth->forceLogin();
     }
 
-    return($auth->user[$field]);
+    return null;
 }
 
 /**

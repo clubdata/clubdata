@@ -15,28 +15,19 @@
  * class to show copyright of clubdata
  * @package Main
  */
-class vCopyright extends CdBase{
+class vCopyright extends CdBase {
 
-    var $smarty;
-    var $formsgeneration;
-
-    function vCopyright($db, &$smarty, &$formsgeneration)
-    {
+    public function __construct($db, $smarty, $formsgeneration) {
         $this->db = $db;
         $this->smarty = &$smarty;
         $this->formsgeneration = &$formsgeneration;
     }
-    
-    function getSmartyTemplate()
-    {
+
+    public function getSmartyTemplate() {
         return("main/v_Copyright.inc.tpl");
     }
 
-    function setSmartyValues()
-    {
-        $this->smarty->assign_by_ref('CopyrightTxt', file_get_contents("COPYING"));
+    public function setSmartyValues() {
+        $this->smarty->assign('CopyrightTxt', file_get_contents("LICENSE"));
     }
-
 }
-
-?>
