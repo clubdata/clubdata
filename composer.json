@@ -2,9 +2,6 @@
     "name": "clubdata/clubdata",
     "description": "A Club member administration tool written in PHP using a MySQL database.",
     "type": "project",
-    "require-dev": {
-        "squizlabs/php_codesniffer": "*"
-    },
     "license": "GPL-2.0",
     "authors": [
         {
@@ -12,5 +9,19 @@
             "email": "franz.domes@gmx.de"
         }
     ],
-    "require": {}
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https:\/\/www.phpclasses.org\/"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "~2.6.30",
+        "adodb/adodb-php": "^5.20",
+        "phpclasses/formsgeneration": "^1.0",
+        "phpclasses/mimemessage": "^1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    }
 }

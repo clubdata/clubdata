@@ -9,9 +9,9 @@
 /**
  *
  */
-require("Tools/mimemessage/email_message.php");
-require("Tools/mimemessage/smtp_message.php");
-require("Tools/mimemessage/smtp.php");
+require("vendor/phpclasses/mimemessage/email_message.php");
+require("vendor/phpclasses/mimemessage/smtp_message.php");
+require("vendor/phpclasses/mimemessage/smtp.php");
 
 /**
  * The Email Send Base class
@@ -396,7 +396,7 @@ _EOT_;
         {
         	$emailID = $this->db->Insert_ID();
         }
-        
+
         return $emailID;
     }
 

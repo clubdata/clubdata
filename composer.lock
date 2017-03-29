@@ -4,8 +4,304 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d49743fea995689c89da53ca7422c95",
-    "packages": [],
+    "content-hash": "6177543715667b1edc9d112c5af47ae7",
+    "packages": [
+        {
+            "name": "adodb/adodb-php",
+            "version": "v5.20.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ADOdb/ADOdb.git",
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/f601748cca1ccb86dfd427620a1692a70e681075",
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "adodb.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "John Lim",
+                    "email": "jlim@natsoft.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "Damien Regad",
+                    "role": "Current maintainer"
+                },
+                {
+                    "name": "Mark Newnham",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ADOdb is a PHP database abstraction layer library",
+            "homepage": "http://adodb.org/",
+            "keywords": [
+                "abstraction",
+                "database",
+                "layer",
+                "library",
+                "php"
+            ],
+            "time": "2016-12-21T17:19:42+00:00"
+        },
+        {
+            "name": "phpclasses/formsgeneration",
+            "version": "1.0.22",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/formsgeneration.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "phpclasses/metabase": "1.0.8"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "forms.php",
+                    "form_date.php",
+                    "form_captcha.php",
+                    "form_linked_select.php",
+                    "form_mysql_linked_select.php",
+                    "form_metabase_linked_select.php",
+                    "form_mdb2_linked_select.php",
+                    "form_ajax_submit.php",
+                    "form_layout_vertical.php",
+                    "form_map_location.php",
+                    "form_auto_complete.php",
+                    "form_mysql_auto_complete.php",
+                    "form_metabase_auto_complete.php",
+                    "form_mdb2_auto_complete.php",
+                    "form_animation.php",
+                    "form_upload_progress.php",
+                    "form_custom_validation.php",
+                    "form_secure_submit.php",
+                    "form_layout_paged.php",
+                    "form_scaffolding.php",
+                    "blog_post_view.php",
+                    "blog_post_model.php",
+                    "form_html_editor.php",
+                    "form_list_select.php",
+                    "form_crud.php",
+                    "form_recaptcha.php",
+                    "blog_post_data_source.php",
+                    "test_crud_input.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/metabase",
+            "version": "1.0.8",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/metabase.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "phpclasses/xmlparser": "1.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "metabase_database.php",
+                    "metabase_manager.php",
+                    "metabase_msql.php",
+                    "metabase_mysql.php",
+                    "metabase_oci.php",
+                    "metabase_odbc.php",
+                    "metabase_parser.php",
+                    "metabase_pgsql.php",
+                    "metabase_template.php",
+                    "metabase_mssql.php",
+                    "metabase_ifx.php",
+                    "metabase_ibase.php",
+                    "metabase_lob.php",
+                    "metabase_odbc_msaccess.php",
+                    "metabase_sqlite.php",
+                    "manager_database.php",
+                    "manager_mysql.php",
+                    "manager_oci.php",
+                    "manager_mssql.php",
+                    "manager_pgsql.php",
+                    "manager_odbc.php",
+                    "manager_ibase.php",
+                    "manager_ifx.php",
+                    "manager_msql.php",
+                    "manager_odbc_msaccess.php",
+                    "manager_sqlite.php",
+                    "manager_mysqli.php",
+                    "metabase_mysqli.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/mimemessage",
+            "version": "1.0.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/mimemessage.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "phpclasses/smtpclass": "1.0.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "email_message.php",
+                    "sendmail_message.php",
+                    "smtp_message.php",
+                    "qmail_message.php",
+                    "pickup_message.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/phpresolver",
+            "version": "1.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/phpresolver.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "DNS.php",
+                    "rrcompat.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/sasl",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/sasl.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "sasl.php",
+                    "plain_sasl_client.php",
+                    "login_sasl_client.php",
+                    "cram_md5_sasl_client.php",
+                    "ntlm_sasl_client.php",
+                    "basic_sasl_client.php",
+                    "digest_sasl_client.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/smtpclass",
+            "version": "1.0.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/smtpclass.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "phpclasses/phpresolver": "1.0.1",
+                "phpclasses/sasl": ">=1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "smtp.php"
+                ]
+            }
+        },
+        {
+            "name": "phpclasses/xmlparser",
+            "version": "1.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://www.phpclasses.org/install/package/xmlparser.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "xml_parser.php"
+                ]
+            }
+        },
+        {
+            "name": "smarty/smarty",
+            "version": "v2.6.30",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smarty-php/smarty.git",
+                "reference": "c5c9d6514ceaf15fe35345886668726829560f93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/c5c9d6514ceaf15fe35345886668726829560f93",
+                "reference": "c5c9d6514ceaf15fe35345886668726829560f93",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "libs/Smarty.class.php",
+                    "libs/Smarty_Compiler.class.php",
+                    "libs/Config_File.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Monte Ohrt",
+                    "email": "monte@ohrt.com"
+                },
+                {
+                    "name": "Uwe Tews",
+                    "email": "uwe.tews@googlemail.com"
+                }
+            ],
+            "description": "Smarty - the compiling PHP template engine",
+            "homepage": "http://www.smarty.net",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-07-19T18:31:12+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "squizlabs/php_codesniffer",

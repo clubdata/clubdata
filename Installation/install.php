@@ -222,7 +222,7 @@ function checkWritePermission($state) {
         $errdirArr[] = dirname($_SERVER["SCRIPT_FILENAME"]) . "/configuration.sample.php";
     }
 
-    foreach (array('style/newstyle/templates_c', 'style/newstyle/cache') as $tmpDir) {
+    foreach (array('style/fresh/templates_c', 'style/fresh/cache') as $tmpDir) {
         if (!is__writable($tmpRootPath . "/" . $tmpDir)) {
             $errdirArr[] = _realpath($tmpRootPath . "/" . $tmpDir) . " [ROOT: {$tmpRootPath}, PATH: {$tmpDir}]";
         }
@@ -248,9 +248,9 @@ function checkWritePermission($state) {
 
 function getLanguages() {
     if (function_exists('preg_filter')) {
-        $filesArr = preg_filter("/^([A-Z]{2})\.php$/", "$1", scandir('../Language'));
+        $filesArr = preg_filter("/^([A-Z]{2})\.php$/", "$1", scandir('../Language/UTF8'));
     } else {
-        $filesArr = preg_replace("/^([A-Z]{2})\.php$/", "$1", preg_grep("/^([A-Z]{2})\.php$/", scandir('../Language')));
+        $filesArr = preg_replace("/^([A-Z]{2})\.php$/", "$1", preg_grep("/^([A-Z]{2})\.php$/", scandir('../Language/UTF8')));
     }
 
     return $filesArr;

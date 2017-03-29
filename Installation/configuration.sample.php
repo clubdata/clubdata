@@ -52,7 +52,7 @@ if (get_magic_quotes_runtime()) {
  * Defines how to access Clubdata via the Browser.
  * LINKROOT is the directory relativ to your home directory of your homepage and should start with a slash (or backslash on Windows systems)
  */
-define("LINKROOT", "/Clubdata2");
+define("LINKROOT", "/");
 
 /**
  * Defines Path ADODB library
@@ -63,7 +63,7 @@ define("LINKROOT", "/Clubdata2");
  * (the tools are installed in the subdirectoy Tools)<BR>
  * The directories MUST end by a slash !!
  */
-define("ADODB_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/adodb/");
+define("ADODB_DIR", "{$_SERVER['DOCUMENT_ROOT']}/vendor/adodb/adodb-php");
 
 /**
  * Defines Path PHP2EXCEL library
@@ -74,7 +74,7 @@ define("ADODB_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/adodb/");
  * (the tools are installed in the subdirectoy Tools)<BR>
  * The directories MUST end by a slash !!
  */
-define("PHP2EXCEL_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/php2excel/");
+define("PHP2EXCEL_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Tools/php2excel/");
 
 /**
  * Defines Path SMARTY library
@@ -85,7 +85,7 @@ define("PHP2EXCEL_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/php2excel/"
  * (the tools are installed in the subdirectoy Tools)<BR>
  * The directories MUST end by a slash !!
  */
-define("SMARTY_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/Smarty-2.6.10/libs/");
+define("SMARTY_DIR", "{$_SERVER['DOCUMENT_ROOT']}/vendor/smarty/smarty/libs/");
 
 /**
  * Defines Path FORMSGENERATION library
@@ -96,7 +96,7 @@ define("SMARTY_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/Smarty-2.6.10/
  * (the tools are installed in the subdirectoy Tools)<BR>
  * The directories MUST end by a slash !!
  */
-define("FORMSGENERATION_DIR", "{$_SERVER['DOCUMENT_ROOT']}/Clubdata2/Tools/formsgeneration/");
+define("FORMSGENERATION_DIR", "{$_SERVER['DOCUMENT_ROOT']}/vendor/phpclasses/formsgeneration/");
 
 /**
  * Name of index.php file.
@@ -181,7 +181,7 @@ define("DEFAULT_LANGUAGE", "UK");
  * be choosen depending on the value.
  * Allowed values: UNIX and WINDOWS
  */
-define("SERVER_SYSTEM_TYPE", "UNIX");
+define("SERVER_SYSTEM_TYPE", "WINDOWS");
 
 /**
  * Define character set used
