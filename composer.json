@@ -22,7 +22,8 @@
         "phpclasses/mimemessage": "^1.0"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "bartlett/php-compatinfo": "^5.0.6"
     },
     "autoload": {
         "psr4": {
