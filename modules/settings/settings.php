@@ -78,7 +78,7 @@ class CdSettings extends CdBase
     *
     * @return integer false: User doesn't have permission, true: User has permission
     */
-    function getModulePerm()
+    function getModulePerm($action = '')
     {
         if ( !isLoggedIn() || getClubUserInfo("MemberOnly") === true )
         {
@@ -114,11 +114,11 @@ class CdSettings extends CdBase
     		case 'Settings':
         		$headTxt = lang("Settings");
         		break;
-        		
+
     		case 'Columns':
         		$headTxt = lang("Select Columns");
     			break;
-    			
+
     		case 'Personal':
         		$headTxt = lang("Personal settings");
     			break;

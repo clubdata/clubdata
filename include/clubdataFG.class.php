@@ -12,62 +12,45 @@
  *
  */
 require_once('include/function.php');
-require_once(FORMSGENERATION_DIR . 'forms.php');
-require_once(FORMSGENERATION_DIR . 'form_date.php');
-require_once(FORMSGENERATION_DIR . "plugins/prefilter.form.php");
 
 $clubdataFG_Output = '';
 $clubdataFG_Head = '';
 $clubdataFG_Javascript = '';
 
-function captureAndProcessOutput($string)
-{
+function captureAndProcessOutput($string) {
     global $clubdataFG_Output, $clubdataFG_Head, $clubdataFG_Javascript;
     static $state = 0;
 
-//    print("<PRE>"); print($state . ": " . htmlentities($string)); print("</PRE>");
-    if ( !strncasecmp($string, "<form",5) )
-    {
+    if (!strncasecmp($string, "<form", 5)) {
         $state = 1;
     }
-    switch ($state)
-    {
+
+    switch ($state) {
         case 0:
-            if (!strncasecmp($string, "<script",7))
-            {
+            if (!strncasecmp($string, "<script", 7)) {
                 $clubdataFG_Javascript .= $string;
                 $state = 2;
-            }
-            elseif (!strncasecmp($string, "</form>",7))
-            {
+            } elseif (!strncasecmp($string, "</form>", 7)) {
                 $state = 0; //FD20110101
-            }
-            else
-            {
+            } else {
                 $clubdataFG_Output .= $string;
             }
             break;
-
         case 1:
             $clubdataFG_Head .= $string;
-            if ( !strcmp($string, ">\n") )
-            {
+
+            if (!strcmp($string, ">\n")) {
                 $state = 0;
             }
             break;
-
         case 2:
-            if ( ($pos=stripos($string, "</script>")) !== false )
-            {
-                $clubdataFG_Javascript .= substr($string,0,$pos+10);
+            if (($pos=stripos($string, "</script>")) !== false) {
+                $clubdataFG_Javascript .= substr($string, 0, $pos+10);
                 $state = 0;
-            }
-            else
-            {
+            } else {
                 $clubdataFG_Javascript .= $string;
             }
             break;
-
         case 3:
             $state = 0;
             break;
@@ -80,8 +63,7 @@ function captureAndProcessOutput($string)
  */
 class clubdataFG extends form_class {
 
-function clubdataFG($name = 'tableforms')
-{
+    public function __construct($name = 'tableforms') {
         $errTxt = array();
 
         $this->NAME=$name;
@@ -138,77 +120,66 @@ function clubdataFG($name = 'tableforms')
 
         debug('FORMS', "[clubdataFG clubdataFG] $name");
 
-        if ( count($errTxt = array_filter($errTxt)) )
-        {
-            $str = join("<BR>",$errTxt);
-            $APerr->setFatal(__FILE__,__LINE__,$str);
+        if (count($errTxt = array_filter($errTxt))) {
+            $str = join("<BR>", $errTxt);
+            $APerr->setFatal(__FILE__, __LINE__, $str);
         }
     }
 
 
-    Function FetchOutput()
-    {
+    public function FetchOutput() {
         global $clubdataFG_Output;
 
         $arguments=array(
                 "Function"=>"captureAndProcessOutput",
                 "EndOfLine"=>$this->end_of_line
         );
+
         return(strlen($this->OutputError($this->Output($arguments))) ? "" : $clubdataFG_Output);
     }
 
-    function processFormsGeneration($smarty, $template)
-    {
-       global $clubdataFG_Output, $clubdataFG_Head, $clubdataFG_Javascript;
+    public function processFormsGeneration($smarty, $template) {
+        global $clubdataFG_Output, $clubdataFG_Head, $clubdataFG_Javascript;
 
         $clubdataFG_Output = $clubdataFG_Head = $clubdataFG_Javascript = '';
 
         $this->ResetFormParts();
-//         debug('MAIN', '[clubdataFG processFormsGeneration] template: ' . $template);
 
-        $smarty->assign_by_ref("form",$this);
+        $smarty->assign_by_ref("form", $this);
         $smarty->register_prefilter("smarty_prefilter_form");
         $op = $smarty->fetch("formsgeneration/" . $template);
         $smarty->unregister_prefilter("smarty_prefilter_form");
 
         $output = $this->FetchOutput();
 
-//         debug('MAIN', '[clubdataFG processFormsGeneration] op: ' . $op);
-//         debug('MAIN', '[clubdataFG processFormsGeneration] output: ' . $output);
 
         return $clubdataFG_Output;
     }
 
-    function getFormDefinition()
-    {
+    public function getFormDefinition() {
         global $clubdataFG_Head;
 
         return  $clubdataFG_Head;
     }
-    function getJavascriptDefinition()
-    {
+
+    public function getJavascriptDefinition() {
         global $clubdataFG_Javascript;
 
         return  $clubdataFG_Javascript;
     }
 
-    function addInput($a)
-    {
-//         if ( $a["NAME"] == "InitView" )
-//         {
-//             debug_backtr('FORMS');
-//         }
+    public function addInput($a) {
+        debug_r(
+            'FORMS',
+            $a,
+            "[clubdataFG addInput] " .
+            (array_key_exists('NAME', $a) ? $a["NAME"] : 'Kein Index NAME vorhanden') .
+            ", IsSet:" .
+            (array_key_exists('NAME', $a) ? (isset($this->inputs[$a["NAME"]]) ? 'TRUE' : 'FALSE') : '') . "a:"
+        );
 
-        debug_r('FORMS', $a, "[clubdataFG addInput] " . 
-        										( array_key_exists('NAME', $a) ? $a["NAME"] : 'Kein Index NAME vorhanden') . 
-        										", IsSet:" . 
-        										( array_key_exists('NAME', $a) ? 
-        											(isset($this->inputs[$a["NAME"]]) ? 'TRUE' : 'FALSE') : '') . "a:");
-//         debug_r('FORMS', $this->inputs, "[clubdataFG addInput] this->inputs");
-        if ( array_key_exists('NAME', $a) && isset($this->inputs[$a["NAME"]]) )
-        {
+        if (!(array_key_exists('NAME', $a) && isset($this->inputs[$a["NAME"]]))) {
+            return parent::addInput($a);
         }
-        else
-          return parent::addInput($a);
     }
 }

@@ -79,7 +79,7 @@ END
     exit(1);
 }
 
-require_once((defined('ADODB_DIR') ? (ADODB_DIR) : '') . 'adodb.inc.php');
+require 'vendor/autoload.php';
 include_once('include/clubdataDB.class.php');
 require_once((defined('PHP2EXCEL_DIR') ? (PHP2EXCEL_DIR) : '') . 'biff.php');
 require_once('include/clubdataSmarty.class.php');

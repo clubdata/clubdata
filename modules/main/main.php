@@ -71,7 +71,7 @@ class CdMain extends CdBase {
         return 'Main';
     }
 /**/
-    function getModulePerm($action)
+    function getModulePerm($action = '')
     {
       $viewObjName = "v" . $this->view;
       if ( class_exists($viewObjName) )
@@ -100,17 +100,16 @@ class CdMain extends CdBase {
     		case 'Impressum':
     				$headTxt = array(lang("Clubdata V2, the software for club member administration"));
     				break;
-    		
+
     		case 'Copyright':
     				$headTxt = array(lang("Copyright"));
     				break;
-    				
+
     		default:
     				$headTxt = parent::getHeaderText();
     				break;
     	}
-    	
+
     	return $headTxt;
     }
 }
-?>

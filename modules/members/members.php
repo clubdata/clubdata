@@ -73,7 +73,7 @@ class CdMembers extends CdBase {
     	{
     		return false;
     	}
-    	
+
         if ( $this->view == 'Help' )
         {
           return true;

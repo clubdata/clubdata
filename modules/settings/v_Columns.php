@@ -42,11 +42,10 @@ class vColumns extends Table {
     var $idField  = '`###_Members`.`MemberID`';
     var $smarty;
 
-    function vColumns($db, &$module)
-    {
+    function vColumns($db, &$module) {
         $this->module = &$module;
 
-        parent::Table($module->formsgeneration);
+        parent::__construct($module->formsgeneration);
 
         $this->db = $db;
         $this->smarty = &$module->smarty;
@@ -225,7 +224,7 @@ class vColumns extends Table {
 
         $this->smarty->assign_by_ref("heads", $this->headArr);
         $this->smarty->assign("mainform", $this->formsgeneration->processFormsGeneration($this->smarty,'columns.inc.tpl'));
-        $this->smarty->assign_by_ref("formDefinition", $this->formsgeneration->getFormDefinition());
+        $this->smarty->assign("formDefinition", $this->formsgeneration->getFormDefinition());
     }
 
 }

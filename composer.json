@@ -23,5 +23,11 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr4": "include/",
+        "files": [
+            "vendor/adodb/adodb-php/drivers/adodb-mysqli.inc.php"
+        ]
     }
 }

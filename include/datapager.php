@@ -69,7 +69,6 @@
 	$datapager->pagecount	// total number of pages of records using this page size
 
 ************************************/
-// require_once('adodb/adodb.inc.php');
 /**
  * @package Clubdata
  */
@@ -84,17 +83,17 @@ class datapager{
     var $page;
     var $recordcount;
     var $querydone;
-    
+
     function datapager($conn = 0, $query  = "", $pagesize = 10, $countquery = ""){
             $this->connection = $conn;
             $this->querydone = false;
             $this->pagesize = $pagesize;
             $this->loadquery($query, $pagesize, $countquery);
     }
-    
+
     function loadquery($query, $pagesize=0, $countquery=""){
         global $APerr;
-        
+
         $this->querydone = false;
         if( $pagesize > 0 )$this->pagesize = $pagesize;
         $this->results = $this->pagecount = $this->page = $this->recordcount = 0;
@@ -111,7 +110,7 @@ class datapager{
                     $APerr->setFatal(__FILE__,__LINE__,$this->connection->ErrorMsg(),"SQL: $this->mainquery");
                     return false;
                 }
-                
+
                 $this->recordcount = $res->RecordCount();
                 $this->pagecount = ceil($this->recordcount / $this->pagesize);
                 $this->page = 1;
@@ -119,10 +118,10 @@ class datapager{
                 return true;
             }else{
                 $this->countquery = $countquery;
-    
+
     //          echo "MAINQUERY: $this->mainquery<BR>COUNTQUERY: $this->countquery<BR>";
                 if( $this->connection ){
-        
+
                     $res = $this->connection->Execute($this->countquery);
                     if ($res === false )
                     {
@@ -177,7 +176,7 @@ class datapager{
 
     function execute( $page = 1, $pagesize = 10){
     global $APerr;
-    
+
             if( $this->querydone == false )
     {
         echo "NO QUERYDONE<BR>\n";

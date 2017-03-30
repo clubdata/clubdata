@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6177543715667b1edc9d112c5af47ae7",
+    "hash": "b267ca7fa4a4c83a26329f165719aa03",
+    "content-hash": "168091330e109991bb9374c874189de4",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -58,7 +59,7 @@
                 "library",
                 "php"
             ],
-            "time": "2016-12-21T17:19:42+00:00"
+            "time": "2016-12-21 17:19:42"
         },
         {
             "name": "phpclasses/formsgeneration",
@@ -299,7 +300,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-07-19T18:31:12+00:00"
+            "time": "2016-07-19 18:31:12"
         }
     ],
     "packages-dev": [
@@ -379,7 +380,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-03-01T22:17:45+00:00"
+            "time": "2017-03-01 22:17:45"
         }
     ],
     "aliases": [],

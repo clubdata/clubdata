@@ -98,6 +98,8 @@
 define('INSTDEBUG', 0);
 define('INSTDEBUGFILE', "../tmp/clubdata.install.log");
 
+require '../vendor/autoload.php';
+
 function debug() {
     if (INSTDEBUG != 0) {
         $args = func_get_args();
@@ -362,7 +364,6 @@ if (isset($_POST['ACTION']) && ($_POST['ACTION'] == 'SAVE' || $_POST['ACTION'] =
             break;
         case 'DBLOAD':
             require_once("./configuration.sample.php");
-            require_once("../Tools/adodb/adodb.inc.php");
             require_once("../include/clubdataDB.class.php");
 
             $host = DB_HOST;

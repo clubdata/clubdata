@@ -46,9 +46,7 @@ class vPersonal extends Table {
     {
         $this->module = &$module;
 
-        parent::Table($formsgeneration);
-
-        parent::Table($module->formsgeneration);
+        parent::__construct($module->formsgeneration);
 
         $this->db = $db;
         $this->smarty = &$module->smarty;
@@ -67,7 +65,7 @@ class vPersonal extends Table {
 
     function setSmartyValues()
     {
-      $this->smarty->assign_by_ref("mainform", $this->formsgeneration->processFormsGeneration($this->smarty,'table.inc.tpl'));
+      $this->smarty->assign("mainform", $this->formsgeneration->processFormsGeneration($this->smarty,'table.inc.tpl'));
     }
 
     function doAction($action)

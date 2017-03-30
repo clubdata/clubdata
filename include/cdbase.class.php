@@ -282,7 +282,7 @@ class CdBase
 		$this->getCurrentView() . ")");
 
 		$this->smarty->assign('demoMode', DEMOMODE);
-		
+
 		/* get navigator view */
 		$this->smarty->assign('navigatorMenu', $_SESSION['navigator_menu']);
 
