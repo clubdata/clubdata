@@ -25,7 +25,9 @@
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
-        "psr4": "include/",
+        "psr4": {
+            "Clubdata\\": "include/"
+        },
         "files": [
             "vendor/adodb/adodb-php/drivers/adodb-mysqli.inc.php"
         ]
