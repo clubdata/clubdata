@@ -12,6 +12,7 @@
  *
  */
 require_once('include/function.php');
+require_once(FORMSGENERATION_DIR . "smarty/2/plugins/prefilter.form.php");
 
 $clubdataFG_Output = '';
 $clubdataFG_Head = '';

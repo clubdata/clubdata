@@ -55,6 +55,8 @@ if (!defined("SCRIPTROOT") )
 $sep = (SERVER_SYSTEM_TYPE == "UNIX") ? ":" : ";";
 
 ini_set('include_path', ini_get('include_path') . "$sep" .
+                        FORMSGENERATION_DIR . "$sep" .
+                        FORMSGENERATION_DIR . "smarty/2" . "$sep" .
                         PHP2EXCEL_DIR . "$sep" .
                         SCRIPTROOT . "$sep" .
                         SCRIPTROOT . "/include/phpmailer");

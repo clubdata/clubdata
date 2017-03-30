@@ -97,7 +97,7 @@ INSERT INTO `###_Configuration` (`id`, `name`, `value`, `Description_UK`, `Descr
 (19, 'EasySearch', 'Addresses_1.Firstname, Addresses_1.Lastname, Addresses_2.FirmName_ml', 'Columns of the table Members, which will be shown for easy search', 'Spalten aus der Tabelle Members die bei einfacher Suche angezeigt werden', ''),
 (20, 'Countrycode', 'D', 'Countrycode of the Club', 'Landeskennung des Clubs', 'code du pays du club'),
 (21, 'TabsShown', 'Overview;Memberinfo;Addresses;Payments;Fees;Emails;Conferences', 'Tabs shown on Member Navigator; Defines also Order of Tabs', 'Tabulatoren die beim Mitglied angezeigt werden; Legt auch die Reihenfolge fest', ''),
-(22, 'Style', 'newstyle', 'Style used to display', 'Stil der Anzeige', ''),
+(22, 'Style', 'fresh', 'Style used to display', 'Stil der Anzeige', ''),
 (23, 'EmailAsHTML', '1', 'If 1, Show HTML-Editor for emails and send Emails as HTML', 'Wenn 1 wird HTML-Editor angezeigt und Emails als HTML versandt.', 'Si 1, un editeur HTML est affich? et les courriels sont envoy?s comme HTML'),
 (99, 'Clubdata_Version_DB', 'V2.03', 'Version of Clubdata Database, DO NOT EDIT!', 'Version der Clubdata Database, BITTE NICHT EDITIEREN !', ''),
 (24, 'InvoiceNumber', '1004', 'The next invoice number inserted when a new invoice (membership, conference) is generated', 'Die n?chste Rechnungsnummer. Sie wird vergeben wenn eine neue Rechnung (Mitglied, Konferenz) erzeugt wird', 'The next invoice number inserted when a new invoice (membership, conference) is generated'),

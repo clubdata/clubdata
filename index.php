@@ -48,7 +48,7 @@ ob_start();
 if (file_exists("include/configuration.{$_SERVER['SERVER_NAME']}.php")) {
     error_log("CONFIGURATION: Using file include/configuration.{$_SERVER['SERVER_NAME']}.php");
     include_once("include/configuration.{$_SERVER['SERVER_NAME']}.php");
-} else {
+} elseif (file_exists("include/configuration.php")) {
     error_log('CONFIGURATION: Using file include/configuration.php');
     include_once('include/configuration.php');
 }
@@ -85,7 +85,7 @@ require_once((defined('PHP2EXCEL_DIR') ? (PHP2EXCEL_DIR) : '') . 'biff.php');
 require_once('include/clubdataSmarty.class.php');
 require_once('include/error.class.php');
 // Global Error handling
-$APerr = new Error();
+$APerr = new ErrorHandler();
 
 require_once('include/Authentication/authentication.php');
 

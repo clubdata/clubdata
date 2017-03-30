@@ -36,6 +36,8 @@ if (get_magic_quotes_runtime()) {
     set_magic_quotes_runtime(0);
 }
 
+date_default_timezone_set('America/Sao_Paulo');
+
 /**
  * Defines Root of HTML-Documents. This overwrites the global $_SERVER['DOCUMENT_ROOT']
  *
@@ -150,17 +152,17 @@ define("DB_HOST", "localhost");
 /**
  * define name of clubdata database
  */
-define("DB_NAME", "Clubdata2a");
+define("DB_NAME", "clubdata");
 
 /**
  * define name of database user
  */
-define("DB_USER", "clubdata2a");
+define("DB_USER", "clubdata");
 
 /**
  * define password of database user
  */
-define("DB_PASSWD", "cluba");
+define("DB_PASSWD", "clubdata");
 
 /**
  * Prefix for database tables. All tables will begin by this prefix

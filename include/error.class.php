@@ -20,13 +20,13 @@ define("FATAL", 4);
 /**
  * @package Clubdata
  */
-class Error {
-    
+class ErrorHandler {
+
     var $errorMsg = array();
     var $errorLvl =  NONE;
     var $errorLvlTxt = array();
-    
-    function Error()
+
+    function ErrorHandler()
     {
         $this->errorLvlTxt[NONE]  = "OK";
         $this->errorLvlTxt[INFO]  = "Info";
@@ -34,12 +34,12 @@ class Error {
         $this->errorLvlTxt[ERROR] = "Error";
         $this->errorLvlTxt[FATAL] = "Fatal";
     }
-    
+
     function setError()
     {
         $paramArr = func_get_args();
         $this->errorMsg = array_merge($this->errorMsg, $paramArr);
-//         print("<PRE>"); print_r($paramArr); print_r($this->errorMsg); print("</PRE>");                                          
+//         print("<PRE>"); print_r($paramArr); print_r($this->errorMsg); print("</PRE>");
         $this->errorLvl = ($this->errorLvl < ERROR) ? ERROR : $this->errorLvl;
     }
 
@@ -48,9 +48,9 @@ class Error {
         $paramArr = func_get_args();
         $this->errorMsg = array_merge($this->errorMsg, $paramArr);
         $this->errorLvl = ($this->errorLvl < FATAL) ? FATAL : $this->errorLvl;
-        
+
         debug_backtr('MAIN');
-        
+
     }
     function setWarn()
     {
@@ -64,32 +64,32 @@ class Error {
         $this->errorMsg = array_merge($this->errorMsg, $paramArr);
         $this->errorLvl = ($this->errorLvl < INFO) ? INFO : $this->errorLvl;
     }
-    
+
     function hasMessage()
     {
         return ( $this->errorLvl > NONE );
     }
-    
+
     function getMessages()
     {
         return ( $this->errorMsg );
     }
-    
+
     function resetError()
     {
         $this->errorMsg = array();
         $this->errorLvl =  NONE;
     }
-    
+
     function getErrorLvlTxt()
     {
         return $this->errorLvlTxt[$this->errorLvl];
     }
-    
+
     function getErrorLevel()
     {
         return $this->errorLvl;
     }
-}     
-        
+}
+
 ?>
