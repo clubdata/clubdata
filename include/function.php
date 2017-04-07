@@ -139,7 +139,9 @@ else
 }
 debug('MAIN', "CHARACTER_ENCODING: " . CHARACTER_ENCODING . ", LANG: $langFile<BR>");
 
-define("HELP_CONTEXT_FILE", INDEX_PHP . "?mod=help&view=Context");
+$app = \Clubdata\Application::instance();
+
+define("HELP_CONTEXT_FILE", $app->getNavigation()->getURL('help-context'));
 
 /**
  * function openDB
@@ -519,9 +521,15 @@ function icT($text)
  * @param string $subsection
  * @param string $text
  */
-function createHelpLink($section, $subsection, $text)
-{
-    $link = INDEX_PHP . "?mod=help&head=$text&cat=$section&subcat=$subsection";
+function createHelpLink($section, $subsection, $text) {
+    global $app;
+
+    $link = $app->getNavigation()->getUrl('help', array(
+        'head'   => $text,
+        'cat'    => $section,
+        'subcat' => $subsection
+    ));
+
     $txt = "<a class=help title='" . lang($text) . "' rel='{$link}&mode=tooltip' href=\"#\" onclick=\"openHelp('$link')\">";
 
     return $txt;

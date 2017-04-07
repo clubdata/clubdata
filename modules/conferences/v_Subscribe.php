@@ -45,6 +45,8 @@ require_once("include/subscription.class.php");
  */
 class vSubscribe {
 
+    private $app;
+
     public $memberID;
     public $db;
     public $conferenceObj;
@@ -63,6 +65,8 @@ class vSubscribe {
 
     public function __construct($db, $memberID, $conferenceObj, $initView, $smarty, $formsgeneration) {
         global $APerr;
+
+        $this->app = \Clubdata\Application::instance();
 
         debug_r(
             'M_CONFERENCES',
@@ -167,8 +171,7 @@ class vSubscribe {
                     $this->subscriptionObj->insertRecord($this->memberID, $this->conferenceObj->conferenceID, $numPersons);
                 }
 
-                header('Location: ' . INDEX_PHP . "?mod=members&view=Conferences");
-                exit;
+                $this->app->getNavigation()->redirectTo('members-conferences');
         }
 
         return $retVal;

@@ -23,6 +23,8 @@ require_once("include/dblist.class.php");
  */
 class vList {
 
+    private $app;
+
     public $memberID;
     public $db;
     public $mlist;
@@ -33,6 +35,8 @@ class vList {
     public $formsgeneration;
 
     public function __construct($db, $table, $key, $smarty, $formsgeneration) {
+        $this->app = \Clubdata\Application::instance();
+
         $this->db = $db;
         $this->table= $table;
         $this->smarty = $smarty;
@@ -52,6 +56,9 @@ class vList {
             $this->mlist = new DbList($db, $this->tableid);
         } else {
             debug('M_ADMIN', "[vList] Initialize View ({$key})");
+
+            $nav = $this->app->getNavigation();
+
             $this->mlist = new DbList(
                 $db,
                 $this->tableid,
@@ -63,8 +70,9 @@ class vList {
                     "selectedRows"  => (getConfigEntry($this->db, "CheckedCheckboxes") ? "ALL" : "NONE"),
                     //"maxRowsPerPage" => 20,
                     "listLinks" => array(
-                        "Detail" => INDEX_PHP . "?mod=admin&view=Detail&Table=$this->table",
-                        "Edit"   => INDEX_PHP . "?mod=admin&view=Edit&Table=$this->table",
+                        'Detail' => $nav->getUrl('admin-detail', array('Table' => $this->table)),
+                        'Edit'   => $nav->getUrl('admin-edit', array('Table' => $this->table)),
+                        'Delete' => $nav->getUrl('admin-list-delete', array('Table' => $this->table)),
                         "Delete" => INDEX_PHP . "?mod=admin&view=List&Action=DELETE&Table=$this->table"
                     ),
                     "linkParams" => "mod=admin&view=List&Table=$this->table"

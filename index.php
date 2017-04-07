@@ -87,6 +87,8 @@ require_once('include/error.class.php');
 // Global Error handling
 $APerr = new ErrorHandler();
 
+require_once 'include/navigation.php';
+
 require_once('include/Authentication/authentication.php');
 
 $auth = new Auth($options);
