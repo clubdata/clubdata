@@ -19,61 +19,59 @@ require("vendor/phpclasses/mimemessage/smtp.php");
  * @author Franz Domes <franz.domes@gmx.de>
  * @package Clubdata
  */
-class EmailSendBase
-{
+class EmailSendBase {
 
-    var $smarty;
-    var $formsgeneration;
+    public $smarty;
+    public $formsgeneration;
 
     /** @var handle database handle*/
-    var $db;
+    public $db;
 
     /** @var FROM header of email*/
-    var $from;
+    public $from;
 
     /** @var Full Name for FROM header of email*/
-    var $fromName;
+    public $fromName;
 
     /** @var REPLY-TO header of email*/
-    var $replyTo;
+    public $replyTo;
 
     /** @var Full Name for REPLY-TO header of email*/
-    var $replyToName;
+    public $replyToName;
 
     /** @var Address of mail server*/
-    var $mailHost;
+    public $mailHost;
 
     /** @var Needs mailserver authorization flag*/
-    var $smtpAuth;
+    public $smtpAuth;
 
     /** @var Username for authorization*/
-    var $username;
+    public $username;
 
     /** @var Password for authorization*/
-    var $password;
+    public $password;
 
     /** @var Mailer used for sending emails (SMTP)*/
-    var $mailer;
+    public $mailer;
 
     /** @var SMTP-Debug flag*/
-    var $smtpDebug;
+    public $smtpDebug;
 
     /** @var Send type of email (BCC, INDIV, PREVIEW)*/
-    var $emailSendType;
+    public $emailSendType;
 
     /** @var Object of email message class*/
-    var $emailMsgObj;
+    public $emailMsgObj;
 
     /** @var Send email as HTML flag*/
-    var $isHTML;
+    public $isHTML;
 
 
     /**
     * Constructor of class EmailBase
     * @return integer Always OK
     */
-    function EmailSendBase($db, $smarty, $formsgeneration)
-    {
+    public function EmailSendBase($db, $smarty, $formsgeneration) {
         $this->db = $db;
         $this->smarty = $smarty;
         $this->formsgeneration = $formsgeneration;
@@ -89,19 +87,21 @@ class EmailSendBase
         $this->mailer   = "smtp";
         $this->smtpDebug = false;
         $this->emailSendType = getConfigEntry($this->db, "EmailSendType");
-        $this->isHTML = (getConfigEntry($this->db,"EmailAsHTML") == "1");
+        $this->isHTML = (getConfigEntry($this->db, "EmailAsHTML") == "1");
 
         $this->emailMsgObj=new smtp_message_class;
 
-        $this->emailMsgObj->SetEncodedEmailHeader("From",$this->from,$this->fromName);
-        $this->emailMsgObj->SetEncodedEmailHeader("Reply-To",$this->replyTo, $this->replyToName);
+        $this->emailMsgObj->SetEncodedEmailHeader("From", $this->from, $this->fromName);
+        $this->emailMsgObj->SetEncodedEmailHeader("Reply-To", $this->replyTo, $this->replyToName);
         /*
         *  Set the Return-Path header to define the envelope sender address to which bounced messages are delivered.
         *  If you are using Windows, you need to use the smtp_message_class to set the return-path address.
         */
-        if(defined("PHP_OS") && strcmp(substr(PHP_OS,0,3),"WIN"))
-                $this->emailMsgObj->SetHeader("Return-Path",$this->from);
-        $this->emailMsgObj->SetEncodedEmailHeader("Errors-To",$this->from,$this->fromName);
+        if (defined("PHP_OS") && strcmp(substr(PHP_OS, 0, 3), "WIN")) {
+            $this->emailMsgObj->SetHeader("Return-Path", $this->from);
+        }
+
+        $this->emailMsgObj->SetEncodedEmailHeader("Errors-To", $this->from, $this->fromName);
 
         /* This computer address */
         $this->emailMsgObj->localhost= php_uname('n');
@@ -118,8 +118,7 @@ class EmailSendBase
         * case, set this variable with that sub-domain address. */
         $this->emailMsgObj->smtp_exclude_address="";
 
-        if ( getConfigEntry($this->db, "SMTPAuthorizing" ) )
-        {
+        if (getConfigEntry($this->db, "SMTPAuthorizing")) {
             /* authentication user name */
             $this->emailMsgObj->smtp_user=$this->username;
 
@@ -137,54 +136,55 @@ class EmailSendBase
         return true;
     }
 
-    function emailFormular($optionArr = array())
-    {
+    public function emailFormular($optionArr = array()) {
         global $APerr;
 
         $errTxt = array();
 
         $errTxt[] .= $this->formsgeneration->AddInput(array(
-                        "TYPE"=>"hidden",
-                        "NAME"=>'WRAP="VIRTUAL"Mailingtype',
-                        "ID"=>'Mailingtype',
-                        "VALUE"=>isset($optionArr["mailingType"]) ? $optionArr["mailingType"] : '',
-        				"Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true,
-                        ));
+            "TYPE"       => "hidden",
+            "NAME"       => 'WRAP="VIRTUAL"Mailingtype',
+            "ID"         => 'Mailingtype',
+            "VALUE"      => isset($optionArr["mailingType"]) ? $optionArr["mailingType"] : '',
+            "Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true
+        ));
+
         $errTxt[] .= $this->formsgeneration->AddInput(array(
-                        "TYPE"=>"text",
-                        "NAME"=>'from',
-                        "ID"=>'from',
-                        "CLASS"=>"email",
-                        "SIZE"=>30,
-                        "LABEL"=>lang("From"),
-                        "VALUE"=>isset($optionArr["from"]) ? $optionArr["from"] : '',
-                        "Accessible"=>0
-                        ));
-        if ( !empty($this->replyTo) && $this->replyTo != $this->from )
-        {
+            "TYPE"       => "text",
+            "NAME"       => 'from',
+            "ID"         => 'from',
+            "CLASS"      => "email",
+            "SIZE"       => 30,
+            "LABEL"      => lang("From"),
+            "VALUE"      => isset($optionArr["from"]) ? $optionArr["from"] : '',
+            "Accessible" => 0
+        ));
+
+        if (!empty($this->replyTo) && $this->replyTo != $this->from) {
             $errTxt[] .= $this->formsgeneration->AddInput(array(
-                            "TYPE"=>"text",
-                            "NAME"=>'replyto',
-                            "ID"=>'replyto',
-                            "CLASS"=>"email",
-                            "SIZE"=>30,
-                            "LABEL"=>lang("Reply to"),
-                            "VALUE"=>isset($optionArr["replyTo"]) ? $optionArr["replyTo"] : '',
-        				"Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true,
-                            ));
+                "TYPE"       => "text",
+                "NAME"       => 'replyto',
+                "ID"         => 'replyto',
+                "CLASS"      => "email",
+                "SIZE"       => 30,
+                "LABEL"      => lang("Reply to"),
+                "VALUE"      => isset($optionArr["replyTo"]) ? $optionArr["replyTo"] : '',
+                "Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true
+            ));
         }
+
         $errTxt[] .= $this->formsgeneration->AddInput(array(
-                        "TYPE"=>"textarea",
-                        "NAME"=>'send_to',
-                        "ID"=>'send_to',
-                        "CLASS"=>"email",
-                        "STYLE"=>"height: 1cm;",
-                        "ROWS"=>30,
-                        "COLS"=>30,
-                        "LABEL"=>lang("To"),
-                        "VALUE"=>isset($optionArr["sendTo"]) ? $optionArr["sendTo"] : '',
-        				"Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true,
-                        ));
+            "TYPE"       => "textarea",
+            "NAME"       => 'send_to',
+            "ID"         => 'send_to',
+            "CLASS"      => "email",
+            "STYLE"      => "height: 1cm;",
+            "ROWS"       => 30,
+            "COLS"       => 30,
+            "LABEL"      => lang("To"),
+            "VALUE"      => isset($optionArr["sendTo"]) ? $optionArr["sendTo"] : '',
+            "Accessible" => isset($optionArr["accessible"]) ? $optionArr["accessible"] : true,
+        ));
         $errTxt[] .= $this->formsgeneration->AddInput(array(
                         "TYPE"=>"textarea",
                         "NAME"=>'send_cc',
@@ -277,19 +277,18 @@ class EmailSendBase
         }
     }
 
-    function insertEmailsMemberRelation($emailID, $mailinglist,$mailingType)
-    {
+    public function insertEmailsMemberRelation($emailID, $mailinglist, $mailingType) {
         global $APerr;
 
-        $ok = true;
-        if ( empty($mailinglist) )
-        {
+
+        if (empty($mailinglist)) {
             // No emails sent
-            return NULL;
+            return null;
         }
+
         $mailinglist = "'" . preg_replace("/\s*,\s*/", "','", $mailinglist) . "'";
 
-        debug('M_MAIL',"[insertEmailsMemberRelation] MAILINGLIST: $mailinglist");
+        debug('M_MAIL', "[insertEmailsMemberRelation] MAILINGLIST: $mailinglist");
 
         $sql = <<<_EOT_
         SELECT `###_Members`.MemberID
@@ -303,30 +302,27 @@ class EmailSendBase
 _EOT_;
         debug('M_MAIL', "[insertEmailsMemberRelation] SQL: $sql");
 
-         $ok = true;
-         if ( ($MemberIdArr = $this->db->GetCol($sql)) === false)
-         {
-            $APerr->setFatal(__FILE__,__LINE__,$this->db->errormsg(),"SQL: $sql");
-            $ok = false;
-         }
-         else
-         {
-            foreach ( $MemberIdArr as $val )
-            {
-                debug('M_MAIL',"Inserting Email %s to Member %s", $emailID, $val);
-                $sql = "INSERT INTO `###_Members_Emails` VALUES ($val, $emailID)";
-                if ( $this->db->Execute($sql) === false )
-                {
-                    $APerr->setFatal(__FILE__,__LINE__,$this->db->errormsg(),"SQL: $sql");
-                    $ok = false;
-                }
+        if (($MemberIdArr = $this->db->GetCol($sql)) === false) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: $sql");
+            return false;
+        }
+
+        $error = false;
+
+        foreach ($MemberIdArr as $val) {
+            debug('M_MAIL', "Inserting Email %s to Member %s", $emailID, $val);
+            $sql = "INSERT INTO `###_Members_Emails` VALUES ({$val}, {$emailID})";
+
+            if ($this->db->Execute($sql) === false) {
+                $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: $sql");
+                $error = true;
             }
         }
-        return $ok;
+
+        return !$error;
     }
 
-    function setIndivBodyText($emailTo, $bodyTXT)
-    {
+    public function setIndivBodyText($emailTo, $bodyTXT) {
         global $APerr;
 
         $sql = <<<_EOT_
@@ -336,35 +332,28 @@ _EOT_;
             AND FirmEmail = '$emailTo' OR PrivatEmail = '$emailTo'
 _EOT_;
 
-        $anArr = $this->db->GetRow($sql)  or
-                $APerr->setFatal(__FILE__,__LINE__,$this->db->errormsg(),"SQL: $sql");
+        $anArr = $this->db->GetRow($sql) or
+                $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: $sql");
 
 
-        foreach ($anArr as $key => $val)
-        {
-            //echo "KEY: $key => $val<BR>";
+        foreach ($anArr as $key => $val) {
             $$key = $val;
         }
 
-        eval("\$bodyTXT1 = \"$bodyTXT\";");
-        //echo "BODY1:<BR>$bodyTXT1<BR>\n";
+        $bodyTXT1 = (string) $bodyTXT;
 
         return $bodyTXT1;
     }
 
-    function br2nl( $data )
-    {
-        return preg_replace( array('!<br.*>!iU',
-                                    '!<P>!iU',
-                                    '!</P>!iU'),
-                                array("\n",
-                                    "\n\n",
-                                    ""),
-                                $data );
+    public function br2nl($data) {
+        return preg_replace(
+            array('!<br.*>!iU', '!<P>!iU', '!</P>!iU'),
+            array("\n", "\n\n", ""),
+            $data
+        );
     }
 
-    function insertEmailToDB($send_to, $send_cc, $send_bcc, $subject, $body, $attachments, $mailingtype)
-    {
+    public function insertEmailToDB($send_to, $send_cc, $send_bcc, $subject, $body, $attachments, $mailingtype) {
         global $APerr;
 
         $sqlTxt = <<<_EOT_
@@ -377,33 +366,30 @@ _EOT_;
             );
 _EOT_;
 
-        $sql = sprintf($sqlTxt,
-                        $this->db->qstr(getConfigEntry($this->db, "Email") . " (". getConfigEntry($this->db, "Emailname") . ")"),
-                        $this->db->qstr($send_to),
-                        $this->db->qstr($send_cc),
-                        $this->db->qstr($send_bcc),
-                        $this->db->qstr($subject),
-                        $this->db->qstr($body),
-                        $this->db->qstr($attachements),
-                        $this->db->qstr($mailingtype));
+        $sql = sprintf(
+            $sqlTxt,
+            $this->db->qstr(getConfigEntry($this->db, "Email") . " (". getConfigEntry($this->db, "Emailname") . ")"),
+            $this->db->qstr($send_to),
+            $this->db->qstr($send_cc),
+            $this->db->qstr($send_bcc),
+            $this->db->qstr($subject),
+            $this->db->qstr($body),
+            $this->db->qstr($attachments),
+            $this->db->qstr($mailingtype)
+        );
 
-        if ( $this->db->Execute($sql) === false)
-        {
-            $APerr->setFatal(__FILE__,__LINE__,$this->db->errormsg(),"SQL: $sql");
+        if ($this->db->Execute($sql) === false) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: $sql");
             $emailID = false;
-        }
-        else
-        {
-        	$emailID = $this->db->Insert_ID();
+        } else {
+            $emailID = $this->db->Insert_ID();
         }
 
         return $emailID;
     }
 
-    function replaceImagesAsInline($bodyTxt, &$imgArr)
-    {
-        function doReplaceImagesAsInline($tag, &$imgArr)
-        {
+    public function replaceImagesAsInline($bodyTxt, &$imgArr) {
+        function doReplaceImagesAsInline($tag, &$imgArr) {
             /*
             *  An HTML message that requires any dependent files to be sent,
             *  like image files, style sheet files, HTML frame files, etc..,
@@ -416,43 +402,40 @@ _EOT_;
             *  the content type automatically from the file name.
             */
             // String file:// from beginning of string
-            if ( strpos($tag, "file://") !== false )
-            {
+            if (strpos($tag, "file://") !== false) {
                 $tag = substr($tag, 7);
             }
-            if ( ! is_file($tag) )
-            {
+
+            if (!is_file($tag)) {
                 echo "TAG: " . SCRIPTROOT . $tag . "<BR>$_SERVER[DOCUMENT_ROOT]$tag";
 
-                if (is_file(SCRIPTROOT . $tag) )
-                {
+                if (is_file(SCRIPTROOT . $tag)) {
                     $tag = SCRIPTROOT . $tag;
-                }
-                elseif(is_file($_SERVER["DOCUMENT_ROOT"] . $tag) )
-                {
+                } elseif (is_file($_SERVER["DOCUMENT_ROOT"] . $tag)) {
                     $tag = $_SERVER["DOCUMENT_ROOT"] . $tag;
                 }
-
             }
-            $image=array(
-                    "FileName"=>"$tag",
-                    "Content-Type"=>"automatic/name",
-                    "Disposition"=>"inline"
+
+            $image = array(
+                "FileName"     => (string) $tag,
+                "Content-Type" => "automatic/name",
+                "Disposition"  => "inline"
             );
-            $this->emailMsgObj->CreateFilePart($image,$image_part);
+
+            $this->emailMsgObj->CreateFilePart($image, $image_part);
 
             $imgArr[] = $image_part;
             print("imgArr = " . $imgArr[count($imgArr)-1] . "<BR>");
-    /*
-    *  Parts that need to be referenced from other parts,
-    *  like images that have to be hyperlinked from the HTML,
-    *  are referenced with a special Content-ID string that
-    *  the class creates when needed.
-    */
-            $image_content_id=$this->emailMsgObj->GetPartContentID($image_part);
 
-            print "IMG: $tag ($image_content_id)<BR>\n";
-            return $image_content_id;
+            /*
+             * Parts that need to be referenced from other parts, like images
+             * that have to be hyperlinked from the HTML, are referenced with a
+             * special Content-ID string that the class creates when needed.
+             */
+            $imageContentId = $this->emailMsgObj->GetPartContentID($image_part);
+
+            print "IMG: $tag ({$imageContentId})<BR>\n";
+            return $imageContentId;
         }
         print "START: $bodyTxt<BR><BR>\n";
         $imgArr = array();
@@ -462,63 +445,45 @@ _EOT_;
         return $bodyTxt;
     }
 
-    function addAttachments()
-    {
+    private function addAttachment($fileAttr) {
+        $attachment = array(
+            "FileName"     => $_FILES[$fileAttr]["tmp_name"],
+            "Name"         => $_FILES[$fileAttr]["name"],
+            "Content-Type" => $_FILES[$fileAttr]["type"],
+            "Disposition"  => "attachment"
+        );
+
+        $this->emailMsgObj->AddFilePart($attachment);
+        debug_r('M_MAIL', $attachment, "[addAttachments] {$fileAttr}:");
+    }
+
+    public function addAttachments() {
         $emailAttachedFiles = array();
-//         phpinfo(INFO_VARIABLES);
+
         /*
         *  One or more additional parts may be added as attachments.
         *  In this case a file part is added from data provided directly from this script.
         */
-        if ( !empty($_FILES["attachfile"]["name"]) )
-        {
-                $attachment=array(
-                        "FileName"=>$_FILES["attachfile"]["tmp_name"],
-                        "Name"=>$_FILES["attachfile"]["name"],
-                        "Content-Type"=>$_FILES["attachfile"]["type"],
-                        "Disposition"=>"attachment"
-                );
-                $this->emailMsgObj->AddFilePart($attachment);
-                $emailAttachedFiles[] =  $_FILES["attachfile"]["name"];
-                debug_r('M_MAIL',$attachment,"[addAttachments] Attachment1:");
-      }
-        if ( !empty($_FILES["attachfile1"]["name"]) )
-        {
-                $attachment=array(
-                        "FileName"=>$_FILES["attachfile1"]["tmp_name"],
-                        "Name"=>$_FILES["attachfile1"]["name"],
-                        "Content-Type"=>$_FILES["attachfile1"]["type"],
-                        "Disposition"=>"attachment"
-                );
-                $this->emailMsgObj->AddFilePart($attachment);
-                $emailAttachedFiles[] =  $_FILES["attachfile1"]["name"];
-                debug_r('M_MAIL',$attachment,"[addAttachments] Attachment2:");
+        if (!empty($_FILES["attachfile"]["name"])) {
+            $this->addAttachment('attachfile');
+            $emailAttachedFiles[] =  $_FILES["attachfile"]["name"];
         }
-        if ( !empty($_FILES["attachfile2"]["name"]) )
-        {
-                $attachment=array(
-                        "FileName"=>$_FILES["attachfile2"]["tmp_name"],
-                        "Name"=>$_FILES["attachfile2"]["name"],
-                        "Content-Type"=>$_FILES["attachfile2"]["type"],
-                        "Disposition"=>"attachment"
-                );
-                $this->emailMsgObj->AddFilePart($attachment);
-                $emailAttachedFiles[] =  $_FILES["attachfile2"]["name"];
-                debug_r('M_MAIL',$attachment,"[addAttachments] Attachment3:");
+
+        if (!empty($_FILES["attachfile1"]["name"])) {
+            $this->addAttachment('attachfile1');
+            $emailAttachedFiles[] =  $_FILES["attachfile1"]["name"];
         }
-        if ( !empty($_FILES["attachfile3"]["name"]) )
-        {
-                $attachment=array(
-                        "FileName"=>$_FILES["attachfile3"]["tmp_name"],
-                        "Name"=>$_FILES["attachfile3"]["name"],
-                        "Content-Type"=>$_FILES["attachfile3"]["type"],
-                        "Disposition"=>"attachment"
-                );
-                $this->emailMsgObj->AddFilePart($attachment);
-                $emailAttachedFiles[] =  $_FILES["attachfile3"]["name"];
-                debug_r('M_MAIL',$attachment,"[addAttachments] Attachment4:");
+
+        if (!empty($_FILES["attachfile2"]["name"])) {
+            $this->addAttachment('attachfile2');
+            $emailAttachedFiles[] =  $_FILES["attachfile2"]["name"];
         }
+
+        if (!empty($_FILES["attachfile3"]["name"])) {
+            $this->addAttachment('attachfile3');
+            $emailAttachedFiles[] =  $_FILES["attachfile3"]["name"];
+        }
+
         return $emailAttachedFiles;
     }
 }
-?>

@@ -42,7 +42,9 @@ class Memberinfo extends DbTable {
             $res = $db->Execute($sql);
             $mainArr = $res->FetchRow();
 
-            return "<a href=INDEX_PHP . '?mod=members&view=Overview&MemberID={$MemberID}'>{$MemberID} ({$mainArr['Lastname']}, {$mainArr['Firstname']})</a>";
+            $link = $app->getNavigation()->getUrl('members-overview', array('MemberID' => $MemberID));
+
+            return "<a href=\"{$link}\">{$MemberID} ({$mainArr['Lastname']}, {$mainArr['Firstname']})</a>";
         } else {
             return '';
         }

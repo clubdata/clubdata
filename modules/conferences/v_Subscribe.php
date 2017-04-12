@@ -44,27 +44,35 @@ require_once("include/subscription.class.php");
  * @package Conferences
  */
 class vSubscribe {
-    var $memberID;
-    var $db;
-    var $conferenceObj;
-    var $tableObj;
-    var $smarty;
-    var $formsgeneration;
 
-    var $subscriptionID;
+    private $app;
+
+    public $memberID;
+    public $db;
+    public $conferenceObj;
+    public $tableObj;
+    public $smarty;
+    public $formsgeneration;
+
+    public $subscriptionID;
 
     /**
      * Database row with information about actual subscription
      *
      * @var array
      */
-    var $subscriptionRow;
+    public $subscriptionRow;
 
-    function vSubscribe($db, $memberID, $conferenceObj, $initView, $smarty, $formsgeneration)
-    {
+    public function __construct($db, $memberID, $conferenceObj, $initView, $smarty, $formsgeneration) {
         global $APerr;
 
-        debug_r('M_CONFERENCES', $conferenceObj, "[Conferences, vSubscribe, vSubscribe], MemberID: $memberID, initView: $initView, conferenceObj:");
+        $this->app = \Clubdata\Application::instance();
+
+        debug_r(
+            'M_CONFERENCES',
+            $conferenceObj,
+            "[Conferences, vSubscribe, vSubscribe], MemberID: {$memberID}, initView: {$initView}, conferenceObj:"
+        );
         $this->db = $db;
         $this->memberID = $memberID;
         $this->conferenceObj = $conferenceObj;
@@ -76,84 +84,100 @@ class vSubscribe {
         $this->subscriptionID = getGlobVar('SubscriptionID', '::number::', 'PG');
         debug('M_CONFERENCES', "[Conferences, vSubscribe, vSubscribe], this->subscriptionID: {$this->subscriptionID}");
 
-        if ( empty($this->subscriptionID) )
-        {
-          debug('M_CONFERENCES', "[Conferences, vSubscribe, vSubscribe], conferenceObj->conferenceID: {$conferenceObj->conferenceID}");
-          if ( !empty($conferenceObj->conferenceID) )
-          {
-            $sql = "SELECT SubscriptionID, Conferences_ref, NumPersons FROM `###_Members_Conferences`
-                     WHERE MemberID = {$this->memberID}
-                       AND Conferences_ref = {$conferenceObj->conferenceID}";
+        if (empty($this->subscriptionID)) {
+            debug(
+                'M_CONFERENCES',
+                "[Conferences, vSubscribe, vSubscribe], conferenceObj->conferenceID: {$conferenceObj->conferenceID}"
+            );
 
-            $this->subscriptionRow = $this->db->GetRow($sql);
-            if ( $this->subscriptionRow === false )
-            {
-              $APerr->setFatal(sprintf(lang('Error in finding Subscription for conference %s'),$conferenceObj->conferenceID ));
+            if (!empty($conferenceObj->conferenceID)) {
+                $sql = "SELECT SubscriptionID,
+                               Conferences_ref,
+                               NumPersons
+                          FROM `###_Members_Conferences`
+                         WHERE MemberID = {$this->memberID}
+                               AND Conferences_ref = {$conferenceObj->conferenceID}";
+
+                $this->subscriptionRow = $this->db->GetRow($sql);
+
+                if ($this->subscriptionRow === false) {
+                    $APerr->setFatal(sprintf(
+                        lang('Error in finding Subscription for conference %s'),
+                        $conferenceObj->conferenceID
+                    ));
+                }
+
+                debug_r(
+                    'M_CONFERENCES',
+                    $this->subscriptionRow,
+                    "[Conferences, vSubscribe, vSubscribe], subscriptionRow:"
+                );
             }
-            debug_r('M_CONFERENCES', $this->subscriptionRow, "[Conferences, vSubscribe, vSubscribe], subscriptionRow:");
-          }
-          $this->subscriptionID = $this->subscriptionRow['SubscriptionID'];
+
+            $this->subscriptionID = $this->subscriptionRow['SubscriptionID'];
+        } else {
+            $sql = "SELECT SubscriptionID,
+                           Conferences_ref,
+                           NumPersons
+                      FROM `###_Members_Conferences`
+                     WHERE SubscriptionID = {$this->subscriptionID}";
+            $this->subscriptionRow = $this->db->GetRow($sql);
+
+            if ($this->subscriptionRow === false) {
+                debug(
+                    'M_CONFERENCES',
+                    "Error in finding Subscription for subscription {$this->subscriptionID}: " . $this->db->ErrorMsg()
+                );
+                $APerr->setFatal(sprintf(
+                    lang('Error in finding Subscription for subscription %s'),
+                    $this->subscriptionID
+                ));
+            }
         }
-        else
-        {
-          $sql = "SELECT SubscriptionID, Conferences_ref, NumPersons FROM `###_Members_Conferences`
-                   WHERE SubscriptionID = {$this->subscriptionID}";
-          $this->subscriptionRow = $this->db->GetRow($sql);
-          if ( $this->subscriptionRow === false )
-          {
-            debug('M_CONFERENCES',"Error in finding Subscription for subscription {$this->subscriptionID}: " . $this->db->ErrorMsg());
-            $APerr->setFatal(sprintf(lang('Error in finding Subscription for subscription %s'),$this->subscriptionID));
-          }
-        }
-        $this->subscriptionObj = new Subscription($this->db, $this->formsgeneration, array('SUBSCRIPTION_ID' => $this->subscriptionID));
+
+        $this->subscriptionObj = new Subscription(
+            $this->db,
+            $this->formsgeneration,
+            array('SUBSCRIPTION_ID' => $this->subscriptionID)
+        );
     }
 
-    function getSmartyTemplate()
-    {
+    public function getSmartyTemplate() {
         return 'conferences/v_Subscribe.inc.tpl';
     }
 
-    function setSmartyValues()
-    {
+    public function setSmartyValues() {
         $listArr = array('' => '') + (array)Subscription::getConferenceSelectionArr($this->db);
-//         print_r($listArr);
+
         $this->smarty->assign_by_ref("subscription", $listArr);
         $this->smarty->assign('SubscriptionID', $this->subscriptionID);
         $this->smarty->assign('subscriptionSelected', $this->subscriptionRow['Conferences_ref']);
         $this->smarty->assign('numPersons', $this->subscriptionRow['NumPersons']);
     }
 
-    function doAction($action)
-    {
-      global $APerr;
-      $retVal = false;
+    public function doAction($action) {
+        global $APerr;
+
+        $retVal = false;
 
 //         return $this->conferenceObj->updateRecord();
-      switch($action)
-      {
-        case 'SUBSCRIBE':
+        switch ($action) {
+            case 'SUBSCRIBE':
+                $numPersons = getGlobVar('numPart', '::number::', 'PG');
 
-          $numPersons = getGlobVar('numPart', '::number::', 'PG');
+                if (!empty($this->subscriptionID)) {
+                    $this->subscriptionObj->updateRecord($this->memberID, $this->conferenceObj->conferenceID, $numPersons);
+                } else {
+                    $this->subscriptionObj->insertRecord($this->memberID, $this->conferenceObj->conferenceID, $numPersons);
+                }
 
-          if ( !empty($this->subscriptionID) )
-          {
-            $this->subscriptionObj->updateRecord($this->memberID, $this->conferenceObj->conferenceID, $numPersons);
-          }
-          else
-          {
-            $this->subscriptionObj->insertRecord($this->memberID, $this->conferenceObj->conferenceID, $numPersons);
-          }
-          header('Location: ' . INDEX_PHP . "?mod=members&view=Conferences");
-          exit;
-          break;
-      }
-      return $retVal;
+                $this->app->getNavigation()->redirectTo('members-conferences');
+        }
+
+        return $retVal;
     }
 
-    function getHeadTxt()
-    {
+    public function getHeadTxt() {
         return lang("Subscribe conference");
     }
-
 }
-?>

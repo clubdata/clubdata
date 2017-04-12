@@ -19,6 +19,11 @@ require_once('include/function.php');
  */
 class DbTable extends Table {
 
+    /**
+     * @var \Clubdata\Application
+     */
+    protected $app;
+
     protected $db;     // DB connection
     protected $table;  // SQL command
     protected $where;  // ID
@@ -32,6 +37,8 @@ class DbTable extends Table {
 
     public function __construct($db, &$formsgeneration, $table, $where, $fields = '*') {
         parent::__construct($formsgeneration);
+
+        $this->app = \Clubdata\Application::instance();
 
         $this->db = $db;
         $this->table = $table;
