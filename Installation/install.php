@@ -208,11 +208,9 @@ function writeFile($filename, &$confFileArr) {
 }
 
 function checkWritePermission($state) {
-    unset($errdirArr);
+    $errdirArr = null; // FIXME There is no need for it if it is not a global and it should be a global
 
-    $tmpRootPath = (defined("SCRIPTROOT") && constant('SCRIPTROOT') != '')
-        ? constant('SCRIPTROOT')
-        : ($_SERVER[DOCUMENT_ROOT] . LINKROOT);
+    $tmpRootPath = (defined("SCRIPTROOT") && SCRIPTROOT) ? SCRIPTROOT : ($_SERVER['DOCUMENT_ROOT'] . LINKROOT);
 
     if (INSTDEBUG != 0 && file_exists(INSTDEBUGFILE) && ! is__writable(INSTDEBUGFILE)) {
         $errdirArr[] = _realpath(dirname(__FILE__) . "/" . INSTDEBUGFILE);
@@ -249,13 +247,7 @@ function checkWritePermission($state) {
 }
 
 function getLanguages() {
-    if (function_exists('preg_filter')) {
-        $filesArr = preg_filter("/^([A-Z]{2})\.php$/", "$1", scandir('../Language/UTF8'));
-    } else {
-        $filesArr = preg_replace("/^([A-Z]{2})\.php$/", "$1", preg_grep("/^([A-Z]{2})\.php$/", scandir('../Language/UTF8')));
-    }
-
-    return $filesArr;
+    return preg_filter("/^([A-Z]{2})\.php$/", "$1", scandir('../Language/UTF8'));
 }
 
 # set_magic_quotes_runtime(0); is deprecated
