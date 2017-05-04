@@ -177,3 +177,35 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover {
 .column-3-1 {
     width: 33.33333333%;
 }
+
+/**** MESSAGES ****/
+.message {
+    background-color: #ddd;
+    margin: 5px 0;
+    padding: 15px;
+}
+
+.message-info {
+    background-color: #bcdff1;
+    color: #31708f;
+}
+
+.message-success {
+    background-color: #d0e9c6;
+    color: #3c763d;
+}
+
+.message-warning {
+    background-color: #faf2cc;
+    color: #8a6d3b;
+}
+
+.message-error {
+    background-color: #ebcccc;
+    color: #a94442;
+}
+
+.message-fatal {
+    background-color: #a94442;
+    color: #ebcccc;
+}

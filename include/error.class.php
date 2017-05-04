@@ -29,10 +29,10 @@ class ErrorHandler {
     function ErrorHandler()
     {
         $this->errorLvlTxt[NONE]  = "OK";
-        $this->errorLvlTxt[INFO]  = "Info";
-        $this->errorLvlTxt[WARN]  = "Warning";
-        $this->errorLvlTxt[ERROR] = "Error";
-        $this->errorLvlTxt[FATAL] = "Fatal";
+        $this->errorLvlTxt[INFO]  = "info";
+        $this->errorLvlTxt[WARN]  = "warning";
+        $this->errorLvlTxt[ERROR] = "error";
+        $this->errorLvlTxt[FATAL] = "fatal";
     }
 
     function setError()

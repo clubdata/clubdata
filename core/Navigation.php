@@ -13,16 +13,16 @@ class Navigation {
      */
     protected $routes = array();
 
-    public function addRoute($id, $module, $view = null, $action = null) {
-        $this->routes[$id] = new Route($module, $view, $action);
+    public function addRoute($name, $module, $view = null, $action = null) {
+        $this->routes[$name] = new Route($module, $view, $action);
     }
 
-    public function getRoute($id) {
-        return ($this->routes[$id]) ? $this->routes[$id] : null;
+    public function getRoute($name) {
+        return ($this->routes[$name]) ? $this->routes[$name] : null;
     }
 
-    public function getUrl($id, $params = array()) {
-        $route = $this->getRoute($id);
+    public function getUrl($name, $params = array()) {
+        $route = $this->getRoute($name);
 
         if ($route) {
             return $route->getUrl($params);
@@ -31,9 +31,9 @@ class Navigation {
         return ''; // TODO Do something when the route is not found. Give a 404 link, maybe?
     }
 
-    public function redirectTo($id, $params = array()) {
-        if ($this->routes[$id]) {
-            $this->routes[$id]->redirect($params);
+    public function redirectTo($name, $params = array()) {
+        if ($this->routes[$name]) {
+            $this->routes[$name]->redirect($params);
         }
     }
 }
