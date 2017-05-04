@@ -21,7 +21,7 @@ require_once('include/dbtable.class.php');
  */
 class Conferences extends DbTable {
 
-    public $db;
+    public $database;
     public $memberID;
     public $conferenceID;
     public $formsgeneration;
@@ -34,14 +34,14 @@ class Conferences extends DbTable {
      *
      * This constructor creates an instance of the class Conferences.
      *
-     * @param object $db Databaseobject
+     * @param object $database Databaseobject
      * @param object $formsgeneration Object of Formsgeneration
      * @param array $selectionArr Associative Array with either "MemberID" or "ConferenceID" as keys and the appropriate
      *                            IDs as values or as comma separated list
      */
-    public function __construct($db, $formsgeneration, $selectionArr = array()) {
+    public function __construct($database, $formsgeneration, $selectionArr = array()) {
         debug_r('M_CONFERENCES', $selectionArr, '[Class Conferences, Conferences] selectionArr=');
-        $this->db = $db;
+        $this->database = $database;
         $this->formsgeneration = $formsgeneration;
 
         if (isset($selectionArr['MemberID'])) {
@@ -50,7 +50,7 @@ class Conferences extends DbTable {
             $this->setConferencesByConferenceID($selectionArr['ConferenceID']);
         } else {
             // Set pseudo table whithout any selected entry (1=0) to initialize tablename and fieldlist
-            parent::__construct($this->db, $this->formsgeneration, '`###_Conferences`', "1=0", $this->fieldList);
+            parent::__construct($this->database, $this->formsgeneration, '`###_Conferences`', "1=0", $this->fieldList);
         }
     }
 
@@ -62,19 +62,18 @@ class Conferences extends DbTable {
             return false;
         }
 
-        if (is_array($this->conferenceID)) {
-            $where = "id IN (" . join(',', $this->conferenceID) . ")";
-        } else {
-            $where = "id IN (" . $this->conferenceID . ")";
-        }
+        $idList = ((is_array($this->conferenceID)) ? join(',', $this->conferenceID) : $this->conferenceID);
+        $where = "id IN (" . $idList . ")";
 
         // FIXME This shouldn't be done like this
-        parent::__construct($this->db, $this->formsgeneration, '`###_Conferences`', $where, $this->fieldList);
+        parent::__construct($this->database, $this->formsgeneration, '`###_Conferences`', $where, $this->fieldList);
 
         return true;
     }
 
     public function setConferencesByMemberID($memberID) {
+        global $APerr;
+
         $this->memberID = $memberID;
 
         if (empty($this->memberID)) {
@@ -82,7 +81,7 @@ class Conferences extends DbTable {
         }
 
         $sql = "SELECT id from `###_Conferences` WHERE MemberID = {$memberID}";
-        $idArr = $this->db->GetCol($sql);
+        $idArr = $this->database->GetCol($sql);
 
         debug_r(
             'M_CONFERENCES',
@@ -90,15 +89,15 @@ class Conferences extends DbTable {
             "[Class Conferences: setConferencesByMemberID] SQL: {$sql}, COUNT: " . count($idArr)
         );
 
-        if ($idArr === false && $this->db->ErrorNo() != 0) {
-            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: {$sql}");
+        if ($idArr === false && $this->database->ErrorNo() != 0) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->database->errormsg(), "SQL: {$sql}");
             return false;
         } else {
             $this->conferenceID = $idArr;
 
             // FIXME This shouldn't be done like this
             parent::__construct(
-                $this->db,
+                $this->database,
                 $this->formsgeneration,
                 '`###_Conferences`',
                 "MemberID IN ({$this->memberID})",
@@ -114,13 +113,13 @@ class Conferences extends DbTable {
     }
 
     public function getConferenceIDCount() {
-        if (empty($this->conferenceID)) {
-            return 0;
+        if (!empty($this->conferenceID)) {
+            return 1;
         } elseif (is_array($this->conferenceID)) {
             return count($this->conferenceID);
-        } else {
-            return 1;
         }
+
+        return 0;
     }
 
     public function getConferencesForInvoice($invoiceNumber) {
@@ -132,7 +131,7 @@ class Conferences extends DbTable {
 
         $idArr = array();
         $sql = "SELECT id FROM `###_Conferences` WHERE InvoiceNumber = '{$this->invoiceNumber}'";
-        $idArr = $this->db->GetCol($sql);
+        $idArr = $this->database->GetCol($sql);
 
         debug_r(
             'M_CONFERENCES',
@@ -140,18 +139,22 @@ class Conferences extends DbTable {
             "[Class Conferences: getConferencesForInvoice] SQL: $sql, COUNT: " . count($idArr)
         );
 
-        if ($idArr === false && $this->db->ErrorNo() != 0) {
-            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: {$sql}");
-        } else {
-            if (empty($idArr) || empty($idArr[0])) {
-                //Give up, enough is enough !!
-                $APerr->setFatal(sprintf(lang('No conferences found for invoice number %s'), $this->invoiceNumber));
-            } else {
-                $this->setConferencesByConferenceID($idArr);
-            }
+        if ($idArr === false && $this->database->ErrorNo() != 0) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->database->errormsg(), "SQL: {$sql}");
 
-            return $idArr;
+            return false;
         }
+
+        if (empty($idArr) || empty($idArr[0])) {
+            //Give up, enough is enough !!
+            $APerr->setFatal(sprintf(lang('No conferences found for invoice number %s'), $this->invoiceNumber));
+
+            return false;
+        }
+
+        $this->setConferencesByConferenceID($idArr);
+
+        return $idArr;
     }
 
     public function insertRecord() {
@@ -162,7 +165,6 @@ class Conferences extends DbTable {
 
         if (!empty($insertId)) {
             $this->setConferencesByConferenceID($insertId);
-            logEntry("INSERT", $sql);
         }
 
         return $insertId;
@@ -172,10 +174,10 @@ class Conferences extends DbTable {
         global $APerr;
 
         $sql = "DELETE FROM `###_Conferences` WHERE id IN (" . $this->getConferenceIDsAsList() . ")";
-        $retVal = $this->db->Execute($sql);
+        $retVal = $this->database->Execute($sql);
 
-        if ($retVal === false && $this->db->ErrorNo() != 0) {
-            $APerr->setFatal(__FILE__, __LINE__, $this->db->errormsg(), "SQL: {$sql}");
+        if ($retVal === false && $this->database->ErrorNo() != 0) {
+            $APerr->setFatal(__FILE__, __LINE__, $this->database->errormsg(), "SQL: {$sql}");
         }
     }
 }
