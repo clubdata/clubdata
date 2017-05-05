@@ -13,10 +13,6 @@
  * @copyright Copyright (c) 2009, Franz Domes
  */
 
-/**
- *
- */
-
 global $db;
 
 require_once("include/function.php");
@@ -32,14 +28,14 @@ $dispFile = "style/" . getConfigEntry($db, "Style") . "/display_list.php";
  */
 class Listing extends datapager {
 
-    var $id;        // ID
-    var $withoutHeader = true;
-    var $changeFlg = false;
-    var $selectRows = true;
-    var $selectedRows;
-    var $sumCols = array("Amount");
-    var $linkParams = "command=execute";
-    var $pageNr = 0;
+    public $id;        // ID
+    public $withoutHeader = true;
+    public $changeFlg = false;
+    public $selectRows = true;
+    public $selectedRows;
+    public $sumCols = array("Amount");
+    public $linkParams = "command=execute";
+    public $pageNr = 0;
 
     /**
      * @var array Names of possible configuration variables for Listing class, and their default values
@@ -54,41 +50,40 @@ class Listing extends datapager {
      * columnNames  - Names of columns to show<BR>
      * maxRowsPerPage - maximal number of lines shown per page<BR>
      */
-    var $configNames = array("selectRowsFlg" => FALSE,
-                             "selectedRows" => array(),
-                             "sumCols" => array(),
-                             "linkParams" => "",
-                             "idFieldName" => "id",
-                             "listLinks" => array(),
-                             "sort" => "",
-                             "columnNames" => array(),
-                             "maxRowsPerPage" => "10");
-    var $config;
+    public $configNames = array(
+        "selectRowsFlg"  => false,
+        "selectedRows"   => array(),
+        "sumCols"        => array(),
+        "linkParams"     => "",
+        "idFieldName"    => "id",
+        "listLinks"      => array(),
+        "sort"           => "",
+        "columnNames"    => array(),
+        "maxRowsPerPage" => "10"
+    );
 
-    var $firstLink;
-    var $previousLink;
-    var $nextLink;
-    var $lastLink;
+    public $config;
 
-    var $maxRows = 0;
-    var $maxCols = 0;
-    var $values = array(array());
+    public $firstLink;
+    public $previousLink;
+    public $nextLink;
+    public $lastLink;
 
-    var $listHeadRows;
+    public $maxRows = 0;
+    public $maxCols = 0;
+    public $values = array(array());
 
-    function Listing($id, $config = array())
-    {
+    public $listHeadRows;
+
+    public function __construct($id, $config = array()) {
         global $db;
 
         $this->id = $id;
-
         $this->config = $config;
 
-        $sess_id = "listing_$id";
+        $sess_id = "listing_{$id}";
 
-        if ( is_array($config) && !empty($config))
-        {
-
+        if (is_array($config) && !empty($config)) {
             $this->configNames["maxRowsPerPage"] = getConfigEntry($db, "MaxRowsPerPage");
             $this->configNames["selectedRows"] = getConfigEntry($db, "CheckedCheckboxes") == 1 ? "ALL" : "NONE";
 
@@ -96,22 +91,20 @@ class Listing extends datapager {
         }
     }
 
-
    /**
     * function showRecordList
     *
     * Creates a table which shows the recordset given as first parameter.
     *
     * Side Effects:
-    *    $this->sort      Column to sort output<BR>
-    *    $this->idFieldName    (Default: id) Columnname of id field. This is the unique identifier of a row<BR>
-    *    $this->change    False (default): Edit of recordset ist not allowed; true: records may been edited<BR>
-    *    $this->selectRow False (default): No checkbox is displayed, true: a checkbox is displayed before each line<BR>
+    *    $this->sort        Column to sort output<BR>
+    *    $this->idFieldName (Default: id) Columnname of id field. This is the unique identifier of a row<BR>
+    *    $this->change      False (default): Edit of recordset ist not allowed; true: records may been edited<BR>
+    *    $this->selectRow   False (default): No checkbox is displayed, true: a checkbox is displayed before each
+    *                       line<BR>
     *    $this->sumCols     (Default: empty array) columns to sum. If at least one column has to been summed up,<BR>
-    *                    an additional line is displayed at the end of the table which shows the sum of
+    *                       an additional line is displayed at the end of the table which shows the sum of
     *                    this/these column(s)
-
-    *  Parameter:
     * @param string $cols colon-delimeted list of columns to display.
     * @param array $listLinks  (Default: empty array) An array of links. The index is the columnname, where to show the link
     *                    The value of the column is passed to the link as parameter<BR>

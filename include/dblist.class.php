@@ -16,6 +16,7 @@ if (defined('CLASS_DBLIST')) {
 } else {
     define('CLASS_DBLIST', true);
 }
+
 global $db;
 
 require_once("include/function.php");
@@ -26,21 +27,21 @@ require_once("include/listing.class.php");
  */
 class DbList extends Listing {
 
-    var $db;        // DB connection
-    var $sql;       // SQL command
-    var $id;        // ID
-    var $idFieldName;
-    var $withoutHeader = true;
-    var $changeFlg = false;
-    var $selectRows = true;
+    public $db;        // DB connection
+    public $sql;       // SQL command
+    public $id;        // ID
+    public $idFieldName;
+    public $withoutHeader = true;
+    public $changeFlg = false;
+    public $selectRows = true;
 
     // Name of session configuration
-    var $sessConfig;
+    public $sessConfig;
 
     // Array of possible configuration parameters and their default values
     // These values may be overwritten by the config array, when creating
     // an instance of this class or by a call to setConfig (implicit or explicit)
-    var $configNames = array(
+    public $configNames = array(
         "cols"           => '*',
         "sql"            => '',
         "cond"           => '',
@@ -57,7 +58,7 @@ class DbList extends Listing {
     );
 
     // Page number to display
-    var $pageNr = 0;
+    public $pageNr = 0;
 
     // Links for paging table display
 //     var $firstLink;
@@ -65,12 +66,12 @@ class DbList extends Listing {
 //     var $nextLink;
 //     var $lastLink;
 
-    function DbList($db, $id, $config = "") {
+    public function __construct($db, $id, $config = "") {
         $this->db = $db;
         $this->id = $id;
         $this->config = $config;
 
-        Listing::Listing($id, $config);
+        parent::Listing($id, $config);
 
         datapager::datapager($this->db);
 
@@ -79,7 +80,7 @@ class DbList extends Listing {
         }
     }
 
-    function copyList($newId) {
+    public function copyList($newId) {
         $new = $this;
         $new->id = $newId;
 
